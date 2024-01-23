@@ -1,0 +1,35 @@
+<div class="mw-1760">
+  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-5 mt-3 my-0 mx-container">
+    <div class="container">
+      <h1 class="site-name text-center mb-4 text-warning">CueSync</h1>
+      <p class="h5 text-center text-light">
+        Elevate Multimedia Interactivity. Simplify the integration of interactive transcripts into your media projects with CueSync. Enhance accessibility and engagement effortlessly.
+      </p>
+    </div>
+  </div>
+</div>
+
+<nav class="sticky-top bg-body mt-0 mb-3 justify-content-center">
+  <ul id="site-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 nav-justified mx-container">
+    <li class="nav-item">
+      <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "CueSync" .Page.Params.title }} active {{ end }}">
+        <i class="bi bi-house-door-fill fs-3"></i> Overview<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/1.0/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Installation" .Page.Params.title }} active {{ end }}">
+        <i class="bi bi-cloud-arrow-down-fill fs-3"></i> Installation<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/1.0/examples" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Examples" .Page.Params.title }} active {{ end }}">
+        <i class="bi bi-palette2 fs-3"></i> Examples<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/1.0/specs" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Specs" .Page.Params.title }} active {{ end }}">
+        <i class="bi bi-grid-fill fs-3"></i> Specs<span class="ripple-surface"></span>
+      </a>
+    </li>
+  </ul>
+</nav>

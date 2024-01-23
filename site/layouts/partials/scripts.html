@@ -1,0 +1,34 @@
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+<!-- MDC Ripple JS (Only for Ripple effects) -->
+<script src="https://cdn.jsdelivr.net/npm/@material/ripple@14.0.0/dist/mdc.ripple.min.js"
+        integrity="sha384-9QANVmWxL3S8VRs8x1Q+bF1Zzogpy7P/Qw1+y5qHLdC1ig0EuoHg9VbB1SXyecdZ"
+        crossorigin="anonymous"></script>
+
+<!-- Material Style JS -->
+<script src="https://cdn.jsdelivr.net/npm/@materialstyle/materialstyle@3.1.1/dist/js/materialstyle.min.js"
+        integrity="sha384-rqhP61M9WSmzd7+ssgyoWP2I+R68vVHx7o+UmmIs6/Nxe8Lt1DoF6+0CKptZIXC0"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
+{{ if eq hugo.Environment "production" -}}
+<script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.min.js"></script>
+{{ else -}}
+<script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.js"></script>
+{{- end }}
+
+{{- $js := resources.Match "1.0/js/*.js" -}}
+{{- $targetDocsJSPath := path.Join "/" .Site.Params.docs_version "assets/js/site.js" -}}
+{{- $docsJs := $js | resources.Concat $targetDocsJSPath -}}
+
+{{- if eq hugo.Environment "production" -}}
+  {{- $docsJs = $docsJs | resources.Minify -}}
+{{- end }}
+
+<script src="{{ $docsJs.Permalink | relURL }}"></script>

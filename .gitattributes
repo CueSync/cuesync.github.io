@@ -1,0 +1,12 @@
+# Enforce Unix newlines
+* text=auto eol=lf
+
+*.jpg binary
+*.png binary
+*.ico binary
+
+# Don't diff or textually merge source maps
+*.map binary
+
+cuesync.css linguist-vendored=false
+cuesync.js linguist-vendored=false

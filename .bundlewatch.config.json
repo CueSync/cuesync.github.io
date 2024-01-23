@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "path": "./dist/css/cuesync.css",
+      "maxSize": "743 B"
+    },
+    {
+      "path": "./dist/css/cuesync.min.css",
+      "maxSize": "705 B"
+    },
+    {
+      "path": "./dist/js/cuesync.esm.js",
+      "maxSize": "2.38 kB"
+    },
+    {
+      "path": "./dist/js/cuesync.esm.min.js",
+      "maxSize": "1.72 kB"
+    },
+    {
+      "path": "./dist/js/cuesync.js",
+      "maxSize": "2.55 kB"
+    },
+    {
+      "path": "./dist/js/cuesync.min.js",
+      "maxSize": "1.75 kB"
+    }
+  ],
+  "ci": {
+    "trackBranches": [
+      "main"
+    ]
+  }
+}
