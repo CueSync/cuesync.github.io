@@ -25,6 +25,8 @@
   --cs-highlight-border-style: solid;
   --cs-highlight-border-color: #000;
 
+  --cs-time-width: auto;
+
   padding: var(--cs-container-padding-y) var(--cs-container-padding-x);
   color: var(--cs-container-color);
   background-color: var(--cs-container-bg);
@@ -48,6 +50,17 @@
       background-color: var(--cs-active-bg);
       border: var(--cs-active-border-width) var(--cs-active-border-style) var(--cs-active-border-color);
       border-radius: var(--cs-active-border-radius);
+    }
+  }
+
+  .transcript-line-container {
+    display: flex;
+
+    .time {
+      display: inline-block;
+      flex-shrink: 0;
+      width: var(--cs-time-width);
+      padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
     }
   }
 }

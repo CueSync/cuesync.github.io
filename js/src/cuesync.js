@@ -16,6 +16,7 @@ class Cuesync extends BaseComponent {
     this._element = element
     this._config = this._getConfig(config)
     this._autoScroll = true
+    this._timeMaxWidth = 0
     this.refresh()
   }
 
@@ -26,6 +27,7 @@ class Cuesync extends BaseComponent {
   refresh() {
     const { transcriptPath } = this._config
     const { media } = this._config
+    const { displayTime } = this._config
 
     // Load and parse the transcript file
     fetch(transcriptPath)
@@ -44,7 +46,24 @@ class Cuesync extends BaseComponent {
             media.currentTime = cue.startTime
           })
 
-          this._element.append(line)
+          if (displayTime) {
+            const transcriptLineContainer = document.createElement('div')
+            transcriptLineContainer.className = 'transcript-line-container'
+
+            const timeContainer = document.createElement('span')
+            timeContainer.className = 'time'
+            timeContainer.textContent = `${cue.startTimeRaw} - ${cue.endTimeRaw}`
+
+            transcriptLineContainer.append(timeContainer)
+            transcriptLineContainer.append(line)
+            this._element.append(transcriptLineContainer)
+
+            if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
+              this._timeMaxWidth = timeContainer.getBoundingClientRect().width
+            }
+          } else {
+            this._element.append(line)
+          }
 
           this._element.addEventListener('scroll', () => {
             if (this._autoScroll) {
@@ -73,6 +92,8 @@ class Cuesync extends BaseComponent {
             }
           })
         }
+
+        this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
       })
       .catch(error => console.error('Error loading transcript file:', error)) // eslint-disable-line no-console
   }
@@ -101,6 +122,8 @@ class Cuesync extends BaseComponent {
         // Parse cue timing (both SRT and VTT formats)
         const [startTime, endTime] = line.split(/ --> /)
         cue = new VTTCue(this.convertToSeconds(startTime), this.convertToSeconds(endTime), '')
+        cue.startTimeRaw = startTime
+        cue.endTimeRaw = endTime
       } else if (cue) {
         // Add cue text (both SRT and VTT formats)
         cue.text += `${line} `
