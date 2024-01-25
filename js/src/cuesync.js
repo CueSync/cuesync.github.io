@@ -41,14 +41,11 @@ class Cuesync extends BaseComponent {
           line.className = 'transcript-line'
           line.textContent = cue.text.trim()
 
-          // Add click event to seek the media to the cue's start time
-          line.addEventListener('click', () => {
-            media.currentTime = cue.startTime
-          })
-
           if (displayTime) {
             const transcriptLineContainer = document.createElement('div')
             transcriptLineContainer.className = 'transcript-line-container'
+            transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
+            transcriptLineContainer.setAttribute('role', 'button')
 
             const timeContainer = document.createElement('span')
             timeContainer.className = 'time'
@@ -58,11 +55,38 @@ class Cuesync extends BaseComponent {
             transcriptLineContainer.append(line)
             this._element.append(transcriptLineContainer)
 
+            transcriptLineContainer.addEventListener('click', () => {
+              media.currentTime = cue.startTime
+            })
+
+            transcriptLineContainer.addEventListener('keypress', e => {
+              if (e.key === 'Enter') {
+                media.currentTime = cue.startTime
+              }
+            })
+
+            transcriptLineContainer.tabIndex = 0
+
             if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
               this._timeMaxWidth = timeContainer.getBoundingClientRect().width
             }
           } else {
             this._element.append(line)
+
+            line.setAttribute('aria-label', cue.text.trim())
+            line.setAttribute('role', 'button')
+
+            line.addEventListener('click', () => {
+              media.currentTime = cue.startTime
+            })
+
+            line.addEventListener('keypress', e => {
+              if (e.key === 'Enter') {
+                media.currentTime = cue.startTime
+              }
+            })
+
+            line.tabIndex = 0
           }
 
           this._element.addEventListener('scroll', () => {
@@ -74,18 +98,36 @@ class Cuesync extends BaseComponent {
           // Update transcript highlighting based on media time
           media.addEventListener('timeupdate', () => {
             if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
-              line.classList.add('active')
+              if (displayTime) {
+                line.closest('.transcript-line-container').classList.add('active')
+              } else {
+                line.classList.add('active')
+              }
 
               this.autoScroll(line)
             } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
-              line.classList.add('active')
+              if (displayTime) {
+                line.closest('.transcript-line-container').classList.add('active')
+              } else {
+                line.classList.add('active')
+              }
 
               this.autoScroll(line)
             } else {
-              line.classList.remove('active')
+              if (displayTime) {
+                line.closest('.transcript-line-container').classList.remove('active')
+              } else {
+                line.classList.remove('active')
+              }
 
               if (media.currentTime >= cue.startTime) {
-                line.classList.add('played')
+                if (displayTime) {
+                  line.closest('.transcript-line-container').classList.add('played')
+                } else {
+                  line.classList.add('played')
+                }
+              } else if (displayTime) {
+                line.closest('.transcript-line-container').classList.remove('played')
               } else {
                 line.classList.remove('played')
               }

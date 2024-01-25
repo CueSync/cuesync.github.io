@@ -105,7 +105,7 @@
   // Toranscript
   const transcriptList = Array.prototype.slice.call(document.querySelectorAll('#audio-transcript'))
   transcriptList.map(t => {
-    return new cuesync.CueSync(t, { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio') })
+    return new cuesync.CueSync(t, { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true })
   })
 
   const transcriptList2 = Array.prototype.slice.call(document.querySelectorAll('#video-transcript'))

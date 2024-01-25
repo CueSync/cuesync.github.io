@@ -11,6 +11,9 @@
   --cs-transcript-padding-x: 5px;
   --cs-transcript-padding-y: 5px;
 
+  --cs-hover-bg: #e3e4e5;
+  --cs-hover-color: #000;
+
   --cs-active-bg: #9ec5fe;
   --cs-active-color: #000;
   --cs-active-border-radius: 4px;
@@ -37,6 +40,26 @@
     display: inline-block;
     padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
     cursor: pointer;
+  }
+
+  .transcript-line-container {
+    display: flex;
+    cursor: pointer;
+
+    .time {
+      display: inline-block;
+      flex-shrink: 0;
+      width: var(--cs-time-width);
+      padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
+    }
+  }
+
+  .transcript-line-container,
+  .transcript-line {
+    &:not(.active, .active .transcript-line):hover {
+      color: var(--cs-hover-color);
+      background-color: var(--cs-hover-bg);
+    }
 
     &.played {
       color: var(--cs-highlight-color);
@@ -50,17 +73,6 @@
       background-color: var(--cs-active-bg);
       border: var(--cs-active-border-width) var(--cs-active-border-style) var(--cs-active-border-color);
       border-radius: var(--cs-active-border-radius);
-    }
-  }
-
-  .transcript-line-container {
-    display: flex;
-
-    .time {
-      display: inline-block;
-      flex-shrink: 0;
-      width: var(--cs-time-width);
-      padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
     }
   }
 }
