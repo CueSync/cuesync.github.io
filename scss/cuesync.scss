@@ -28,6 +28,9 @@
   --cs-highlight-border-style: solid;
   --cs-highlight-border-color: #000;
 
+  --cs-time-bg: #084298;
+  --cs-time-color: #fff;
+  --cs-time-border-radius: 4px;
   --cs-time-width: auto;
 
   padding: var(--cs-container-padding-y) var(--cs-container-padding-x);
@@ -44,6 +47,8 @@
 
   .transcript-line-container {
     display: flex;
+    gap: 5px;
+    padding: var(--cs-transcript-padding-y) 0;
     cursor: pointer;
 
     .time {
@@ -51,6 +56,10 @@
       flex-shrink: 0;
       width: var(--cs-time-width);
       padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
+      color: var(--cs-time-color);
+      text-align: center;
+      background-color: var(--cs-time-bg);
+      border-radius: var(--cs-time-border-radius);
     }
   }
 
