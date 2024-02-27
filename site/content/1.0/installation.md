@@ -6,12 +6,20 @@ aliases:
   - "/1.0/installation/"
   - "/installation/"
 toc: true
-description: We offer three convenient options to integrate CueSync into your project. Choose the one that aligns with your preferences.
+description: We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.
 ---
 
 ## Installation
 
+<p class="fs-4 ms-0 mb-4">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.</p>
+
 ### CDN
+
+Use CueSync instantly by including its CSS and JavaScript files directly from a Content Delivery Network (CDN). 
+This option allows you to link to the files hosted on a remote server, ensuring quick and easy integration into your project. 
+You can choose from popular CDN providers like `jsDelivr` or `unpkg` to access CueSync’s resources seamlessly. 
+This method is convenient and ideal for those who want a straightforward integration process.
+
 <div class="d-inline-block">
 <ul id="cdn-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-pill" role="tablist">
   <li class="nav-item" role="presentation">
@@ -80,6 +88,9 @@ Scripts
 
 ### npm
 
+Integrate CueSync into your project using the Node Package Manager (NPM). This method involves installing CueSync 
+as a package within your project’s ecosystem, providing more control and flexibility over its usage and updates.
+
 Install
 ```console
 npm i @cuesync/cuesync
@@ -98,7 +109,11 @@ Import CueSync SCSS in your SCSS file
 {{< squiggle >}}
 
 ### Download
-<a class="btn btn-success btn-lg rounded-pill" 
+
+Download the pre-compiled CSS and JavaScript files of CueSync directly to your system. This option is suitable for 
+developers who prefer to have local copies of the required files and manually link them in their project’s code.
+
+<a class="btn btn-primary btn-lg rounded-pill" 
    href="https://github.com/cuesync/cuesync.github.io/releases/download/v1.0.0-alpha1/cuesync-1.0.0-alpha1-dist.zip" download>
 Download v1.0.0-alpha1
 </a>
