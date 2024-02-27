@@ -49,7 +49,7 @@ class Cuesync extends BaseComponent {
 
             const timeContainer = document.createElement('span')
             timeContainer.className = 'time'
-            timeContainer.textContent = `${cue.startTimeRaw} - ${cue.endTimeRaw}`
+            timeContainer.textContent = `${cue.startTimeRaw}`
 
             transcriptLineContainer.append(timeContainer)
             transcriptLineContainer.append(line)
@@ -164,8 +164,7 @@ class Cuesync extends BaseComponent {
         // Parse cue timing (both SRT and VTT formats)
         const [startTime, endTime] = line.split(/ --> /)
         cue = new VTTCue(this.convertToSeconds(startTime), this.convertToSeconds(endTime), '')
-        cue.startTimeRaw = startTime
-        cue.endTimeRaw = endTime
+        cue.startTimeRaw = this.minimalTime(startTime)
       } else if (cue) {
         // Add cue text (both SRT and VTT formats)
         cue.text += `${line} `
@@ -183,6 +182,12 @@ class Cuesync extends BaseComponent {
     const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
 
     return ((hours * 3600) + (minutes * 60) + seconds).toFixed(2)
+  }
+
+  minimalTime(time) {
+    const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
+
+    return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`
   }
 
   autoScroll(line) {
