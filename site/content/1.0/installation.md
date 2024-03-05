@@ -116,4 +116,11 @@ developers who prefer to have local copies of the required files and manually li
 <a class="btn btn-primary btn-lg rounded-pill" 
    href="https://github.com/cuesync/cuesync.github.io/releases/download/v1.0.0-alpha1/cuesync-1.0.0-alpha1-dist.zip" download>
 Download v1.0.0-alpha1
+    <span class="ripple-surface"></span>
 </a>
+
+{{< squiggle >}}
+
+## Next steps
+
+Explore CueSync's capabilities in action! Head over to the [Examples](/1.0/examples) page for usage scenarios, code snippets, and examples.
