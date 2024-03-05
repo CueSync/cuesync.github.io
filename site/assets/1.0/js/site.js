@@ -102,16 +102,16 @@
     return new materialstyle.MaterialTab(tab)
   })
 
-  // Toranscript
-  const transcriptList = Array.prototype.slice.call(document.querySelectorAll('#audio-transcript'))
-  transcriptList.map(t => {
-    return new cuesync.CueSync(t, { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true })
-  })
+  // Transcript
+  new cuesync.CueSync(
+    document.getElementById('audio-transcript'),
+    { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true }
+  )
 
-  const transcriptList2 = Array.prototype.slice.call(document.querySelectorAll('#video-transcript'))
-  transcriptList2.map(t => {
-    return new cuesync.CueSync(t, { transcriptPath: '/assets/transcripts/you.vtt', media: document.querySelector('#natGeoVideo') })
-  })
+  new cuesync.CueSync(
+    document.getElementById('video-transcript'),
+    { transcriptPath: '/assets/transcripts/you.vtt', media: document.querySelector('#natGeoVideo') }
+  )
 
   let i = 1
   const squiggles = Array.prototype.slice.call(document.querySelectorAll('.squiggle'))
