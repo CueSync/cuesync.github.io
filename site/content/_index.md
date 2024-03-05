@@ -34,7 +34,7 @@ title: CueSync
 
 <div class="text-center mb-5">
     <h2 class="my-5">Get started any way you want</h2>
-    <p class="h5">Use the CDN, install it via package manager, or download.</p>
+    <p class="h5 mb-3">Use the CDN, install it via package manager, or download.</p>
     <a class="btn btn-primary btn-lg rounded-pill" 
        href="/installation">
     Read installation docs
