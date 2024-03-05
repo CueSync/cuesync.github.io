@@ -7,7 +7,9 @@ toc: true
 ## Specs
   
 ### CSS custom properties
-Customize CueSync by changing CSS custom properties
+Customize CueSync by modifying the CSS custom properties listed below.
+
+#### Transcript container
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -19,80 +21,139 @@ Customize CueSync by changing CSS custom properties
   </thead>
   <tbody>
     <tr>
-      <td>--mq-bg</td>
-      <td>#f8f9fa</td>
-      <td>Background color</td>
+      <td>--cs-container-bg</td>
+      <td>#fff</td>
+      <td>Transcript container background color</td>
     </tr>
     <tr>
-      <td>--mq-hover-bg</td>
-      <td>#e9ecef</td>
-      <td>Hover background color</td>
-    </tr>
-    <tr>
-      <td>--mq-color</td>
-      <td>#212529</td>
-      <td>Color</td>
-    </tr>
-    <tr>
-      <td>--mq-hover-color</td>
+      <td>--cs-container-color</td>
       <td>#000</td>
-      <td>Hover color</td>
+      <td>Transcript container text color</td>
     </tr>
     <tr>
-      <td>--mq-border-width</td>
-      <td>0</td>
-      <td>Border width</td>
+      <td>--cs-container-padding-x</td>
+      <td>5px</td>
+      <td>Transcript container padding left and right</td>
     </tr>
     <tr>
-      <td>--mq-border-style</td>
+      <td>--cs-container-padding-y</td>
+      <td>5px</td>
+      <td>Transcript container padding top and bottom</td>
+    </tr>
+    <tr>
+      <td>--cs-container-border-width</td>
+      <td>1px</td>
+      <td>Transcript container border width</td>
+    </tr>
+    <tr>
+      <td>--cs-container-border-style</td>
       <td>solid</td>
-      <td>Border style</td>
+      <td>Transcript container border style</td>
     </tr>
     <tr>
-      <td>--mq-border-color</td>
+      <td>--cs-container-border-color</td>
+      <td>#e9e9e9</td>
+      <td>Transcript container border color</td>
+    </tr>
+    <tr>
+      <td>--cs-container-border-radius</td>
+      <td>4px</td>
+      <td>Transcript container border radius</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    
+#### Transcript
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Default Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-padding-x</td>
+      <td>5px</td>
+      <td>Transcript padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-padding-y</td>
+      <td>5px</td>
+      <td>Transcript padding top and bottom</td>
+    </tr>
+    <tr>
+      <td>--cs-border-radius</td>
+      <td>4px</td>
+      <td>Transcript border radius</td>
+    </tr>
+    <tr>
+      <td>--cs-hover-bg</td>
+      <td>#e3e4e5</td>
+      <td>Transcript hover background color</td>
+    </tr>
+    <tr>
+      <td>--cs-hover-color</td>
+      <td>#000</td>
+      <td>Transcript hover color</td>
+    </tr>
+    <tr>
+      <td>--cs-active-bg</td>
+      <td>#9ec5fe</td>
+      <td>Transcript active background color</td>
+    </tr>    
+    <tr>
+      <td>--cs-active-color</td>
+      <td>#000</td>
+      <td>Transcript active color</td>
+    </tr>
+    <tr>
+      <td>--cs-highlight-bg</td>
       <td>transparent</td>
-      <td>Border color</td>
+      <td>Transcript highlight background color</td>
     </tr>
     <tr>
-      <td>--mq-border-radius</td>
-      <td>.375rem</td>
-      <td>Border radius</td>
+      <td>--cs-highlight-color</td>
+      <td>#084298</td>
+      <td>Transcript highlight color</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#### Timestamp
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Default Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-time-bg</td>
+      <td>#084298</td>
+      <td>Timestamp background color</td>
     </tr>
     <tr>
-      <td rowspan="2">--mq-padding-y</td>
-      <td>1rem <i>(for direction left and right)</i></td>
-      <td rowspan="2">Padding top and bottom</td>
+      <td>--cs-time-color</td>
+      <td>#fff</td>
+      <td>Timestamp color</td>
     </tr>
     <tr>
-      <td>0 <i>(for direction top and bottom)</i></td>
+      <td>--cs-time-border-radius</td>
+      <td>4px</td>
+      <td>Timestamp border radius</td>
     </tr>
     <tr>
-      <td rowspan="2">--mq-padding-x</td>
-      <td>0 <i>(for direction left and right)</i></td>
-      <td rowspan="2">Padding left and right</td>
-    </tr>
-    <tr>
-      <td>1rem <i>(for direction top and bottom)</i></td>
-    </tr>
-    <tr>
-      <td>--mq-font-size</td>
-      <td>1rem</td>
-      <td>Font size</td>
-    </tr>
-    <tr>
-      <td>--mq-font-family</td>
-      <td>sans-serif</td>
-      <td>Font family</td>
-    </tr>
-    <tr>
-      <td>--mq-animation-duration</td>
-      <td>15s</td>
-      <td>Animation duration <i>(Automatically set according to the dimensions of the content and specified speed, default speed is 100)</i></td>
-    </tr>
-    <tr>
-      <td>--mq-item-gap</td>
-      <td>1rem</td>
-      <td>Gap between multiple items <i>(In multiple items variant)</i></td>
+      <td>--cs-time-width</td>
+      <td>auto</td>
+      <td>Timestamp width<br><i>(Automatically adjusted to match the width of the longest timestamp.)</i></td>
     </tr>
   </tbody>
 </table>
@@ -100,12 +161,38 @@ Customize CueSync by changing CSS custom properties
 
 {{< squiggle >}}
 
+### Javascript options
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+      <td>transcriptPath</td>
+      <td>Sets the transcript file path</td>
+    </tr>
+    <tr>
+      <td>media</td>
+      <td>Sepcifies the media element for transcript highlighting and interactive control</td>
+    </tr>
+    <tr>
+      <td>displayTime</td>
+      <td>Indicates whether the timestamp should be displayed or not</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ### Javascript functions
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
     <tr>
-      <th>function</th>
+      <th>Function</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -144,14 +231,14 @@ Customize CueSync by changing CSS custom properties
     </thead>
     <tbody>
       <tr>
-        <td>data-mq-direction</td>
-        <td>direction</td>
-        <td>Sets the scrolling direction of the CueSync.</td>
+        <td>data-cs-transcript-path</td>
+        <td>transcriptPath</td>
+        <td>Sets the transcript file path</td>
       </tr>
       <tr>
-        <td>data-mq-speed</td>
-        <td>speed</td>
-        <td>Sets the scrolling speed of the CueSync.</td>
+        <td>data-cs-display-time</td>
+        <td>displayTime</td>
+        <td>Indicates whether the timestamp should be displayed or not</td>
       </tr>
     </tbody>
   </table>
