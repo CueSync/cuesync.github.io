@@ -8,9 +8,9 @@
   --cs-container-border-color: #e9e9e9;
   --cs-container-border-radius: 4px;
 
-  --cs-transcript-padding-x: 5px;
-  --cs-transcript-padding-y: 5px;
-  --cs-transcript-border-radius: 4px;
+  --cs-padding-x: 5px;
+  --cs-padding-y: 5px;
+  --cs-border-radius: 4px;
 
   --cs-hover-bg: #e3e4e5;
   --cs-hover-color: #000;
@@ -34,19 +34,20 @@
 
   .transcript-line {
     display: inline-block;
-    padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
+    padding: var(--cs-padding-y) var(--cs-padding-x);
   }
 
   .transcript-line-container {
     display: flex;
     gap: 5px;
-    padding: var(--cs-transcript-padding-y) 0;
+    align-items: center;
+    padding: var(--cs-padding-y) 0;
 
     .time {
       display: inline-block;
       flex-shrink: 0;
       width: var(--cs-time-width);
-      padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
+      padding: var(--cs-padding-y) var(--cs-padding-x);
       color: var(--cs-time-color);
       text-align: center;
       white-space: nowrap;
@@ -58,7 +59,7 @@
   .transcript-line-container,
   .transcript-line {
     cursor: pointer;
-    border-radius: var(--cs-transcript-border-radius);
+    border-radius: var(--cs-border-radius);
 
     &:not(.active, .active .transcript-line):hover {
       color: var(--cs-hover-color);
