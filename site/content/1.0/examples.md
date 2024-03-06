@@ -157,3 +157,57 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 </script>
 {{< /example >}}
+
+<br>
+
+## Javascript
+
+### getInstance()
+`getInstance()` is a static method that enables you to obtain the CueSync instance associated with a DOM element.
+
+ ```javascript
+  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
+```
+
+<br>
+
+### getOrCreateInstance()
+`getOrCreateInstance()` is a static method that enables you to obtain the CueSync instance associated with a DOM element or create a new one if it hasn't been initialized.
+
+ ```javascript
+  const cueSyncInstance = cuesync.CueSync.getOrCreateInstance('#video-transcript')
+```
+
+<br>
+
+### Non-visible transcripts
+CueSync automatically adjusts the width of timestamp elements to match that of the longest timestamp, 
+ensuring uniformity across all elements. 
+However, since dimensions cannot be accurately determined on elements that aren't visible, 
+if you instantiate CueSync on transcripts that are hidden, you may need to call the `redrawTime()` method once they become visible. 
+This ensures consistency in the width of all timestamp elements.
+
+ ```javascript
+  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
+  cueSyncInstance.redrawTime()
+```
+
+<br>
+
+### refresh()
+`refresh()` — Reconfigures a CueSync instance, useful in case it was not properly initialized during the first attempt.
+
+ ```javascript
+  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
+  cueSyncInstance.refresh()
+```
+
+<br>
+
+### dispose()
+`dispose()` - Destroys an element's instance and removes stored data associated with the DOM element.
+
+ ```javascript
+  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
+  cueSyncInstance.dispose()
+```

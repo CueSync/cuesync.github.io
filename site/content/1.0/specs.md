@@ -197,22 +197,26 @@ Customize CueSync by modifying the CSS custom properties listed below.
     </tr>
   </thead>
   <tbody>
-   <tr>
-      <td>refresh</td>
-      <td>Reconfigures a CueSync instance. (Useful in reconfiguring non-visible elements when they become visible)</td>
-    </tr>
-    <tr>
-      <td>dispose</td>
-      <td>Destroys an element’s instance. (Removes stored data on the DOM element)</td>
-    </tr>
-    <tr>
-      <td>getInstance</td>
-      <td>Static method which allows you to get the CueSync instance associated with a DOM element.</td>
-    </tr>
-    <tr>
-      <td>getOrCreateInstance</td>
-      <td>Static method which allows you to get the CueSync instance associated with a DOM element, or create a new one in case it wasn’t initialized.</td>
-    </tr>
+  <tr>
+    <td>getInstance</td>
+    <td>Static method that enables you to obtain the CueSync instance associated with a DOM element.</td>
+  </tr>
+  <tr>
+    <td>getOrCreateInstance</td>
+    <td>Static method that enables you to obtain the CueSync instance associated with a DOM element or create a new one if it hasn’t been initialized.</td>
+  </tr>
+  <tr>
+    <td>redrawTime</td>
+    <td>Ensures consistent timestamp element width in CueSync by recalculating dimensions when transcripts become visible.</td>
+  </tr>
+  <tr>
+    <td>refresh</td>
+    <td>Reconfigures a CueSync instance, useful in case it was not properly initialized during the first attempt.</td>
+  </tr>
+  <tr>
+    <td>dispose</td>
+    <td>Destroys an element’s instance and removes stored data associated with the DOM element.</td>
+  </tr>
   </tbody>
 </table>
 </div>
