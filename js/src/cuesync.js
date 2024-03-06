@@ -96,46 +96,12 @@ class Cuesync extends BaseComponent {
           })
 
           // Update transcript highlighting based on media time
-          media.addEventListener('timeupdate', () => {
-            if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
-              if (displayTime) {
-                line.closest('.transcript-line-container').classList.add('active')
-              } else {
-                line.classList.add('active')
-              }
-
-              this.autoScroll(line)
-            } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
-              if (displayTime) {
-                line.closest('.transcript-line-container').classList.add('active')
-              } else {
-                line.classList.add('active')
-              }
-
-              this.autoScroll(line)
-            } else {
-              if (displayTime) {
-                line.closest('.transcript-line-container').classList.remove('active')
-              } else {
-                line.classList.remove('active')
-              }
-
-              if (media.currentTime >= cue.startTime) {
-                if (displayTime) {
-                  line.closest('.transcript-line-container').classList.add('played')
-                } else {
-                  line.classList.add('played')
-                }
-              } else if (displayTime) {
-                line.closest('.transcript-line-container').classList.remove('played')
-              } else {
-                line.classList.remove('played')
-              }
-            }
-          })
+          this.addMediaEventListener(line, cues, cue, index)
         }
 
-        this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+        if (this._timeMaxWidth) {
+          this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+        }
       })
       .catch(error => console.error('Error loading transcript file:', error)) // eslint-disable-line no-console
   }
@@ -206,7 +172,6 @@ class Cuesync extends BaseComponent {
   scrollToView(element) {
     const parent = element.parentElement
 
-    // Calculate the scroll position to make the element visible in the parent
     const elementOffset = element.offsetTop - parent.offsetTop
     const elementHeight = element.offsetHeight
     const parentHeight = parent.clientHeight
@@ -231,6 +196,66 @@ class Cuesync extends BaseComponent {
       })
     }
     // If the element is already visible, no scrolling is needed
+  }
+
+  addMediaEventListener(line, cues, cue, index) {
+    const { media } = this._config
+    const { displayTime } = this._config
+
+    media.addEventListener('timeupdate', () => {
+      if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
+        if (displayTime) {
+          line.closest('.transcript-line-container').classList.add('active')
+        } else {
+          line.classList.add('active')
+        }
+
+        this.autoScroll(line)
+      } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
+        if (displayTime) {
+          line.closest('.transcript-line-container').classList.add('active')
+        } else {
+          line.classList.add('active')
+        }
+
+        this.autoScroll(line)
+      } else {
+        if (displayTime) {
+          line.closest('.transcript-line-container').classList.remove('active')
+        } else {
+          line.classList.remove('active')
+        }
+
+        if (media.currentTime >= cue.startTime) {
+          if (displayTime) {
+            line.closest('.transcript-line-container').classList.add('played')
+          } else {
+            line.classList.add('played')
+          }
+        } else if (displayTime) {
+          line.closest('.transcript-line-container').classList.remove('played')
+        } else {
+          line.classList.remove('played')
+        }
+      }
+    })
+  }
+
+  redrawTime() {
+    const timeList = Array.prototype.slice.call(this._element.querySelectorAll('.time'))
+
+    if (timeList) {
+      let maxWidth = 0
+      for (const t of timeList) {
+        if (t.getBoundingClientRect().width > maxWidth) {
+          maxWidth = t.getBoundingClientRect().width
+        }
+      }
+
+      if (maxWidth) {
+        this._element.style.setProperty('--cs-time-width', `${maxWidth}px`)
+      }
+    }
   }
 }
 
