@@ -7,16 +7,13 @@
 <h3 align="center">CueSync</h3>
 
 <p align="center">
-  CueSync is a custom Marquee component used to create horizontal or vertical scrolling content.
+  CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.
 </p>
-
-[![](https://data.jsdelivr.com/v1/package/npm/@cuesync/cuesync/badge)](https://www.jsdelivr.com/package/npm/@cuesync/cuesync)
 
 ## Table of contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [Options](#options)
+- [Examples](#examples)
 - [Specs](#specs)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Documentation](#documentation)
@@ -24,16 +21,13 @@
 - [Creator](#creator)
 
 ## Installation
-https://cuesync.github.io/#installation
+https://cuesync.github.io/1.0/installation
 
-## Usage
-https://cuesync.github.io/#usage
-
-## Options
-https://cuesync.github.io/#options
+## Examples
+https://cuesync.github.io/1.0/examples
 
 ## Specs
-https://cuesync.github.io/#specs
+https://cuesync.github.io/1.0/specs
 
 ## Bugs and feature requests
 Have a bug or a feature request? Please read the [issue guidelines](https://github.com/cuesync/cuesync.github.io/blob/main/.github/CONTRIBUTING.md#using-the-issue-tracker) 
