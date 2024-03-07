@@ -46,7 +46,7 @@ Styles
 <!-- CueSync CSS -->
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css" 
-      integrity="sha384-wADgvhAqbORDLWCl6LHRmwaldDxcsCZJ9EfC4tyLmlqRSrxK8SQSmUprPJYdtCZb" 
+      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e" 
       crossorigin="anonymous">
 ```
 
@@ -55,7 +55,7 @@ Scripts
 ```html  
 <!-- CueSync JS -->
 <script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/js/cuesync.min.js" 
-        integrity="sha384-GkNdpzZA0aigYQs7bhB94ikrs1rxyzcoGZqE/KBxsvvsQPERiMHw4vrDlCgDewnu" 
+        integrity="sha384-0jVqDf583RzrFczNb63VXRe5dXvYKzlsaWfIWwJe8HI3a/Uo9uARXkVt1yx2To8O" 
         crossorigin="anonymous"></script>
 ```
 
@@ -68,7 +68,7 @@ Styles
 <!-- CueSync CSS -->
 <link rel="stylesheet"
       href="https://unpkg.com/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css" 
-      integrity="sha384-wADgvhAqbORDLWCl6LHRmwaldDxcsCZJ9EfC4tyLmlqRSrxK8SQSmUprPJYdtCZb" 
+      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e" 
       crossorigin="anonymous">
 ```
 
@@ -77,7 +77,7 @@ Scripts
 ```html  
 <!-- CueSync JS -->
 <script src="https://unpkg.com/@cuesync/cuesync@1.0.0-alpha1/dist/js/cuesync.min.js" 
-        integrity="sha384-GkNdpzZA0aigYQs7bhB94ikrs1rxyzcoGZqE/KBxsvvsQPERiMHw4vrDlCgDewnu" 
+        integrity="sha384-0jVqDf583RzrFczNb63VXRe5dXvYKzlsaWfIWwJe8HI3a/Uo9uARXkVt1yx2To8O" 
         crossorigin="anonymous"></script>
 ```
 
