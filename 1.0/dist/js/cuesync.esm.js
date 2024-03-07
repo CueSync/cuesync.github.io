@@ -1,6 +1,6 @@
 /*!
-  * CueSync v1.0.0 (https://cuesync.github.io/)
-  * Copyright 2023-2024 Neeraj Kumar Das (https://github.com/nkdas91)
+  * CueSync v1.0.0-alpha1 (https://cuesync.github.io/)
+  * Copyright 2024 Neeraj Kumar Das (https://github.com/nkdas91)
   * Licensed under MIT (https://github.com/cuesync/cuesync/blob/master/LICENSE)  
   */
 /**
@@ -204,7 +204,7 @@ class Config {
  * Constants
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.0.0-alpha1';
 
 /**
  * Class definition
@@ -259,7 +259,7 @@ class BaseComponent extends Config {
  */
 
 const NAME = 'cuesync';
-class Cuesync extends BaseComponent {
+class CueSync extends BaseComponent {
   constructor(element, config) {
     super(element);
     this._element = element;
@@ -395,7 +395,7 @@ class Cuesync extends BaseComponent {
     }
   }
   scrollToView(element) {
-    const parent = element.parentElement;
+    const parent = element.closest('.transcript-container');
     const elementOffset = element.offsetTop - parent.offsetTop;
     const elementHeight = element.offsetHeight;
     const parentHeight = parent.clientHeight;
@@ -479,5 +479,5 @@ class Cuesync extends BaseComponent {
   }
 }
 
-export { Cuesync as CueSync };
+export { CueSync };
 //# sourceMappingURL=cuesync.esm.js.map
