@@ -12,7 +12,7 @@ const year = new Date().getFullYear()
 function getBanner() {
   return `/*!
   * CueSync v${pkg.version} (${pkg.homepage})
-  * Copyright 2023-${year} ${pkg.author}
+  * Copyright ${year} ${pkg.author}
   * Licensed under MIT (https://github.com/cuesync/cuesync/blob/master/LICENSE)  
   */`
 }

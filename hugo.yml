@@ -50,5 +50,5 @@ params:
   description:          "CueSync"
   authors:              "Neeraj Kumar Das"
 
-  current_version:      "1.0.0"
+  current_version:      "1.0.0-alpha1"
   docs_version:         "1.0"

@@ -9,7 +9,7 @@ import BaseComponent from './helpers/base-component.js'
 
 const NAME = 'cuesync'
 
-class Cuesync extends BaseComponent {
+class CueSync extends BaseComponent {
   constructor(element, config) {
     super(element)
 
@@ -170,7 +170,7 @@ class Cuesync extends BaseComponent {
   }
 
   scrollToView(element) {
-    const parent = element.parentElement
+    const parent = element.closest('.transcript-container')
 
     const elementOffset = element.offsetTop - parent.offsetTop
     const elementHeight = element.offsetHeight
@@ -259,4 +259,4 @@ class Cuesync extends BaseComponent {
   }
 }
 
-export default Cuesync
+export default CueSync

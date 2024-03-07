@@ -1,19 +1,20 @@
 {
   "name": "@cuesync/cuesync",
-  "description": "CueSync is a custom Marquee component used to create horizontal or vertical scrolling content.",
-  "version": "1.0.0",
+  "description": "CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.",
+  "version": "1.0.0-alpha1",
   "config": {
     "version_short": "1.0"
   },
   "keywords": [
-    "marquee",
-    "custom-marquee",
     "cuesync",
-    "scrolling-text",
-    "html",
-    "css",
-    "scss",
-    "js"
+    "cue",
+    "multimedia",
+    "audio",
+    "video",
+    "transcript",
+    "interactive-transcript",
+    "vtt",
+    "srt"
   ],
   "homepage": "https://cuesync.github.io/",
   "author": "Neeraj Kumar Das (https://github.com/nkdas91)",
