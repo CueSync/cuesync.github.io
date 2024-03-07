@@ -170,7 +170,7 @@ class Cuesync extends BaseComponent {
   }
 
   scrollToView(element) {
-    const parent = element.parentElement
+    const parent = element.closest('.transcript-container')
 
     const elementOffset = element.offsetTop - parent.offsetTop
     const elementHeight = element.offsetHeight
