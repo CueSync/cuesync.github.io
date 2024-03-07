@@ -5,6 +5,6 @@
  * --------------------------------------------------------------------------
  */
 
-import Cuesync from './src/cuesync.js'
+import CueSync from './src/cuesync.js'
 
-export default { CueSync: Cuesync }
+export default { CueSync }

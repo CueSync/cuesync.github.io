@@ -9,7 +9,7 @@ import BaseComponent from './helpers/base-component.js'
 
 const NAME = 'cuesync'
 
-class Cuesync extends BaseComponent {
+class CueSync extends BaseComponent {
   constructor(element, config) {
     super(element)
 
@@ -259,4 +259,4 @@ class Cuesync extends BaseComponent {
   }
 }
 
-export default Cuesync
+export default CueSync
