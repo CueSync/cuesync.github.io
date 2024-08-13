@@ -103,15 +103,21 @@
   })
 
   // Transcript
-  new cuesync.CueSync(
-    document.getElementById('audio-transcript'),
-    { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true }
-  )
+  const audioTranscript = document.getElementById('audio-transcript')
+  if (audioTranscript) {
+    new cuesync.CueSync(
+      audioTranscript,
+      { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true }
+    )
+  }
 
-  new cuesync.CueSync(
-    document.getElementById('video-transcript'),
-    { transcriptPath: '/assets/transcripts/you.vtt', media: document.querySelector('#natGeoVideo') }
-  )
+  const videoTranscript = document.getElementById('video-transcript')
+  if (videoTranscript) {
+    new cuesync.CueSync(
+      videoTranscript,
+      { transcriptPath: '/assets/transcripts/you.vtt', media: document.querySelector('#natGeoVideo') }
+    )
+  }
 
   let i = 1
   const squiggles = Array.prototype.slice.call(document.querySelectorAll('.squiggle'))

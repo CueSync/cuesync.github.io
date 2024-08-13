@@ -65,12 +65,12 @@ To display the transcript timestamp, pass `displayTime: true` as an option when 
 </audio>
 
 <!-- Transcript Container -->
-<div id="audio-transcript" class="transcript-container" style="height: 400px; overflow: auto;"></div>
+<div id="audio-transcript-example" class="transcript-container" style="height: 400px; overflow: auto;"></div>
 ##split##
 <script>
 window.addEventListener('DOMContentLoaded', (event) => {
   const audioTranscript = new cuesync.CueSync(
-    document.getElementById('audio-transcript'), 
+    document.getElementById('audio-transcript-example'), 
     { 
       transcriptPath: '/assets/transcripts/transcript.vtt', 
       media: document.querySelector('#audio'),
