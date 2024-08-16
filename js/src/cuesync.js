@@ -26,8 +26,6 @@ class CueSync extends BaseComponent {
 
   refresh() {
     const { transcriptPath } = this._config
-    const { media } = this._config
-    const { displayTime } = this._config
 
     // Load and parse the transcript file
     fetch(transcriptPath)
@@ -36,72 +34,17 @@ class CueSync extends BaseComponent {
         const cues = this.parseTranscript(data)
 
         // Create transcript lines and add them to the container
-        for (const [index, cue] of cues.entries()) {
-          const line = document.createElement('div')
-          line.className = 'transcript-line'
-          line.textContent = cue.text.trim()
-
-          if (displayTime) {
-            const transcriptLineContainer = document.createElement('div')
-            transcriptLineContainer.className = 'transcript-line-container'
-            transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
-            transcriptLineContainer.setAttribute('role', 'button')
-
-            const timeContainer = document.createElement('span')
-            timeContainer.className = 'time'
-            timeContainer.textContent = `${cue.startTimeRaw}`
-
-            transcriptLineContainer.append(timeContainer)
-            transcriptLineContainer.append(line)
-            this._element.append(transcriptLineContainer)
-
-            transcriptLineContainer.addEventListener('click', () => {
-              media.currentTime = cue.startTime
-            })
-
-            transcriptLineContainer.addEventListener('keypress', e => {
-              if (e.key === 'Enter') {
-                media.currentTime = cue.startTime
-              }
-            })
-
-            transcriptLineContainer.tabIndex = 0
-
-            if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
-              this._timeMaxWidth = timeContainer.getBoundingClientRect().width
-            }
-          } else {
-            this._element.append(line)
-
-            line.setAttribute('aria-label', cue.text.trim())
-            line.setAttribute('role', 'button')
-
-            line.addEventListener('click', () => {
-              media.currentTime = cue.startTime
-            })
-
-            line.addEventListener('keypress', e => {
-              if (e.key === 'Enter') {
-                media.currentTime = cue.startTime
-              }
-            })
-
-            line.tabIndex = 0
-          }
-
-          this._element.addEventListener('scroll', () => {
-            if (this._autoScroll) {
-              this._autoScroll = false
-            }
-          })
-
-          // Update transcript highlighting based on media time
-          this.addMediaEventListener(line, cues, cue, index)
-        }
+        this.createTranscriptLines(cues)
 
         if (this._timeMaxWidth) {
           this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
         }
+
+        this._element.addEventListener('scroll', () => {
+          if (this._autoScroll) {
+            this._autoScroll = false
+          }
+        })
       })
       .catch(error => console.error('Error loading transcript file:', error)) // eslint-disable-line no-console
   }
@@ -142,6 +85,67 @@ class CueSync extends BaseComponent {
     }
 
     return cues
+  }
+
+  createTranscriptLines(cues) {
+    const { media, displayTime } = this._config
+
+    for (const [index, cue] of cues.entries()) {
+      const line = document.createElement('div')
+      line.className = 'transcript-line'
+      line.textContent = cue.text.trim()
+
+      if (displayTime) {
+        const transcriptLineContainer = document.createElement('div')
+        transcriptLineContainer.className = 'transcript-line-container'
+        transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
+        transcriptLineContainer.setAttribute('role', 'button')
+
+        const timeContainer = document.createElement('span')
+        timeContainer.className = 'time'
+        timeContainer.textContent = `${cue.startTimeRaw}`
+
+        transcriptLineContainer.append(timeContainer)
+        transcriptLineContainer.append(line)
+        this._element.append(transcriptLineContainer)
+
+        transcriptLineContainer.addEventListener('click', () => {
+          media.currentTime = cue.startTime
+        })
+
+        transcriptLineContainer.addEventListener('keypress', e => {
+          if (e.key === 'Enter') {
+            media.currentTime = cue.startTime
+          }
+        })
+
+        transcriptLineContainer.tabIndex = 0
+
+        if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
+          this._timeMaxWidth = timeContainer.getBoundingClientRect().width
+        }
+      } else {
+        this._element.append(line)
+
+        line.setAttribute('aria-label', cue.text.trim())
+        line.setAttribute('role', 'button')
+
+        line.addEventListener('click', () => {
+          media.currentTime = cue.startTime
+        })
+
+        line.addEventListener('keypress', e => {
+          if (e.key === 'Enter') {
+            media.currentTime = cue.startTime
+          }
+        })
+
+        line.tabIndex = 0
+      }
+
+      // Update transcript highlighting based on media time
+      this.addMediaEventListener(line, cues, cue, index)
+    }
   }
 
   convertToSeconds(time) {
@@ -199,8 +203,7 @@ class CueSync extends BaseComponent {
   }
 
   addMediaEventListener(line, cues, cue, index) {
-    const { media } = this._config
-    const { displayTime } = this._config
+    const { media, displayTime } = this._config
 
     media.addEventListener('timeupdate', () => {
       if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
