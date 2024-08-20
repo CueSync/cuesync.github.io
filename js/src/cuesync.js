@@ -24,35 +24,42 @@ class CueSync extends BaseComponent {
     return NAME
   }
 
-  refresh() {
+  async refresh() {
     const { transcriptPath } = this._config
+    const transcriptText = await this.fetchTranscript(transcriptPath)
 
-    // Load and parse the transcript file
-    fetch(transcriptPath)
-      .then(response => response.text())
-      .then(data => {
-        const cues = this.parseTranscript(data)
+    if (transcriptText) {
+      const cues = this.parseTranscript(transcriptText)
 
-        // Create transcript lines and add them to the container
-        this.createTranscriptLines(cues)
+      // Create transcript lines and add them to the container
+      this.createTranscriptLines(cues)
 
-        if (this._timeMaxWidth) {
-          this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+      if (this._timeMaxWidth) {
+        this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+      }
+
+      this._element.addEventListener('scroll', () => {
+        if (this._autoScroll) {
+          this._autoScroll = false
         }
-
-        this._element.addEventListener('scroll', () => {
-          if (this._autoScroll) {
-            this._autoScroll = false
-          }
-        })
       })
-      .catch(error => console.error('Error loading transcript file:', error)) // eslint-disable-line no-console
+    }
+  }
+
+  async fetchTranscript(transcriptPath) {
+    try {
+      const response = await fetch(transcriptPath)
+      return await response.text()
+    } catch (error) {
+      console.error(`Error reading file: ${error.message}`) // eslint-disable-line no-console
+      return false
+    }
   }
 
   // Function to parse SRT or VTT text into cue objects
-  parseTranscript(text) {
+  parseTranscript(transcriptText) {
     const cues = []
-    const lines = text.split('\n')
+    const lines = transcriptText.split('\n')
     let cue = null
 
     for (let line of lines) {
