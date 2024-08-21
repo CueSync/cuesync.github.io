@@ -107,6 +107,7 @@ class CueSync extends BaseComponent {
         transcriptLineContainer.className = 'transcript-line-container'
         transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
         transcriptLineContainer.setAttribute('role', 'button')
+        transcriptLineContainer.tabIndex = 0
 
         const timeContainer = document.createElement('span')
         timeContainer.className = 'time'
@@ -114,40 +115,22 @@ class CueSync extends BaseComponent {
 
         transcriptLineContainer.append(timeContainer)
         transcriptLineContainer.append(line)
+
         this._element.append(transcriptLineContainer)
 
-        transcriptLineContainer.addEventListener('click', () => {
-          media.currentTime = cue.startTime
-        })
-
-        transcriptLineContainer.addEventListener('keypress', e => {
-          if (e.key === 'Enter') {
-            media.currentTime = cue.startTime
-          }
-        })
-
-        transcriptLineContainer.tabIndex = 0
+        this.addTranscriptEventListeners(transcriptLineContainer, media, cue.startTime)
 
         if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
           this._timeMaxWidth = timeContainer.getBoundingClientRect().width
         }
       } else {
-        this._element.append(line)
-
         line.setAttribute('aria-label', cue.text.trim())
         line.setAttribute('role', 'button')
-
-        line.addEventListener('click', () => {
-          media.currentTime = cue.startTime
-        })
-
-        line.addEventListener('keypress', e => {
-          if (e.key === 'Enter') {
-            media.currentTime = cue.startTime
-          }
-        })
-
         line.tabIndex = 0
+
+        this._element.append(line)
+
+        this.addTranscriptEventListeners(line, media, cue.startTime)
       }
 
       // Update transcript highlighting based on media time
@@ -247,6 +230,18 @@ class CueSync extends BaseComponent {
         } else {
           line.classList.remove('played')
         }
+      }
+    })
+  }
+
+  addTranscriptEventListeners(element, media, time) {
+    element.addEventListener('click', () => {
+      media.currentTime = time
+    })
+
+    element.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        media.currentTime = time
       }
     })
   }
