@@ -24,92 +24,42 @@ class CueSync extends BaseComponent {
     return NAME
   }
 
-  refresh() {
+  async refresh() {
     const { transcriptPath } = this._config
-    const { media } = this._config
-    const { displayTime } = this._config
+    const transcriptText = await this._fetchTranscript(transcriptPath)
 
-    // Load and parse the transcript file
-    fetch(transcriptPath)
-      .then(response => response.text())
-      .then(data => {
-        const cues = this.parseTranscript(data)
+    if (transcriptText) {
+      const cues = this._parseTranscript(transcriptText)
 
-        // Create transcript lines and add them to the container
-        for (const [index, cue] of cues.entries()) {
-          const line = document.createElement('div')
-          line.className = 'transcript-line'
-          line.textContent = cue.text.trim()
+      // Create transcript lines and add them to the container
+      this._createTranscriptLines(cues)
 
-          if (displayTime) {
-            const transcriptLineContainer = document.createElement('div')
-            transcriptLineContainer.className = 'transcript-line-container'
-            transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
-            transcriptLineContainer.setAttribute('role', 'button')
+      if (this._timeMaxWidth) {
+        this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+      }
 
-            const timeContainer = document.createElement('span')
-            timeContainer.className = 'time'
-            timeContainer.textContent = `${cue.startTimeRaw}`
-
-            transcriptLineContainer.append(timeContainer)
-            transcriptLineContainer.append(line)
-            this._element.append(transcriptLineContainer)
-
-            transcriptLineContainer.addEventListener('click', () => {
-              media.currentTime = cue.startTime
-            })
-
-            transcriptLineContainer.addEventListener('keypress', e => {
-              if (e.key === 'Enter') {
-                media.currentTime = cue.startTime
-              }
-            })
-
-            transcriptLineContainer.tabIndex = 0
-
-            if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
-              this._timeMaxWidth = timeContainer.getBoundingClientRect().width
-            }
-          } else {
-            this._element.append(line)
-
-            line.setAttribute('aria-label', cue.text.trim())
-            line.setAttribute('role', 'button')
-
-            line.addEventListener('click', () => {
-              media.currentTime = cue.startTime
-            })
-
-            line.addEventListener('keypress', e => {
-              if (e.key === 'Enter') {
-                media.currentTime = cue.startTime
-              }
-            })
-
-            line.tabIndex = 0
-          }
-
-          this._element.addEventListener('scroll', () => {
-            if (this._autoScroll) {
-              this._autoScroll = false
-            }
-          })
-
-          // Update transcript highlighting based on media time
-          this.addMediaEventListener(line, cues, cue, index)
-        }
-
-        if (this._timeMaxWidth) {
-          this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
+      this._element.addEventListener('scroll', () => {
+        if (this._autoScroll) {
+          this._autoScroll = false
         }
       })
-      .catch(error => console.error('Error loading transcript file:', error)) // eslint-disable-line no-console
+    }
+  }
+
+  async _fetchTranscript(transcriptPath) {
+    try {
+      const response = await fetch(transcriptPath)
+      return await response.text()
+    } catch (error) {
+      console.error(`Error reading file: ${error.message}`) // eslint-disable-line no-console
+      return false
+    }
   }
 
   // Function to parse SRT or VTT text into cue objects
-  parseTranscript(text) {
+  _parseTranscript(transcriptText) {
     const cues = []
-    const lines = text.split('\n')
+    const lines = transcriptText.split('\n')
     let cue = null
 
     for (let line of lines) {
@@ -129,8 +79,8 @@ class CueSync extends BaseComponent {
       } else if (line.includes('-->')) {
         // Parse cue timing (both SRT and VTT formats)
         const [startTime, endTime] = line.split(/ --> /)
-        cue = new VTTCue(this.convertToSeconds(startTime), this.convertToSeconds(endTime), '')
-        cue.startTimeRaw = this.minimalTime(startTime)
+        cue = new VTTCue(this._convertToSeconds(startTime), this._convertToSeconds(endTime), '')
+        cue.startTimeRaw = this._minimalTime(startTime)
       } else if (cue) {
         // Add cue text (both SRT and VTT formats)
         cue.text += `${line} `
@@ -144,21 +94,65 @@ class CueSync extends BaseComponent {
     return cues
   }
 
-  convertToSeconds(time) {
+  _createTranscriptLines(cues) {
+    const { media, displayTime } = this._config
+
+    for (const [index, cue] of cues.entries()) {
+      const line = document.createElement('div')
+      line.className = 'transcript-line'
+      line.textContent = cue.text.trim()
+
+      if (displayTime) {
+        const transcriptLineContainer = document.createElement('div')
+        transcriptLineContainer.className = 'transcript-line-container'
+        transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
+        transcriptLineContainer.setAttribute('role', 'button')
+        transcriptLineContainer.tabIndex = 0
+
+        const timeContainer = document.createElement('span')
+        timeContainer.className = 'time'
+        timeContainer.textContent = `${cue.startTimeRaw}`
+
+        transcriptLineContainer.append(timeContainer)
+        transcriptLineContainer.append(line)
+
+        this._element.append(transcriptLineContainer)
+
+        this._addTranscriptEventListeners(transcriptLineContainer, media, cue.startTime)
+
+        if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
+          this._timeMaxWidth = timeContainer.getBoundingClientRect().width
+        }
+      } else {
+        line.setAttribute('aria-label', cue.text.trim())
+        line.setAttribute('role', 'button')
+        line.tabIndex = 0
+
+        this._element.append(line)
+
+        this._addTranscriptEventListeners(line, media, cue.startTime)
+      }
+
+      // Update transcript highlighting based on media time
+      this._addMediaEventListener(line, cues, cue, index)
+    }
+  }
+
+  _convertToSeconds(time) {
     const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
 
     return ((hours * 3600) + (minutes * 60) + seconds).toFixed(2)
   }
 
-  minimalTime(time) {
+  _minimalTime(time) {
     const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
 
     return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`
   }
 
-  autoScroll(line) {
+  _scroll(line) {
     if (this._autoScroll) {
-      this.scrollToView(line)
+      this._scrollToView(line)
     } else {
       const parentRect = this._element.getBoundingClientRect()
       const elementRect = line.getBoundingClientRect()
@@ -169,7 +163,7 @@ class CueSync extends BaseComponent {
     }
   }
 
-  scrollToView(element) {
+  _scrollToView(element) {
     const parent = element.closest('.transcript-container')
 
     const elementOffset = element.offsetTop - parent.offsetTop
@@ -198,9 +192,8 @@ class CueSync extends BaseComponent {
     // If the element is already visible, no scrolling is needed
   }
 
-  addMediaEventListener(line, cues, cue, index) {
-    const { media } = this._config
-    const { displayTime } = this._config
+  _addMediaEventListener(line, cues, cue, index) {
+    const { media, displayTime } = this._config
 
     media.addEventListener('timeupdate', () => {
       if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
@@ -210,7 +203,7 @@ class CueSync extends BaseComponent {
           line.classList.add('active')
         }
 
-        this.autoScroll(line)
+        this._scroll(line)
       } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
         if (displayTime) {
           line.closest('.transcript-line-container').classList.add('active')
@@ -218,7 +211,7 @@ class CueSync extends BaseComponent {
           line.classList.add('active')
         }
 
-        this.autoScroll(line)
+        this._scroll(line)
       } else {
         if (displayTime) {
           line.closest('.transcript-line-container').classList.remove('active')
@@ -237,6 +230,18 @@ class CueSync extends BaseComponent {
         } else {
           line.classList.remove('played')
         }
+      }
+    })
+  }
+
+  _addTranscriptEventListeners(element, media, time) {
+    element.addEventListener('click', () => {
+      media.currentTime = time
+    })
+
+    element.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        media.currentTime = time
       }
     })
   }
