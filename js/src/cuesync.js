@@ -25,14 +25,31 @@ class CueSync extends BaseComponent {
   }
 
   async refresh() {
-    const { transcriptPath } = this._config
-    const transcriptText = await this._fetchTranscript(transcriptPath)
+    let transcripts = []
+    let cuesCollection = []
 
-    if (transcriptText) {
-      const cues = this._parseTranscript(transcriptText)
+    // Create an array of transcript file paths
+    const transcriptFilePaths = this._getTranscriptFilePaths()
 
-      // Create transcript lines and add them to the container
-      this._createTranscriptLines(cues)
+    // Create an array of transcript file contents
+    if (transcriptFilePaths.length) {
+      transcripts = await Promise.all(
+        transcriptFilePaths.map(t => this._fetchTranscript(t))
+      )
+    } else {
+      throw new Error('No transcript file paths found')
+    }
+
+    // Create an array of parsed transcripts
+    if (transcripts.length) {
+      cuesCollection = transcripts.map(t => this._parseTranscript(t))
+    } else {
+      throw new Error('No transcript content retrieved')
+    }
+
+    // Create transcript lines and add them to the container
+    if (cuesCollection.length) {
+      this._createTranscriptLines(cuesCollection)
 
       if (this._timeMaxWidth) {
         this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`)
@@ -43,16 +60,37 @@ class CueSync extends BaseComponent {
           this._autoScroll = false
         }
       })
+    } else {
+      throw new Error('No cues parsed from transcripts')
     }
+  }
+
+  _getTranscriptFilePaths() {
+    const { transcriptPath } = this._config
+    let transcriptFilePaths = []
+
+    if (typeof transcriptPath === 'string') {
+      transcriptFilePaths = [transcriptPath]
+    } else if (Array.isArray(transcriptPath)) {
+      transcriptFilePaths = transcriptPath
+    } else {
+      throw new TypeError('The transcript path should be provided as a string, or as an array if you have multiple transcript files.')
+    }
+
+    return transcriptFilePaths
   }
 
   async _fetchTranscript(transcriptPath) {
     try {
       const response = await fetch(transcriptPath)
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`)
+      }
+
       return await response.text()
     } catch (error) {
-      console.error(`Error reading file: ${error.message}`) // eslint-disable-line no-console
-      return false
+      throw new Error(`Failed to fetch transcripts: ${error.message}`)
     }
   }
 
@@ -68,9 +106,10 @@ class CueSync extends BaseComponent {
         // Empty line
         if (cue) {
           cues.push(cue)
+          cue = null
         }
 
-        cue = null
+        continue
       }
 
       if (!cue && /^\d+$/.test(line)) {
@@ -94,13 +133,49 @@ class CueSync extends BaseComponent {
     return cues
   }
 
-  _createTranscriptLines(cues) {
+  _convertToSeconds(time) {
+    const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
+
+    return ((hours * 3600) + (minutes * 60) + seconds).toFixed(2)
+  }
+
+  _minimalTime(time) {
+    const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
+
+    return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`
+  }
+
+  _createTranscriptLines(cuesCollection) {
     const { media, displayTime } = this._config
+
+    if (!Array.isArray(cuesCollection) || cuesCollection.length === 0) {
+      throw new Error('Invalid cuesCollection provided')
+    }
+
+    const cues = cuesCollection[0]
 
     for (const [index, cue] of cues.entries()) {
       const line = document.createElement('div')
       line.className = 'transcript-line'
-      line.textContent = cue.text.trim()
+
+      // Create a document fragment to combine text safely
+      const fragment = document.createDocumentFragment()
+
+      // Combine text from all cue arrays
+      for (const cueArray of cuesCollection) {
+        if (cueArray[index]) {
+          const textNode = document.createTextNode(`${cueArray[index].text.trim()}`)
+          fragment.append(textNode)
+          fragment.append(document.createElement('br'))
+        }
+      }
+
+      // Remove the trailing <br>
+      if (fragment.lastChild?.nodeName === 'BR') {
+        fragment.lastChild.remove()
+      }
+
+      line.append(fragment)
 
       if (displayTime) {
         const transcriptLineContainer = document.createElement('div')
@@ -111,7 +186,7 @@ class CueSync extends BaseComponent {
 
         const timeContainer = document.createElement('span')
         timeContainer.className = 'time'
-        timeContainer.textContent = `${cue.startTimeRaw}`
+        timeContainer.textContent = cue.startTimeRaw
 
         transcriptLineContainer.append(timeContainer)
         transcriptLineContainer.append(line)
@@ -120,8 +195,9 @@ class CueSync extends BaseComponent {
 
         this._addTranscriptEventListeners(transcriptLineContainer, media, cue.startTime)
 
-        if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
-          this._timeMaxWidth = timeContainer.getBoundingClientRect().width
+        const timeWidth = timeContainer.getBoundingClientRect().width
+        if (timeWidth > this._timeMaxWidth) {
+          this._timeMaxWidth = timeWidth
         }
       } else {
         line.setAttribute('aria-label', cue.text.trim())
@@ -136,18 +212,6 @@ class CueSync extends BaseComponent {
       // Update transcript highlighting based on media time
       this._addMediaEventListener(line, cues, cue, index)
     }
-  }
-
-  _convertToSeconds(time) {
-    const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
-
-    return ((hours * 3600) + (minutes * 60) + seconds).toFixed(2)
-  }
-
-  _minimalTime(time) {
-    const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat)
-
-    return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`
   }
 
   _scroll(line) {
@@ -166,101 +230,91 @@ class CueSync extends BaseComponent {
   _scrollToView(element) {
     const parent = element.closest('.transcript-container')
 
-    const elementOffset = element.offsetTop - parent.offsetTop
-    const elementHeight = element.offsetHeight
-    const parentHeight = parent.clientHeight
+    if (!parent) {
+      console.error('Parent .transcript-container not found.') // eslint-disable-line no-console
+      return
+    }
 
-    // Calculate the current scroll position of the parent
-    const parentScrollTop = parent.scrollTop
+    const parentRect = parent.getBoundingClientRect()
+    const elementRect = element.getBoundingClientRect()
 
-    // Check if the element is above the visible area
-    if (elementOffset < parentScrollTop) {
+    // Check if the element is above or below the visible area
+    const isAbove = elementRect.top < parentRect.top
+    const isBelow = elementRect.bottom > parentRect.bottom
+
+    if (isAbove) {
       // Scroll up to make the element visible at the top
       parent.scrollTo({
-        top: elementOffset,
+        top: parent.scrollTop + (elementRect.top - parentRect.top),
         left: 0,
         behavior: 'smooth'
       })
-    } else if (elementOffset + elementHeight > parentScrollTop + parentHeight) {
+    } else if (isBelow) {
       // Scroll down to make the element visible at the bottom
       parent.scrollTo({
-        top: elementOffset + elementHeight - parentHeight,
+        top: parent.scrollTop + (elementRect.bottom - parentRect.bottom),
         left: 0,
         behavior: 'smooth'
       })
     }
-    // If the element is already visible, no scrolling is needed
   }
 
   _addMediaEventListener(line, cues, cue, index) {
     const { media, displayTime } = this._config
 
+    const updateClasses = (isActive, isPlayed) => {
+      const container = displayTime ? line.closest('.transcript-line-container') : line
+
+      if (container) {
+        container.classList.toggle('active', isActive)
+        container.classList.toggle('played', isPlayed)
+      }
+    }
+
     media.addEventListener('timeupdate', () => {
-      if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.add('active')
-        } else {
-          line.classList.add('active')
-        }
+      const { currentTime } = media
+      const isActive = currentTime >= cue.startTime && (index === cues.length - 1 || currentTime < cue.endTime)
+      const isPlayed = currentTime >= cue.startTime
 
+      updateClasses(isActive, isPlayed)
+
+      if (isActive) {
         this._scroll(line)
-      } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.add('active')
-        } else {
-          line.classList.add('active')
-        }
-
-        this._scroll(line)
-      } else {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.remove('active')
-        } else {
-          line.classList.remove('active')
-        }
-
-        if (media.currentTime >= cue.startTime) {
-          if (displayTime) {
-            line.closest('.transcript-line-container').classList.add('played')
-          } else {
-            line.classList.add('played')
-          }
-        } else if (displayTime) {
-          line.closest('.transcript-line-container').classList.remove('played')
-        } else {
-          line.classList.remove('played')
-        }
       }
     })
   }
 
   _addTranscriptEventListeners(element, media, time) {
-    element.addEventListener('click', () => {
+    const setMediaTime = () => {
       media.currentTime = time
-    })
+    }
+
+    element.addEventListener('click', setMediaTime)
 
     element.addEventListener('keypress', e => {
       if (e.key === 'Enter') {
-        media.currentTime = time
+        setMediaTime()
       }
     })
   }
 
   redrawTime() {
-    const timeList = Array.prototype.slice.call(this._element.querySelectorAll('.time'))
+    const timeElements = this._element.querySelectorAll('.time')
 
-    if (timeList) {
-      let maxWidth = 0
-      for (const t of timeList) {
-        if (t.getBoundingClientRect().width > maxWidth) {
-          maxWidth = t.getBoundingClientRect().width
-        }
-      }
+    if (timeElements.length === 0) {
+      return
+    }
 
-      if (maxWidth) {
-        this._element.style.setProperty('--cs-time-width', `${maxWidth}px`)
+    let maxWidth = 0
+
+    for (const t of timeElements) {
+      const { width } = t.getBoundingClientRect()
+      if (width > maxWidth) {
+        maxWidth = width
       }
     }
+
+    this._element.style.setProperty('--cs-time-width', `${maxWidth}px`)
   }
 }
 
