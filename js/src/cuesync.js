@@ -70,7 +70,7 @@ class CueSync extends BaseComponent {
     let transcriptFilePaths = []
 
     if (typeof transcriptPath === 'string') {
-      transcriptFilePaths = [transcriptPath]
+      transcriptFilePaths = transcriptPath.split(',')
     } else if (Array.isArray(transcriptPath)) {
       transcriptFilePaths = transcriptPath
     } else {
