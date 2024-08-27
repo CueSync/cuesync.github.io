@@ -114,11 +114,81 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 <br>
 
+## Multiple transcripts
+
+Add multiple transcripts to a single audio/video file by specifying an array of transcript file paths. 
+This allows you to present transcripts in multiple languages seamlessly.
+
+{{< example codeId="code3" >}}
+<!-- Video -->
+<video id="natGeoVideoMultiTime" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript Container -->
+<div id="video-transcript-multi-time" class="transcript-container" 
+     style="height: 400px; overflow: auto;"></div>
+##split##
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  const videoTranscript3 = new cuesync.CueSync(
+    document.getElementById('video-transcript-multi-time'), 
+    {
+      transcriptPath: [
+        '/assets/transcripts/you.vtt',
+        '/assets/transcripts/you_hindi.vtt'
+      ],
+      media: document.getElementById('natGeoVideoMultiTime'),
+      displayTime: true 
+    }
+  )
+});
+</script>
+{{< /example >}}
+
+<br>
+
+{{< example codeId="code4" >}}
+<!-- Video -->
+<video id="natGeoVideoMulti" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript Container -->
+<div id="video-transcript-multi" class="transcript-container" 
+     style="height: 400px; overflow: auto;"></div>
+##split##
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+  const videoTranscript3 = new cuesync.CueSync(
+    document.getElementById('video-transcript-multi'), 
+    {
+      transcriptPath: [
+        '/assets/transcripts/you.vtt',
+        '/assets/transcripts/you_hindi.vtt'
+      ],
+      media: document.getElementById('natGeoVideoMulti') 
+    }
+  )
+});
+</script>
+{{< /example >}}
+
+You can pass multiple comma-separated transcript paths using the HTML attribute `data-cs-transcript-path` as shown below:
+
+```html
+data-cs-transcript-path="/assets/transcripts/you.vtt, /assets/transcripts/you_hindi.vtt"
+```
+
+<br>
+
 ## Customization
 
 Customize CueSync by modifying the <a href="/1.0/specs/#css-custom-properties">CSS custom properties listed here</a>.
 
-{{< example codeId="code3" >}}
+{{< example codeId="code5" >}}
 <style>
 #video-transcript-3 {
  --cs-container-bg: #aa076b;
