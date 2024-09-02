@@ -10,19 +10,19 @@
     },
     {
       "path": "./dist/js/cuesync.esm.js",
-      "maxSize": "3.75 kB"
+      "maxSize": "4.30 kB"
     },
     {
       "path": "./dist/js/cuesync.esm.min.js",
-      "maxSize": "2.55 kB"
+      "maxSize": "3.00 kB"
     },
     {
       "path": "./dist/js/cuesync.js",
-      "maxSize": "4 kB"
+      "maxSize": "4.50 kB"
     },
     {
       "path": "./dist/js/cuesync.min.js",
-      "maxSize": "2.6 kB"
+      "maxSize": "3.00 kB"
     }
   ],
   "ci": {

@@ -16,7 +16,7 @@ title: CueSync
         </div>
     </div>
     <div class="col-md-6">
-        <div id="video-transcript" class="transcript-container overflow-auto"></div>
+        <div id="video-transcript" class="transcript-container" style="max-height: 400px; overflow: auto;"></div>
     </div>
 </div>
 
