@@ -85,6 +85,8 @@ export default class CueSync extends HTMLElement {
         --cs-toolbar-padding-y: 15px;
         --cs-container-padding-x: 15px;
         --cs-container-padding-y: 5px;
+        --cs-container-paragraph-padding-x: 5px;
+        --cs-container-paragraph-padding-y: 5px;
         --cs-transcript-padding-x: 5px;
         --cs-transcript-padding-y: 5px;
         --cs-transcript-border-radius: var(--cs-border-radius);
@@ -188,6 +190,7 @@ export default class CueSync extends HTMLElement {
       
       .transcript-line-container.paragraph {
         display: inline-flex;
+        padding: var(--cs-container-paragraph-padding-y) var(--cs-container-paragraph-padding-x);
       }
       
       .time {
@@ -256,7 +259,9 @@ export default class CueSync extends HTMLElement {
     // Dispatch a custom event based on the attribute that was changed
     this._dispatchCustomEvent(name, newValue)
 
-    this._requestRefresh()
+    if (!['theme', 'layout', 'show-timestamp', 'auto-scroll'].includes(name)) {
+      this._requestRefresh()
+    }
   }
 
   _updateConfig(name, value) {
@@ -411,11 +416,15 @@ export default class CueSync extends HTMLElement {
     }
 
     const settingsToggle = this.shadowRoot.querySelector('#settings-toggle')
+
+    settingsToggle.removeEventListener('click', this._toggleSettingsMenu)
+    settingsToggle.addEventListener('click', this._toggleSettingsMenu)
+  }
+
+  _toggleSettingsMenu = () => {
     const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
 
-    settingsToggle.addEventListener('click', () => {
-      settingsMenu.hidden = !settingsMenu.hidden
-    })
+    settingsMenu.hidden = !settingsMenu.hidden
   }
 
   _setTimeMaxWidth() {
@@ -573,27 +582,24 @@ export default class CueSync extends HTMLElement {
       stackedOption.checked = true
     }
 
-    paragraphOption.addEventListener('change', () => {
-      this._toggleLayout('paragraph')
+    paragraphOption.removeEventListener('change', this._toggleLayout)
+    paragraphOption.addEventListener('change', this._toggleLayout)
 
-      this._dispatchCustomEvent('layout', 'paragraph')
-    })
-
-    stackedOption.addEventListener('change', () => {
-      this._toggleLayout('stacked')
-
-      this._dispatchCustomEvent('layout', 'stacked')
-    })
+    stackedOption.removeEventListener('change', this._toggleLayout)
+    stackedOption.addEventListener('change', this._toggleLayout)
   }
 
-  _toggleLayout(style) {
+  _toggleLayout = () => {
+    const layout = this.shadowRoot.querySelector('input[name="layout"]:checked').value
     const transcriptLineContainers = this.shadowRoot.querySelectorAll('.transcript-line-container')
 
     for (const container of transcriptLineContainers) {
-      container.classList.toggle('paragraph', style === 'paragraph')
+      container.classList.toggle('paragraph', layout === 'paragraph')
     }
 
-    this._config.layout = style
+    this._config.layout = layout
+
+    this._dispatchCustomEvent('layout', layout)
   }
 
   _initializeThemes() {
@@ -609,54 +615,57 @@ export default class CueSync extends HTMLElement {
       autoOption.checked = true
     }
 
-    autoOption.addEventListener('change', () => {
-      this._setTheme('auto')
+    autoOption.removeEventListener('change', this._setTheme)
+    lightOption.removeEventListener('change', this._setTheme)
+    darkOption.removeEventListener('change', this._setTheme)
 
-      this._dispatchCustomEvent('theme', 'auto')
-    })
-
-    lightOption.addEventListener('change', () => {
-      this._setTheme('light')
-
-      this._dispatchCustomEvent('theme', 'light')
-    })
-
-    darkOption.addEventListener('change', () => {
-      this._setTheme('dark')
-
-      this._dispatchCustomEvent('theme', 'dark')
-    })
+    autoOption.addEventListener('change', this._setTheme)
+    lightOption.addEventListener('change', this._setTheme)
+    darkOption.addEventListener('change', this._setTheme)
   }
 
-  _setTheme(theme) {
+  _setTheme = () => {
+    const theme = this.shadowRoot.querySelector('input[name="theme"]:checked').value
+
     this.setAttribute('theme', theme)
+
+    this._dispatchCustomEvent('theme', theme)
   }
 
   _initializeTimestampToggle() {
     const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
     timestampCheckbox.checked = this._config.showTimestamp
 
-    timestampCheckbox.addEventListener('change', () => {
-      const timestamps = this.shadowRoot.querySelectorAll('.time')
-      for (const timeElement of timestamps) {
-        timeElement.style.display = timestampCheckbox.checked ? 'inline-block' : 'none'
-      }
+    timestampCheckbox.removeEventListener('change', this._toggleTimestamps)
+    timestampCheckbox.addEventListener('change', this._toggleTimestamps)
+  }
 
-      this._config.showTimestamp = timestampCheckbox.checked
+  _toggleTimestamps = () => {
+    const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
+    const timestamps = this.shadowRoot.querySelectorAll('.time')
 
-      this._dispatchCustomEvent('show-timestamp', timestampCheckbox.checked)
-    })
+    for (const timeElement of timestamps) {
+      timeElement.style.display = timestampCheckbox.checked ? 'inline-block' : 'none'
+    }
+
+    this._config.showTimestamp = timestampCheckbox.checked
+
+    this._dispatchCustomEvent('show-timestamp', timestampCheckbox.checked)
   }
 
   _initializeAutoScrollToggle() {
     const autoScrollCheckbox = this.shadowRoot.getElementById('auto-scroll-toggle')
     autoScrollCheckbox.checked = this._config.autoScroll
 
-    autoScrollCheckbox.addEventListener('change', () => {
-      this._config.autoScroll = autoScrollCheckbox.checked
+    autoScrollCheckbox.removeEventListener('change', this._toggleAutoScroll)
+    autoScrollCheckbox.addEventListener('change', this._toggleAutoScroll)
+  }
 
-      this._dispatchCustomEvent('auto-scroll', autoScrollCheckbox.checked)
-    })
+  _toggleAutoScroll = () => {
+    const autoScrollCheckbox = this.shadowRoot.getElementById('auto-scroll-toggle')
+    this._config.autoScroll = autoScrollCheckbox.checked
+
+    this._dispatchCustomEvent('auto-scroll', autoScrollCheckbox.checked)
   }
 
   _createLanguageCheckboxes(languages) {
@@ -682,20 +691,27 @@ export default class CueSync extends HTMLElement {
 
     const checkboxes = languageSelectDiv.querySelectorAll('input[type="checkbox"]')
     for (const checkbox of checkboxes) {
-      checkbox.addEventListener('change', () => {
-        const selectedLanguages = Array.from(checkboxes)
-          .filter(input => input.checked)
-          .map(input => input.value)
-
-        // If this is the last checkbox being unchecked, prevent it
-        if (selectedLanguages.length === 0) {
-          checkbox.checked = true // Re-check the last checkbox
-          return
-        }
-
-        this._updateLayout(selectedLanguages)
-      })
+      checkbox.removeEventListener('change', this._handleCheckboxChange)
+      checkbox.addEventListener('change', this._handleCheckboxChange)
     }
+  }
+
+  _handleCheckboxChange = event => {
+    const languageSelectDiv = this.shadowRoot.getElementById('language-options')
+    const checkboxes = languageSelectDiv.querySelectorAll('input[type="checkbox"]')
+    const checkbox = event.target
+
+    const selectedLanguages = Array.from(checkboxes)
+      .filter(input => input.checked)
+      .map(input => input.value)
+
+    // If this is the last checkbox being unchecked, prevent it
+    if (selectedLanguages.length === 0) {
+      checkbox.checked = true // Re-check the last checkbox
+      return
+    }
+
+    this._updateLayout(selectedLanguages)
   }
 
   _updateLayout(selectedLanguages) {
@@ -719,18 +735,11 @@ export default class CueSync extends HTMLElement {
     const lockPosition = containerTop + secondLineOffset
 
     if (elementTop !== lockPosition) {
-      this._scrollToLock(line, lockPosition)
+      this._scrollToLock(line, lockPosition, container)
     }
   }
 
-  _scrollToLock(element, lockPosition) {
-    const parent = element.closest('#transcript-container')
-
-    if (!parent) {
-      console.error('Parent #transcript-container not found.') // eslint-disable-line no-console
-      return
-    }
-
+  _scrollToLock(element, lockPosition, parent) {
     const { top: elementTop } = element.getBoundingClientRect()
 
     // Calculate how much to scroll to keep the element at the locked position
@@ -757,6 +766,9 @@ export default class CueSync extends HTMLElement {
       }
     }
 
+    element.removeEventListener('click', handleEvent)
+    element.removeEventListener('keypress', handleEvent)
+
     element.addEventListener('click', handleEvent)
     element.addEventListener('keypress', handleEvent)
   }
@@ -779,42 +791,47 @@ export default class CueSync extends HTMLElement {
       }
     }
 
-    media.addEventListener('timeupdate', () => {
-      const { currentTime } = media
+    if (!this._handleTimeUpdate) {
+      this._handleTimeUpdate = () => {
+        const { currentTime } = media
 
-      // Identify the new active cue index
-      let newActiveIndex = activeCueIndex
+        // Identify the new active cue index
+        let newActiveIndex = activeCueIndex
 
-      for (let i = 0; i < cues.length; i++) {
-        const { startTime, endTime } = cues[i]
-        if (currentTime >= startTime && (i === cues.length - 1 || currentTime < endTime)) {
-          newActiveIndex = i
-          break
-        }
-      }
-
-      // Update only if there's a change in the active cue
-      if (newActiveIndex !== activeCueIndex) {
-        if (activeCueIndex >= 0) {
-          updateActiveLine(activeCueIndex, false)
-        }
-
-        activeCueIndex = newActiveIndex
-
-        if (activeCueIndex >= 0) {
-          updateActiveLine(activeCueIndex, true)
-
-          // Add the 'active-added' class once the media starts
-          if (!transcriptContainer.classList.contains('active-added')) {
-            transcriptContainer.classList.add('active-added')
-          }
-
-          if (this._config.autoScroll) {
-            this._scroll(transcriptLines[activeCueIndex])
+        for (let i = 0; i < cues.length; i++) {
+          const { startTime, endTime } = cues[i]
+          if (currentTime >= startTime && (i === cues.length - 1 || currentTime < endTime)) {
+            newActiveIndex = i
+            break
           }
         }
+
+        // Update only if there's a change in the active cue
+        if (newActiveIndex !== activeCueIndex) {
+          if (activeCueIndex >= 0) {
+            updateActiveLine(activeCueIndex, false)
+          }
+
+          activeCueIndex = newActiveIndex
+
+          if (activeCueIndex >= 0) {
+            updateActiveLine(activeCueIndex, true)
+
+            // Add the 'active-added' class once the media starts
+            if (!transcriptContainer.classList.contains('active-added')) {
+              transcriptContainer.classList.add('active-added')
+            }
+
+            if (this._config.autoScroll) {
+              this._scroll(transcriptLines[activeCueIndex])
+            }
+          }
+        }
       }
-    })
+    }
+
+    media.removeEventListener('timeupdate', this._handleTimeUpdate)
+    media.addEventListener('timeupdate', this._handleTimeUpdate)
   }
 
   redrawTime() {
