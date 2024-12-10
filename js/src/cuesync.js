@@ -38,6 +38,7 @@ export default class CueSync extends HTMLElement {
         --cs-transcript-highlight-color: #044ba7;
         --cs-timestamp-bg: #def1ff;
         --cs-timestamp-color: #044ba7;
+        --cs-settings-shadow-opacity: 0.1;
       }
       
       /* Dark mode */
@@ -56,6 +57,7 @@ export default class CueSync extends HTMLElement {
         --cs-transcript-highlight-color: #def1ff;
         --cs-timestamp-bg: #032b48;
         --cs-timestamp-color: #def1ff;
+        --cs-settings-shadow-opacity: 1;
       }
       
       /* Media query for users without theme attribute but with OS-level dark mode */
@@ -75,6 +77,7 @@ export default class CueSync extends HTMLElement {
           --cs-transcript-highlight-color: #def1ff;
           --cs-timestamp-bg: #032b48;
           --cs-timestamp-color: #def1ff;
+          --cs-settings-shadow-opacity: 1;
         }
       }
       :host {
@@ -82,7 +85,7 @@ export default class CueSync extends HTMLElement {
         --cs-border-style: solid;
         --cs-border-radius: 10px;
         --cs-toolbar-padding-x: 15px;
-        --cs-toolbar-padding-y: 15px;
+        --cs-toolbar-padding-y: 8px;
         --cs-container-padding-x: 15px;
         --cs-container-padding-y: 5px;
         --cs-container-paragraph-padding-x: 5px;
@@ -134,11 +137,17 @@ export default class CueSync extends HTMLElement {
       }
       
       #settings-toggle {
-        padding: 0;
+        padding: 8px;
         font-size: 1.2rem;
         cursor: pointer;
         background: none;
         border: none;
+        border-radius: 50%;
+      }
+      
+      #settings-toggle:hover {
+        background: var(--cs-timestamp-bg);
+        color: var(--cs-timestamp-color);
       }
       
       #settings-toggle svg {
@@ -154,12 +163,12 @@ export default class CueSync extends HTMLElement {
         right: 0;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
         padding: 20px 10px;
         color: var(--cs-toolbar-color);
         background-color: var(--cs-toolbar-bg);
         border-radius: var(--cs-border-radius);
-        box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 32px 0 rgba(0, 0, 0, var(--cs-settings-shadow-opacity));
       }
       
       #settings-menu[hidden] {
@@ -229,7 +238,7 @@ export default class CueSync extends HTMLElement {
       #layout-options,
       #theme-options {
         display: flex;
-        gap: 10px;
+        gap: 8px;
         align-items: center;
       }
     `
@@ -318,6 +327,7 @@ export default class CueSync extends HTMLElement {
         </button>
         <div id="settings-menu" hidden>
             <div id="layout-options">
+                Layout:
                 <label><input type="radio" name="layout" value="stacked">Stacked</label>
                 <label><input type="radio" name="layout" value="paragraph">Paragraph</label>
             </div>
@@ -326,6 +336,7 @@ export default class CueSync extends HTMLElement {
             <div id="language-options">
             </div>
             <div id="theme-options">
+                Theme:
                 <label><input type="radio" name="theme" value="auto">Auto</label>
                 <label><input type="radio" name="theme" value="light">Light</label>
                 <label><input type="radio" name="theme" value="dark">Dark</label>
@@ -364,6 +375,26 @@ export default class CueSync extends HTMLElement {
       const cuesCollection = this._parseTranscripts(transcripts)
 
       this._applyConfiguration(cuesCollection)
+
+      const handleDocumentClicks = e => {
+        const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
+        const settingsToggle = this.shadowRoot.querySelector('#settings-toggle')
+
+        if (settingsMenu && !settingsMenu.hidden) {
+          // Check if the click is outside the settings menu and toggle
+          const path = e.composedPath() // Get the full event path
+          const clickedInsideComponent = path.includes(this)
+          const clickedInsideMenu = path.includes(settingsMenu)
+          const clickedToggle = path.includes(settingsToggle)
+
+          if (!clickedInsideComponent || (!clickedInsideMenu && !clickedToggle)) {
+            settingsMenu.hidden = true
+          }
+        }
+      }
+
+      document.removeEventListener('click', handleDocumentClicks)
+      document.addEventListener('click', handleDocumentClicks)
     } catch (error) {
       console.error(error.message) // eslint-disable-line no-console
       throw error
@@ -415,16 +446,18 @@ export default class CueSync extends HTMLElement {
       this._createLanguageCheckboxes(this._languages)
     }
 
+    const toggleSettingsMenu = e => {
+      const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
+
+      settingsMenu.hidden = !settingsMenu.hidden
+
+      e.stopPropagation()
+    }
+
     const settingsToggle = this.shadowRoot.querySelector('#settings-toggle')
 
-    settingsToggle.removeEventListener('click', this._toggleSettingsMenu)
-    settingsToggle.addEventListener('click', this._toggleSettingsMenu)
-  }
-
-  _toggleSettingsMenu = () => {
-    const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
-
-    settingsMenu.hidden = !settingsMenu.hidden
+    settingsToggle.removeEventListener('click', toggleSettingsMenu)
+    settingsToggle.addEventListener('click', toggleSettingsMenu)
   }
 
   _setTimeMaxWidth() {
@@ -696,10 +729,10 @@ export default class CueSync extends HTMLElement {
     }
   }
 
-  _handleCheckboxChange = event => {
+  _handleCheckboxChange = e => {
     const languageSelectDiv = this.shadowRoot.getElementById('language-options')
     const checkboxes = languageSelectDiv.querySelectorAll('input[type="checkbox"]')
-    const checkbox = event.target
+    const checkbox = e.target
 
     const selectedLanguages = Array.from(checkboxes)
       .filter(input => input.checked)
