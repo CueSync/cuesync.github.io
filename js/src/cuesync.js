@@ -348,43 +348,24 @@ export default class CueSync extends HTMLElement {
   }
 
   _changeTheme() {
-    if (this._config.theme === 'light') {
-      const lightOption = this.shadowRoot.querySelector('input[type="radio"][value="light"]')
-      if (lightOption) {
-        lightOption.checked = true
-      }
-    } else if (this._config.theme === 'dark') {
-      const darkOption = this.shadowRoot.querySelector('input[type="radio"][value="dark"]')
-      if (darkOption) {
-        darkOption.checked = true
-      }
-    } else {
-      const autoOption = this.shadowRoot.querySelector('input[type="radio"][value="auto"]')
-      if (autoOption) {
-        autoOption.checked = true
-      }
+    const themeOptions = this.shadowRoot.querySelectorAll('input[type="radio"][name="theme"]')
+
+    for (const option of themeOptions) {
+      option.checked = option.value === this._config.theme || (this._config.theme === undefined && option.value === 'auto')
     }
   }
 
   _changeLayout() {
-    if (this._config.layout === 'paragraph') {
-      const paragraphOption = this.shadowRoot.querySelector('input[type="radio"][value="paragraph"]')
-      if (paragraphOption) {
-        paragraphOption.checked = true
-      }
-    } else {
-      const stackedOption = this.shadowRoot.querySelector('input[type="radio"][value="stacked"]')
-      if (stackedOption) {
-        stackedOption.checked = true
-      }
+    const layoutOptions = this.shadowRoot.querySelectorAll('input[type="radio"][name="layout"]')
+
+    for (const option of layoutOptions) {
+      option.checked = option.value === this._config.layout
     }
 
     const transcriptLineContainers = this.shadowRoot.querySelectorAll('.transcript-line-container')
 
-    if (transcriptLineContainers) {
-      for (const container of transcriptLineContainers) {
-        container.classList.toggle('paragraph', this._config.layout === 'paragraph')
-      }
+    for (const container of transcriptLineContainers) {
+      container.classList.toggle('paragraph', this._config.layout === 'paragraph')
     }
   }
 
@@ -693,20 +674,14 @@ export default class CueSync extends HTMLElement {
   }
 
   _initializeLayoutOptions() {
-    const stackedOption = this.shadowRoot.querySelector('input[type="radio"][value="stacked"]')
-    const paragraphOption = this.shadowRoot.querySelector('input[type="radio"][value="paragraph"]')
+    const layoutOptions = this.shadowRoot.querySelectorAll('input[type="radio"][name="layout"]')
 
-    if (this._config.layout === 'paragraph') {
-      paragraphOption.checked = true
-    } else {
-      stackedOption.checked = true
+    for (const option of layoutOptions) {
+      option.checked = option.value === this._config.layout
+
+      option.removeEventListener('change', this._toggleLayout)
+      option.addEventListener('change', this._toggleLayout)
     }
-
-    paragraphOption.removeEventListener('change', this._toggleLayout)
-    paragraphOption.addEventListener('change', this._toggleLayout)
-
-    stackedOption.removeEventListener('change', this._toggleLayout)
-    stackedOption.addEventListener('change', this._toggleLayout)
   }
 
   _toggleLayout = () => {
@@ -723,25 +698,14 @@ export default class CueSync extends HTMLElement {
   }
 
   _initializeThemes() {
-    const autoOption = this.shadowRoot.querySelector('input[type="radio"][value="auto"]')
-    const lightOption = this.shadowRoot.querySelector('input[type="radio"][value="light"]')
-    const darkOption = this.shadowRoot.querySelector('input[type="radio"][value="dark"]')
+    const themeOptions = this.shadowRoot.querySelectorAll('input[type="radio"][name="theme"]')
 
-    if (this._config.theme === 'light') {
-      lightOption.checked = true
-    } else if (this._config.theme === 'dark') {
-      darkOption.checked = true
-    } else {
-      autoOption.checked = true
+    for (const option of themeOptions) {
+      option.checked = option.value === this._config.theme || (this._config.theme === undefined && option.value === 'auto')
+
+      option.removeEventListener('change', this._setTheme)
+      option.addEventListener('change', this._setTheme)
     }
-
-    autoOption.removeEventListener('change', this._setTheme)
-    lightOption.removeEventListener('change', this._setTheme)
-    darkOption.removeEventListener('change', this._setTheme)
-
-    autoOption.addEventListener('change', this._setTheme)
-    lightOption.addEventListener('change', this._setTheme)
-    darkOption.addEventListener('change', this._setTheme)
   }
 
   _setTheme = () => {
