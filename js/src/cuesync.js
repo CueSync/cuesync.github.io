@@ -268,7 +268,10 @@ export default class CueSync extends HTMLElement {
     // Dispatch a custom event based on the attribute that was changed
     this._dispatchCustomEvent(name, newValue)
 
-    if (!['theme', 'layout', 'show-timestamp', 'auto-scroll'].includes(name)) {
+    // Handle lightweight UI updates without a full refresh
+    if (['theme', 'layout', 'show-timestamp', 'auto-scroll'].includes(name)) {
+      this._applyAttributeChange(name)
+    } else {
       this._requestRefresh()
     }
   }
@@ -314,6 +317,90 @@ export default class CueSync extends HTMLElement {
     })
 
     this.dispatchEvent(event)
+  }
+
+  _applyAttributeChange(name) {
+    switch (name) {
+      case 'theme': {
+        this._changeTheme()
+        break
+      }
+
+      case 'layout': {
+        this._changeLayout()
+        break
+      }
+
+      case 'show-timestamp': {
+        this._changeTimestamp()
+        break
+      }
+
+      case 'auto-scroll': {
+        this._changeAutoScroll()
+        break
+      }
+
+      default: {
+        console.warn(`Unhandled attribute change: ${name}`) // eslint-disable-line no-console
+      }
+    }
+  }
+
+  _changeTheme() {
+    if (this._config.theme === 'light') {
+      const lightOption = this.shadowRoot.querySelector('input[type="radio"][value="light"]')
+      if (lightOption) {
+        lightOption.checked = true
+      }
+    } else if (this._config.theme === 'dark') {
+      const darkOption = this.shadowRoot.querySelector('input[type="radio"][value="dark"]')
+      if (darkOption) {
+        darkOption.checked = true
+      }
+    } else {
+      const autoOption = this.shadowRoot.querySelector('input[type="radio"][value="auto"]')
+      if (autoOption) {
+        autoOption.checked = true
+      }
+    }
+  }
+
+  _changeLayout() {
+    if (this._config.layout === 'paragraph') {
+      const paragraphOption = this.shadowRoot.querySelector('input[type="radio"][value="paragraph"]')
+      if (paragraphOption) {
+        paragraphOption.checked = true
+      }
+    } else {
+      const stackedOption = this.shadowRoot.querySelector('input[type="radio"][value="stacked"]')
+      if (stackedOption) {
+        stackedOption.checked = true
+      }
+    }
+
+    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.transcript-line-container')
+
+    if (transcriptLineContainers) {
+      for (const container of transcriptLineContainers) {
+        container.classList.toggle('paragraph', this._config.layout === 'paragraph')
+      }
+    }
+  }
+
+  _changeTimestamp() {
+    const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
+    timestampCheckbox.checked = this._config.showTimestamp
+
+    const timestamps = this.shadowRoot.querySelectorAll('.time')
+    for (const timeElement of timestamps) {
+      timeElement.style.display = this._config.showTimestamp ? 'inline-block' : 'none'
+    }
+  }
+
+  _changeAutoScroll() {
+    const autoScrollCheckbox = this.shadowRoot.getElementById('auto-scroll-toggle')
+    autoScrollCheckbox.checked = this._config.autoScroll
   }
 
   _renderComponent() {
