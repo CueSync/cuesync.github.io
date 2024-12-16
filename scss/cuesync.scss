@@ -1,79 +1,221 @@
-.transcript-container {
+// stylelint-disable selector-max-id, declaration-property-value-disallowed-list,
+:host,
+:host([theme="light"]) {
+  color-scheme: light;
+  --cs-border-color: #e9e9e9;
+  --cs-toolbar-bg: #fff;
+  --cs-toolbar-color: #000;
   --cs-container-bg: #fff;
   --cs-container-color: #000;
-  --cs-container-padding-x: 5px;
-  --cs-container-padding-y: 5px;
-  --cs-container-border-width: 1px;
-  --cs-container-border-style: solid;
-  --cs-container-border-color: #e9e9e9;
-  --cs-container-border-radius: 4px;
+  --cs-transcript-hover-bg: #f2f2f2;
+  --cs-transcript-hover-color: #000;
+  --cs-transcript-active-bg: #def1ff;
+  --cs-transcript-active-color: #044ba7;
+  --cs-transcript-highlight-bg: transparent;
+  --cs-transcript-highlight-color: #044ba7;
+  --cs-timestamp-bg: #def1ff;
+  --cs-timestamp-color: #044ba7;
+  --cs-settings-shadow-opacity: .1;
+}
 
-  --cs-padding-x: 5px;
-  --cs-padding-y: 5px;
-  --cs-border-radius: 4px;
+/* Dark mode */
+:host([theme="dark"]) {
+  color-scheme: dark;
+  --cs-border-color: #495057;
+  --cs-toolbar-bg: #16191d;
+  --cs-toolbar-color: #ced4da;
+  --cs-container-bg: #16191d;
+  --cs-container-color: #ced4da;
+  --cs-transcript-hover-bg: #252525;
+  --cs-transcript-hover-color: #ced4da;
+  --cs-transcript-active-bg: #032b48;
+  --cs-transcript-active-color: #def1ff;
+  --cs-transcript-highlight-bg: transparent;
+  --cs-transcript-highlight-color: #def1ff;
+  --cs-timestamp-bg: #032b48;
+  --cs-timestamp-color: #def1ff;
+  --cs-settings-shadow-opacity: 1;
+}
 
-  --cs-hover-bg: #e3e4e5;
-  --cs-hover-color: #000;
-
-  --cs-active-bg: #9ec5fe;
-  --cs-active-color: #000;
-
-  --cs-highlight-bg: transparent;
-  --cs-highlight-color: #084298;
-
-  --cs-time-bg: #084298;
-  --cs-time-color: #fff;
-  --cs-time-border-radius: 4px;
-  --cs-time-width: auto;
-
-  padding: var(--cs-container-padding-y) var(--cs-container-padding-x);
-  color: var(--cs-container-color);
-  background-color: var(--cs-container-bg);
-  border: var(--cs-container-border-width) var(--cs-container-border-style) var(--cs-container-border-color);
-  border-radius: var(--cs-container-border-radius);
-
-  .transcript-line {
-    display: inline-block;
-    padding: var(--cs-padding-y) var(--cs-padding-x);
-  }
-
-  .transcript-line-container {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    padding: var(--cs-padding-y) 0;
-
-    .time {
-      display: inline-block;
-      flex-shrink: 0;
-      width: var(--cs-time-width);
-      padding: var(--cs-padding-y) var(--cs-padding-x);
-      color: var(--cs-time-color);
-      text-align: center;
-      white-space: nowrap;
-      background-color: var(--cs-time-bg);
-      border-radius: var(--cs-time-border-radius);
-    }
-  }
-
-  .transcript-line-container,
-  .transcript-line {
-    cursor: pointer;
-    border-radius: var(--cs-border-radius);
-
-    &:not(.active, .active .transcript-line):hover {
-      color: var(--cs-hover-color);
-      background-color: var(--cs-hover-bg);
-    }
-
-    &.played {
-      color: var(--cs-highlight-color);
-      background-color: var(--cs-highlight-bg);
-    }
-
-    &.active {
-      color: var(--cs-active-color);
-      background-color: var(--cs-active-bg);
-    }
+/* Media query for users without theme attribute but with OS-level dark mode */
+@media (prefers-color-scheme: dark) {
+  :host {
+    color-scheme: dark;
+    --cs-border-color: #495057;
+    --cs-toolbar-bg: #16191d;
+    --cs-toolbar-color: #ced4da;
+    --cs-container-bg: #16191d;
+    --cs-container-color: #ced4da;
+    --cs-transcript-hover-bg: #252525;
+    --cs-transcript-hover-color: #ced4da;
+    --cs-transcript-active-bg: #032b48;
+    --cs-transcript-active-color: #def1ff;
+    --cs-transcript-highlight-bg: transparent;
+    --cs-transcript-highlight-color: #def1ff;
+    --cs-timestamp-bg: #032b48;
+    --cs-timestamp-color: #def1ff;
+    --cs-settings-shadow-opacity: 1;
   }
 }
+:host {
+  --cs-border-width: 1px;
+  --cs-border-style: solid;
+  --cs-border-radius: 10px;
+  --cs-toolbar-padding-x: 15px;
+  --cs-toolbar-padding-y: 8px;
+  --cs-container-padding-x: 15px;
+  --cs-container-padding-y: 5px;
+  --cs-container-paragraph-padding-x: 5px;
+  --cs-container-paragraph-padding-y: 5px;
+  --cs-transcript-padding-x: 5px;
+  --cs-transcript-padding-y: 5px;
+  --cs-transcript-border-radius: var(--cs-border-radius);
+  --cs-timestamp-padding-x: 5px;
+  --cs-timestamp-padding-y: 5px;
+  --cs-timestamp-border-radius: 5px;
+  --cs-timestamp-width: auto;
+  box-sizing: border-box;
+  display: block;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  border: var(--cs-border-width) var(--cs-border-style) var(--cs-border-color);
+  border-radius: var(--cs-border-radius);
+}
+
+#toolbar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cs-toolbar-padding-y) var(--cs-toolbar-padding-x);
+  color: var(--cs-toolbar-color);
+  background-color: var(--cs-toolbar-bg);
+}
+
+#toolbar h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+#settings-toggle {
+  padding: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 50%;
+}
+
+#settings-toggle:hover {
+  color: var(--cs-timestamp-color);
+  background: var(--cs-timestamp-bg);
+}
+
+#settings-toggle svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+}
+
+#settings-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 10px;
+  color: var(--cs-toolbar-color);
+  background-color: var(--cs-toolbar-bg);
+  border-radius: var(--cs-border-radius);
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, var(--cs-settings-shadow-opacity));
+}
+
+#settings-menu[hidden] {
+  display: none;
+}
+
+#transcript-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  color: var(--cs-container-color);
+  background-color: var(--cs-container-bg);
+}
+
+.transcript-line {
+  display: inline-flex;
+  flex-direction: column;
+  padding: var(--cs-transcript-padding-y) var(--cs-transcript-padding-x);
+}
+
+.transcript-line-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: var(--cs-container-padding-y) var(--cs-container-padding-x);
+  cursor: pointer;
+  border-radius: var(--cs-tanscript-line-border-radius);
+}
+
+.transcript-line-container.paragraph {
+  display: inline-flex;
+  padding: var(--cs-container-paragraph-padding-y) var(--cs-container-paragraph-padding-x);
+}
+
+.time {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--cs-timestamp-width);
+  padding: var(--cs-timestamp-padding-y) var(--cs-timestamp-padding-x);
+  color: var(--cs-timestamp-color);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--cs-timestamp-bg);
+  border-radius: var(--cs-timestamp-border-radius);
+}
+
+#transcript-container.active-added .transcript-line-container {
+  color: var(--cs-transcript-highlight-color);
+  background-color: var(--cs-transcript-highlight-bg);
+}
+
+#transcript-container .transcript-line-container.active {
+  color: var(--cs-transcript-active-color);
+  background-color: var(--cs-transcript-active-bg);
+}
+
+#transcript-container .transcript-line-container.active ~ .transcript-line-container {
+  color: var(--cs-container-color);
+  background-color: var(--cs-container-bg);
+}
+
+#transcript-container .transcript-line-container:not(.active):hover {
+  color: var(--cs-transcript-hover-color);
+  background-color: var(--cs-transcript-hover-bg);
+}
+
+#language-options,
+#layout-options,
+#theme-options {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+// stylelint-enable selector-max-id, declaration-property-value-disallowed-list
