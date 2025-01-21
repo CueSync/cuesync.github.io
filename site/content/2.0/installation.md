@@ -2,8 +2,9 @@
 layout: docs
 title: Installation
 aliases:
-  - "/1.0/installation/"
-version: "1.0"
+  - "/2.0/installation/"
+  - "/installation/"
+version: "2.0"
 toc: true
 description: We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.
 ---
@@ -92,7 +93,7 @@ as a package within your project’s ecosystem, providing more control and flexi
 
 Install
 ```console
-npm i @cuesync/cuesync@1.0.0-alpha1
+npm i @cuesync/cuesync
 ```
 
 Import CueSync JS

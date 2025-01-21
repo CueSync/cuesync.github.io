@@ -107,7 +107,7 @@
   if (audioTranscript) {
     new cuesync.CueSync(
       audioTranscript,
-      { transcriptPath: '/assets/transcripts/transcript.vtt', media: document.querySelector('#audio'), displayTime: true }
+      { transcriptPath: '/assets/transcripts/bob_dylan.vtt', media: document.querySelector('#audio'), displayTime: true }
     )
   }
 
@@ -115,7 +115,7 @@
   if (videoTranscript) {
     new cuesync.CueSync(
       videoTranscript,
-      { transcriptPath: '/assets/transcripts/you.vtt', media: document.querySelector('#natGeoVideo') }
+      { transcriptPath: '/assets/transcripts/natgeo.vtt', media: document.querySelector('#natGeoVideo') }
     )
   }
 

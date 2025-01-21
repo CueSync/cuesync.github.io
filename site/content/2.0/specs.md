@@ -2,8 +2,9 @@
 layout: docs
 title: Specs
 aliases:
-  - "/1.0/specs/"
-version: "1.0"
+  - "/2.0/specs/"
+  - "/specs/"
+version: "2.0"
 toc: true
 ---
 

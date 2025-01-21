@@ -12,22 +12,22 @@
 <nav class="sticky-top bg-body mt-0 mb-3 justify-content-center">
   <ul id="site-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 nav-justified mx-container">
     <li class="nav-item">
-      <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "CueSync" .Page.Params.title }} active {{ end }}">
+      <a href="/{{ .Page.Params.version | markdownify }}" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "CueSync" .Page.Params.title }} active {{ end }}">
         <i class="bi bi-house-door-fill fs-3"></i> Overview<span class="ripple-surface"></span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/1.0/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Installation" .Page.Params.title }} active {{ end }}">
+      <a href="/{{ .Page.Params.version | markdownify }}/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Installation" .Page.Params.title }} active {{ end }}">
         <i class="bi bi-cloud-arrow-down-fill fs-3"></i> Installation<span class="ripple-surface"></span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/1.0/examples" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Examples" .Page.Params.title }} active {{ end }}">
+      <a href="/{{ .Page.Params.version | markdownify }}/examples" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Examples" .Page.Params.title }} active {{ end }}">
         <i class="bi bi-palette2 fs-3"></i> Examples<span class="ripple-surface"></span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/1.0/specs" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Specs" .Page.Params.title }} active {{ end }}">
+      <a href="/{{ .Page.Params.version | markdownify }}/specs" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "Specs" .Page.Params.title }} active {{ end }}">
         <i class="bi bi-grid-fill fs-3"></i> Specs<span class="ripple-surface"></span>
       </a>
     </li>

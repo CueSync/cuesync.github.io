@@ -24,7 +24,7 @@ publishDir: "_site"
 module:
   mounts:
   - source: dist
-    target: static/1.0/dist
+    target: static/2.0/dist
   - source: site/content
     target: content
   - source: site/static
@@ -50,5 +50,5 @@ params:
   description:          "CueSync"
   authors:              "Neeraj Kumar Das"
 
-  current_version:      "1.0.0-alpha1"
-  docs_version:         "1.0"
+  current_version:      "2.0.0-alpha1"
+  docs_version:         "2.0"

@@ -2,18 +2,15 @@
 layout: home
 title: CueSync
 aliases:
-  - "/2.0/"
-  - "/2.0/overview/"
-  - "/overview/"
-version: "2.0"
+  - "/1.0/"
+  - "/1.0/overview/"
+version: "1.0"
 ---
 
 <h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
 
 <div class="row my-5">
-    <label class="h3">Explore how CueSync works with video and audio elements through the examples below!</label>
-    <label>Hit the play button and watch the phrases in the transcript come to life, elegantly highlighted as they’re spoken. Feel free to click on any phrase in the transcript to seamlessly navigate to that specific segment of the video.</label>
-    <label class="h4 my-4">Video</label>
+    <label class="h3 mb-4">Video Transcript</label>
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">
             <video id="natGeoVideo" controls>
@@ -23,22 +20,17 @@ version: "2.0"
         </div>
     </div>
     <div class="col-md-6">
-        <cue-sync transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/natgeo_hindi.vtt" 
-                  media="#natGeoVideo" 
-                  layout="paragraph"
-                  style="height: 400px;"></cue-sync>
+        <div id="video-transcript" class="transcript-container" style="max-height: 400px; overflow: auto;"></div>
     </div>
 </div>
 
 <div class="row my-5">
-    <label class="h4 mb-4">Audio</label>
+    <label class="h3 mb-4">Audio Transcript</label>
     <div class="col-md-12">
-        <audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
+        <audio controls id="audio" crossorigin="anonymous" preload="true">
             <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
         </audio>
-        <cue-sync transcript-path="/assets/transcripts/bob_dylan.vtt" 
-                  media="#bobDylanAudio"
-                  style="height: 400px;"></cue-sync>
+        <div id="audio-transcript" class="transcript-container" style="height: 400px; overflow: auto;"></div>
     </div>
 </div>
 

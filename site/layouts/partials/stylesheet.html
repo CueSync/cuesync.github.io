@@ -8,10 +8,12 @@
       integrity="sha384-TveZ4SBMG9Zwu44Pq5aK2bgL+4CaFRTtx6pSSsxmQKWhIRKoONDSRW+k+NA9A0Gk"
       crossorigin="anonymous">
 
-{{ if eq hugo.Environment "production" -}}
-<link href="/{{ .Site.Params.docs_version }}/dist/css/cuesync.min.css" rel="stylesheet">
-{{- else -}}
-<link href="/{{ .Site.Params.docs_version }}/dist/css/cuesync.css" rel="stylesheet">
+{{ if eq .Page.Params.version "1.0" -}}
+<!-- CueSync CSS -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css"
+      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e"
+      crossorigin="anonymous">
 {{- end }}
 
 {{- $targetDocsCssPath := path.Join "/" .Site.Params.docs_version "assets/css/styles.css" -}}
