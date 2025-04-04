@@ -2,9 +2,8 @@
 layout: docs
 title: Installation
 aliases:
-  - "/1.0/"
   - "/1.0/installation/"
-  - "/installation/"
+version: "1.0"
 toc: true
 description: We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.
 ---

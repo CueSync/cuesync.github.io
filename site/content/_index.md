@@ -1,6 +1,10 @@
 ---
 layout: home
 title: CueSync
+aliases:
+  - "/1.0/"
+  - "/1.0/overview/"
+version: "1.0"
 ---
 
 <h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
@@ -10,7 +14,7 @@ title: CueSync
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">
             <video id="natGeoVideo" controls>
-              <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+              <source src="/assets/videos/natgeo.mp4" type="video/mp4">
               Your browser does not support HTML video.
             </video>
         </div>
@@ -23,8 +27,8 @@ title: CueSync
 <div class="row my-5">
     <label class="h3 mb-4">Audio Transcript</label>
     <div class="col-md-12">
-        <audio controls id="audio" crossorigin="anonymous" preload="true">
-            <source src="/assets/audio/audio.mp3" type="audio/mpeg">
+        <audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
+            <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
         </audio>
         <div id="audio-transcript" class="transcript-container" style="height: 400px; overflow: auto;"></div>
     </div>

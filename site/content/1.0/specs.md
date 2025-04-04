@@ -2,6 +2,9 @@
 layout: docs
 title: Specs
 toc: true
+aliases:
+  - "/1.0/specs/"
+version: "1.0"
 ---
 
 ## Specs

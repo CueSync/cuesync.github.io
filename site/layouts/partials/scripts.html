@@ -23,7 +23,7 @@
 <script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.js"></script>
 {{- end }}
 
-{{- $js := resources.Match "1.0/js/*.js" -}}
+{{- $js := resources.Match (path.Join .Site.Params.docs_version "/js/*.js") -}}
 {{- $targetDocsJSPath := path.Join "/" .Site.Params.docs_version "assets/js/site.js" -}}
 {{- $docsJs := $js | resources.Concat $targetDocsJSPath -}}
 

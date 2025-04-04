@@ -2,6 +2,9 @@
 layout: docs
 title: Examples
 toc: true
+aliases:
+  - "/1.0/examples/"
+version: "1.0"
 ---
 
 ## Basic usage
@@ -12,7 +15,7 @@ with the class `transcript-container`. This div will display the interactive tra
 ```html
 <!-- Video -->
 <video id="natGeoVideo" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
@@ -30,7 +33,7 @@ const videoTranscript = new cuesync.CueSync(
   
   // Options
   { 
-    transcriptPath: '/assets/transcripts/you.vtt', 
+    transcriptPath: '/assets/transcripts/natgeo.vtt', 
     media: document.getElementById('natGeoVideo') 
   }
 )
@@ -44,7 +47,7 @@ Feel free to click on any phrase in the transcript to seamlessly navigate to tha
 Video
 
 <video id="natGeoVideo" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
@@ -60,8 +63,8 @@ To display the transcript timestamp, pass `displayTime: true` as an option when 
 
 {{< example codeId="code1" >}}
 <!-- Audio -->
-<audio controls id="audio" crossorigin="anonymous" preload="true">
-    <source src="/assets/audio/audio.mp3" type="audio/mpeg">
+<audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
+    <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Transcript Container -->
@@ -72,8 +75,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const audioTranscript = new cuesync.CueSync(
     document.getElementById('audio-transcript-example'), 
     { 
-      transcriptPath: '/assets/transcripts/transcript.vtt', 
-      media: document.querySelector('#audio'),
+      transcriptPath: '/assets/transcripts/bob_dylan.vtt', 
+      media: document.querySelector('#bobDylanAudio'),
       displayTime: true 
     }
   )
@@ -91,13 +94,13 @@ and `data-cs-display-time`, respectively, on the `.transcript-container`.
 {{< example codeId="code2" >}}
 <!-- Video -->
 <video id="natGeoVideo2" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
 <!-- Transcript Container -->
 <div id="video-transcript-2" class="transcript-container" style="height: 400px; overflow: auto;"
-     data-cs-transcript-path="/assets/transcripts/you.vtt"
+     data-cs-transcript-path="/assets/transcripts/natgeo.vtt"
      data-cs-display-time="true"></div>
 ##split##
 <script>
@@ -122,7 +125,7 @@ This allows you to present transcripts in multiple languages seamlessly.
 {{< example codeId="code3" >}}
 <!-- Video -->
 <video id="natGeoVideoMultiTime" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
@@ -136,8 +139,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('video-transcript-multi-time'), 
     {
       transcriptPath: [
-        '/assets/transcripts/you.vtt',
-        '/assets/transcripts/you_hindi.vtt'
+        '/assets/transcripts/natgeo.vtt',
+        '/assets/transcripts/natgeo_hindi.vtt'
       ],
       media: document.getElementById('natGeoVideoMultiTime'),
       displayTime: true 
@@ -152,7 +155,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 {{< example codeId="code4" >}}
 <!-- Video -->
 <video id="natGeoVideoMulti" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
@@ -166,8 +169,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('video-transcript-multi'), 
     {
       transcriptPath: [
-        '/assets/transcripts/you.vtt',
-        '/assets/transcripts/you_hindi.vtt'
+        '/assets/transcripts/natgeo.vtt',
+        '/assets/transcripts/natgeo_hindi.vtt'
       ],
       media: document.getElementById('natGeoVideoMulti') 
     }
@@ -179,7 +182,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 You can pass multiple comma-separated transcript paths using the HTML attribute `data-cs-transcript-path` as shown below:
 
 ```html
-data-cs-transcript-path="/assets/transcripts/you.vtt, /assets/transcripts/you_hindi.vtt"
+data-cs-transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/natgeo_hindi.vtt"
 ```
 
 <br>
@@ -207,13 +210,13 @@ Customize CueSync by modifying the <a href="/1.0/specs/#css-custom-properties">C
 
 <!-- Video -->
 <video id="natGeoVideo3" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/NatGeo.mp4" type="video/mp4">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
 <!-- Transcript Container -->
 <div id="video-transcript-3" class="transcript-container" style="height: 400px; overflow: auto;"
-     data-cs-transcript-path="/assets/transcripts/you.vtt"
+     data-cs-transcript-path="/assets/transcripts/natgeo.vtt"
      data-cs-display-time="true"></div>
 ##split##
 <script>
