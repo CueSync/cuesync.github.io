@@ -2,9 +2,25 @@
   <div class="bg-theme-primary bg-opacity-10 rounded-5 p-5 mt-3 my-0 mx-container">
     <div class="container">
       <h1 class="site-name text-center mb-4 text-warning">CueSync</h1>
-      <p class="h4 text-center text-light fw-bold">
+
+      <p class="h4 text-center text-light fw-bold mb-4">
         Elevate Multimedia Interactivity. Simplify the integration of interactive transcripts into your media projects with CueSync.
       </p>
+
+      <div class="d-flex justify-content-center">
+        <ul id="version-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 mx-container">
+          <li class="nav-item">
+            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center {{ if eq "2.0" .Page.Params.version }} active {{ end }}">
+            2.0<span class="ripple-surface"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/1.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center {{ if eq "1.0" .Page.Params.version }} active {{ end }}">
+            1.0<span class="ripple-surface"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

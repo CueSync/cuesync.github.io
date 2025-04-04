@@ -17,18 +17,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
 
-{{ if eq .Page.Params.version "1.0" -}}
-<!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/js/cuesync.min.js"
-        integrity="sha384-0jVqDf583RzrFczNb63VXRe5dXvYKzlsaWfIWwJe8HI3a/Uo9uARXkVt1yx2To8O"
-        crossorigin="anonymous"></script>
-{{ else if eq hugo.Environment "production" -}}
+{{ if eq hugo.Environment "production" -}}
 <script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.min.js"></script>
 {{ else -}}
 <script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.js"></script>
 {{- end }}
 
-{{- $js := resources.Match "1.0/js/*.js" -}}
+{{- $js := resources.Match (path.Join .Site.Params.docs_version "/js/*.js") -}}
 {{- $targetDocsJSPath := path.Join "/" .Site.Params.docs_version "assets/js/site.js" -}}
 {{- $docsJs := $js | resources.Concat $targetDocsJSPath -}}
 

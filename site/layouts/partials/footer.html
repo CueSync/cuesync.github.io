@@ -26,11 +26,7 @@
         </li>
       </ul>
       <h1 class="site-name text-center text-warning">CueSync</h1>
-      {{ if eq .Page.Params.version "1.0" -}}
-      <label class="text-center d-block fw-bold mt-4 text-light">v1.0.0-alpha1</label>
-      {{ else -}}
       <label class="text-center d-block fw-bold mt-4 text-light">{{ .Site.Params.current_version }}</label>
-      {{- end }}
     </div>
   </footer>
 </div>
