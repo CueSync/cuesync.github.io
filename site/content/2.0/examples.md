@@ -4,8 +4,8 @@ title: Examples
 aliases:
   - "/2.0/examples/"
   - "/examples/"
-version: "2.0"
 toc: true
+description: CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. Explore different ways to use CueSync with real examples. Each example shows a variation of the interactive transcript along with the code you need to implement it.
 ---
 
 ## Basic usage
@@ -64,7 +64,7 @@ To display the transcript timestamp, pass `displayTime: true` as an option when 
 
 {{< example codeId="code1" >}}
 <!-- Audio -->
-<audio controls id="audio" crossorigin="anonymous" preload="true">
+<audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
     <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
 </audio>
 
@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('audio-transcript-example'), 
     { 
       transcriptPath: '/assets/transcripts/bob_dylan.vtt', 
-      media: document.querySelector('#audio'),
+      media: document.querySelector('#bobDylanAudio'),
       displayTime: true 
     }
   )
@@ -190,7 +190,7 @@ data-cs-transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/you
 
 ## Customization
 
-Customize CueSync by modifying the <a href="/1.0/specs/#css-custom-properties">CSS custom properties listed here</a>.
+Customize CueSync by modifying the <a href="/{{< docs_version >}}/specs/#css-custom-properties">CSS custom properties listed here</a>.
 
 {{< example codeId="code5" >}}
 <style>

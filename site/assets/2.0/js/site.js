@@ -107,7 +107,7 @@
   if (audioTranscript) {
     new cuesync.CueSync(
       audioTranscript,
-      { transcriptPath: '/assets/transcripts/bob_dylan.vtt', media: document.querySelector('#audio'), displayTime: true }
+      { transcriptPath: '/assets/transcripts/bob_dylan.vtt', media: document.querySelector('#bobDylanAudio'), displayTime: true }
     )
   }
 

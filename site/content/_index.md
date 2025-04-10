@@ -5,7 +5,6 @@ aliases:
   - "/2.0/"
   - "/2.0/overview/"
   - "/overview/"
-version: "2.0"
 ---
 
 <h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
@@ -48,7 +47,7 @@ version: "2.0"
     <h2 class="my-5">Get started any way you want</h2>
     <p class="h5 mb-4">Use the CDN, install it via package manager, or download.</p>
     <a class="btn btn-primary btn-lg rounded-pill" 
-       href="/installation">
+       href="/{{< docs_version >}}/installation">
     Read installation docs
     </a>
 </div>
@@ -60,17 +59,17 @@ version: "2.0"
     <p class="h5 mb-4">Check out our examples using Webpack, Parcel, and Vite to get started quickly and make the most of interactive transcripts in your multimedia content.</p>
     <div class="d-flex justify-content-center align-items-center gap-4">
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/webpack">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/webpack" target="_blank">
            <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
         Webpack
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/parcel">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/parcel" target="_blank">
            <img class="d-block mb-2" src="/assets/images/parcel.png" alt="webpack logo" width="72" height="72">
         Parcel
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/vite">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/vite" target="_blank">
            <img class="d-block mb-2" src="/assets/images/vite.svg" alt="webpack logo" width="72" height="72">
         Vite
         </a>
