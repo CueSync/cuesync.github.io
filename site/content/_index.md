@@ -9,7 +9,9 @@ aliases:
 <h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
 
 <div class="row my-5">
-    <label class="h3 mb-4">Video Transcript</label>
+    <label class="h3">Explore how CueSync works with video and audio elements through the examples below!</label>
+    <label>Hit the play button and watch the phrases in the transcript come to life, elegantly highlighted as they’re spoken. Feel free to click on any phrase in the transcript to seamlessly navigate to that specific segment of the video.</label>
+    <label class="h4 my-4">Video</label>
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">
             <video id="natGeoVideo" controls>
@@ -24,7 +26,7 @@ aliases:
 </div>
 
 <div class="row my-5">
-    <label class="h3 mb-4">Audio Transcript</label>
+    <label class="h4 mb-4">Audio</label>
     <div class="col-md-12">
         <audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
             <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
