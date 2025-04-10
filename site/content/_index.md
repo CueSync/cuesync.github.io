@@ -6,11 +6,9 @@ aliases:
   - "/1.0/overview/"
 ---
 
-<h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
-
-<div class="row my-5">
-    <label class="h3">Explore how CueSync works with video and audio elements through the examples below!</label>
-    <label>Hit the play button and watch the phrases in the transcript come to life, elegantly highlighted as they’re spoken. Feel free to click on any phrase in the transcript to seamlessly navigate to that specific segment of the video.</label>
+<div class="row mb-5">
+    <h2 class="text-center">See CueSync in action!</h3>
+    <label class="h5 text-center">Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken. Click any phrase to instantly jump to that moment in the video.</label>
     <label class="h4 my-4">Video</label>
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">
