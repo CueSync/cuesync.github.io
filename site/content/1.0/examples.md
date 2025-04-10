@@ -4,7 +4,7 @@ title: Examples
 toc: true
 aliases:
   - "/1.0/examples/"
-version: "1.0"
+description: CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. Explore different ways to use CueSync with real examples. Each example shows a variation of the interactive transcript along with the code you need to implement it.
 ---
 
 ## Basic usage
@@ -119,7 +119,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 ## Customization
 
-Customize CueSync by modifying the <a href="/1.0/specs/#css-custom-properties">CSS custom properties listed here</a>.
+Customize CueSync by modifying the <a href="/{{< docs_version >}}/specs/#css-custom-properties">CSS custom properties listed here</a>.
 
 {{< example codeId="code5" >}}
 <style>

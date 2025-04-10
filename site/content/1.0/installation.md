@@ -3,14 +3,13 @@ layout: docs
 title: Installation
 aliases:
   - "/1.0/installation/"
-version: "1.0"
 toc: true
-description: We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.
+description: CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.
 ---
 
 ## Installation
 
-<p class="fs-4 ms-0 mb-4">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that aligns with your preferences.</p>
+<p class="fs-4 ms-0 mb-4">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.</p>
 
 ### CDN
 
@@ -122,4 +121,4 @@ Download v1.0.0-alpha1
 
 ## Next steps
 
-Explore CueSync's capabilities in action! Head over to the [Examples](/1.0/examples) page for usage scenarios, code snippets, and examples.
+Explore CueSync's capabilities in action! Head over to the [Examples](/{{< docs_version >}}/examples) page for usage scenarios, code snippets, and examples.
