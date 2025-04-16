@@ -8,10 +8,13 @@ toc: true
 description: CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. Explore different ways to use CueSync with real examples. Each example shows a variation of the interactive transcript along with the code you need to implement it.
 ---
 
-## Basic usage
+## Getting Started
 
-Assuming you've added your media (audio or video) to your page and have the transcripts ready, include a `<div>` 
-with the class `transcript-container`. This div will display the interactive transcript of the media.
+Assuming you've added your media (audio or video) to your page, have the transcript ready, and have correctly included 
+the required CueSync JavaScript file, you're ready to use the component.
+
+Simply add a `<cue-sync>` element with the `transcript-path` attribute **set to the path of your transcript file**, 
+and the `media` attribute **set to a CSS selector that matches your media element (e.g. #videoId or .audio-player)**.
 
 ```html
 <!-- Video -->
@@ -20,30 +23,16 @@ with the class `transcript-container`. This div will display the interactive tra
     Your browser does not support HTML video.
 </video>
 
-<!-- Transcript Container -->
-<div id="video-transcript" class="transcript-container"></div>
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo"
+          style="height: 400px;"></cue-sync>
 ```
 
-Next, initialize CueSync with JavaScript by passing the transcript container as the first argument and options as the second argument. 
-The options must include the transcript file path and the media element.
+That’s it — your interactive transcript is ready to go!
 
-```javascript
-const videoTranscript = new cuesync.CueSync(
-  // Transcript container
-  document.getElementById('video-transcript'), 
-  
-  // Options
-  { 
-    transcriptPath: '/assets/transcripts/natgeo.vtt', 
-    media: document.getElementById('natGeoVideo') 
-  }
-)
-```
-
-That's it! Your interactive transcript is now ready. 
-
-Hit the play button and watch the phrases in the transcript come to life, elegantly highlighted as they're spoken. 
-Feel free to click on any phrase in the transcript to seamlessly navigate to that specific segment of the video.
+Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken.
+Click on any phrase to instantly jump to that exact moment in the media.
 
 Video
 
@@ -54,234 +43,324 @@ Video
 
 Transcript
 
-<div id="video-transcript" class="transcript-container overflow-auto"></div>
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo" 
+          style="height: 400px;"></cue-sync>
 
-<br><br>
+{{< squiggle >}}
 
-## Display time
+## Transcript Formats (VTT and SRT)
+Before exploring the different options available with CueSync, it's important to understand the supported 
+transcript formats.
 
-To display the transcript timestamp, pass `displayTime: true` as an option when initializing.
+CueSync supports two common transcript file formats: `VTT (WebVTT)` and `SRT (SubRip)`. These formats define 
+the timing and text of each spoken segment, allowing CueSync to sync them precisely with your media.
 
-{{< example codeId="code1" >}}
-<!-- Audio -->
-<audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
-    <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Transcript Container -->
-<div id="audio-transcript-example" class="transcript-container" style="height: 400px; overflow: auto;"></div>
-##split##
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  const audioTranscript = new cuesync.CueSync(
-    document.getElementById('audio-transcript-example'), 
-    { 
-      transcriptPath: '/assets/transcripts/bob_dylan.vtt', 
-      media: document.querySelector('#bobDylanAudio'),
-      displayTime: true 
-    }
-  )
-});
-</script>
-{{< /example >}}
+It is important to follow their structure strictly, or the transcript may not render correctly.
 
 <br>
 
-## Setting options as HTML attributes
+### VTT (WebVTT)
+VTT is a flexible and modern format, commonly used for captions and interactive transcripts on the web.
 
-The options `transcriptPath` and `displayTime` can be passed as HTML data attributes `data-cs-transcript-path` 
-and `data-cs-display-time`, respectively, on the `.transcript-container`.
+**Basic structure:**
+* Begins with **WEBVTT** **(CueSync works even if this line is omitted)**
+* Each block contains a **timestamp** and **text**
+* A **cue number** is optional
+* Timestamps use a **period (.)** as the decimal separator (e.g., **00:01:00.500**)
+* Language metadata (e.g., `Language: English`) is optionally supported by CueSync for language selection in 
+multilingual transcripts
+* CueSync currently **does not support styling or positioning lines** — only timing and text are allowed
 
-{{< example codeId="code2" >}}
+```text
+WEBVTT
+Language: Hindi
+
+00:00:02 --> 00:00:03
+कीट
+
+00:00:03 --> 00:00:06
+खुरदरे, गूदेदार
+
+00:00:06 --> 00:00:09
+ओह, वह मुलायम है
+```
+
+<br>
+
+### SRT (SubRip)
+SRT is a simpler and widely used subtitle format, especially in video production and distribution.
+
+**Basic structure:**
+* Each block starts with a **cue number** **(CueSync works even if this is omitted)**
+* Timestamps use a **comma (,)**  as the decimal separator (e.g., **00:01:00,500**)
+* Each timestamp line is followed by the text to display
+* **Metadata is not officially supported** — however, if a `Language:` line is included, **CueSync will read it and enable language selection**
+
+```text
+1
+00:00:02 --> 00:00:03
+bugs
+
+2
+00:00:03 --> 00:00:06
+give me the scaly the squishy
+
+3
+00:00:06 --> 00:00:09
+oh she's fluffy
+```
+
+{{< squiggle >}}
+
+## Layout
+CueSync offers two layout options for displaying the transcript: `stacked` and `paragraph`, with `stacked` being 
+the default. 
+
+Users can switch between these layouts at any time from the Settings menu.
+
+As a developer, you can also set a default layout for your users using the `layout` attribute on the 
+`<cue-sync>` element. This attribute accepts the values `'stacked'` or `'paragraph'`, respectively, to choose 
+the desired layout.
+
+{{< example codeId="code1" >}}
 <!-- Video -->
 <video id="natGeoVideo2" controls style="width: 100%; max-width: 500px;">
     <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
-<!-- Transcript Container -->
-<div id="video-transcript-2" class="transcript-container" style="height: 400px; overflow: auto;"
-     data-cs-transcript-path="/assets/transcripts/natgeo.vtt"
-     data-cs-display-time="true"></div>
-##split##
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  const videoTranscript2 = new cuesync.CueSync(
-    document.getElementById('video-transcript-2'), 
-    { 
-      media: document.getElementById('natGeoVideo2') 
-    }
-  )
-});
-</script>
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo2" 
+          layout="paragraph"
+          style="height: 400px;"></cue-sync>
 {{< /example >}}
 
-<br>
+<br><br>
 
-## Multiple transcripts
+## Timestamps
+By default, CueSync displays timestamps for each segment of the transcript. Users can show or hide the timestamps 
+at any time from the Settings menu.
 
-Add multiple transcripts to a single audio/video file by specifying an array of transcript file paths. 
-This allows you to present transcripts in multiple languages seamlessly.
+As a developer, you can control the visibility of timestamps for your users by using the `show-timestamp` attribute 
+on the `<cue-sync>` element. This attribute accepts `'true'` to show timestamps and `'false'` to hide them.
 
-{{< example codeId="code3" >}}
-<!-- Video -->
-<video id="natGeoVideoMultiTime" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
-    Your browser does not support HTML video.
-</video>
-
-<!-- Transcript Container -->
-<div id="video-transcript-multi-time" class="transcript-container" 
-     style="height: 400px; overflow: auto;"></div>
-##split##
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  const videoTranscript3 = new cuesync.CueSync(
-    document.getElementById('video-transcript-multi-time'), 
-    {
-      transcriptPath: [
-        '/assets/transcripts/natgeo.vtt',
-        '/assets/transcripts/you_hindi.vtt'
-      ],
-      media: document.getElementById('natGeoVideoMultiTime'),
-      displayTime: true 
-    }
-  )
-});
-</script>
-{{< /example >}}
-
-<br>
-
-{{< example codeId="code4" >}}
-<!-- Video -->
-<video id="natGeoVideoMulti" controls style="width: 100%; max-width: 500px;">
-    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
-    Your browser does not support HTML video.
-</video>
-
-<!-- Transcript Container -->
-<div id="video-transcript-multi" class="transcript-container" 
-     style="height: 400px; overflow: auto;"></div>
-##split##
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  const videoTranscript3 = new cuesync.CueSync(
-    document.getElementById('video-transcript-multi'), 
-    {
-      transcriptPath: [
-        '/assets/transcripts/natgeo.vtt',
-        '/assets/transcripts/you_hindi.vtt'
-      ],
-      media: document.getElementById('natGeoVideoMulti') 
-    }
-  )
-});
-</script>
-{{< /example >}}
-
-You can pass multiple comma-separated transcript paths using the HTML attribute `data-cs-transcript-path` as shown below:
-
-```html
-data-cs-transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/you_hindi.vtt"
-```
-
-<br>
-
-## Customization
-
-Customize CueSync by modifying the <a href="/{{< docs_version >}}/specs/#css-custom-properties">CSS custom properties listed here</a>.
-
-{{< example codeId="code5" >}}
-<style>
-#video-transcript-3 {
- --cs-container-bg: #aa076b;
- --cs-container-color: #fff;
- --cs-container-border-width: 0;
- --cs-hover-bg: #e47aaf;
- --cs-active-bg: #ffd75e;
- --cs-active-color: #aa076b;
- --cs-highlight-color: #ffd75e;
- --cs-time-bg: #ffd75e;
- --cs-time-color: #aa076b;
- --cs-time-border-radius: 20px;
- --cs-border-radius: 20px;
-}
-</style>
-
+{{< example codeId="code2" >}}
 <!-- Video -->
 <video id="natGeoVideo3" controls style="width: 100%; max-width: 500px;">
     <source src="/assets/videos/natgeo.mp4" type="video/mp4">
     Your browser does not support HTML video.
 </video>
 
-<!-- Transcript Container -->
-<div id="video-transcript-3" class="transcript-container" style="height: 400px; overflow: auto;"
-     data-cs-transcript-path="/assets/transcripts/natgeo.vtt"
-     data-cs-display-time="true"></div>
-##split##
-<script>
-window.addEventListener('DOMContentLoaded', (event) => {
-  const videoTranscript3 = new cuesync.CueSync(
-    document.getElementById('video-transcript-3'), 
-    { 
-      media: document.getElementById('natGeoVideo3') 
-    }
-  )
-});
-</script>
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo3" 
+          show-timestamp="false"
+          style="height: 400px;"></cue-sync>
 {{< /example >}}
 
-<br>
+<br><br>
+
+## Auto Scroll
+By default, CueSync enables auto-scroll, which automatically brings the currently spoken phrase into view as the 
+media plays. Users can turn this feature on or off at any time from the Settings menu.
+
+As a developer, you can control the default behavior using the `auto-scroll` attribute on the `<cue-sync>` 
+element. This attribute accepts `'true'` to enable auto-scroll and `'false'` to disable it.
+
+{{< example codeId="code3" >}}
+<!-- Video -->
+<video id="natGeoVideo4" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo4" 
+          auto-scroll="false"
+          style="height: 400px;"></cue-sync>
+{{< /example >}}
+
+<br><br>
+
+## Theme
+CueSync offers three theme options: `auto`, `light`, and `dark`, with `auto` being the default. 
+The `auto` theme adapts to the user's device settings, switching between light or dark mode accordingly.
+
+Users can switch between these themes at any time from the Settings menu.
+
+As a developer, you can set a default theme for your users using the `theme` attribute on the `<cue-sync>` element. 
+This attribute accepts the values `'auto'`, `'light'`, or `'dark'`.
+
+{{< example codeId="code4" >}}
+<!-- Video -->
+<video id="natGeoVideo5" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo5" 
+          theme="light"
+          style="height: 400px;"></cue-sync>
+{{< /example >}}
+
+<br><br>
+
+## Settings Menu
+The Settings menu is enabled by default in CueSync, allowing users to switch themes, toggle auto-scroll, 
+change layouts, show or hide timestamps, and select transcript languages.
+
+If you prefer not to offer these customization options, you can disable the Settings menu by using the 
+`allow-settings` attribute on the `<cue-sync>` element. This will hide the settings icon from the toolbar.
+
+This attribute accepts `'true'` to enable the menu and `'false'` to disable it.
+
+{{< example codeId="code5" >}}
+<!-- Video -->
+<video id="natGeoVideo6" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt" 
+          media="#natGeoVideo6" 
+          allow-settings="false"
+          layout="paragraph"
+          show-timestamp="false"
+          style="height: 400px;"></cue-sync>
+{{< /example >}}
+
+<br><br>
+
+## Multilingual Transcripts
+If you have transcripts in multiple languages for a media element, you can provide the paths to each 
+transcript file **(comma-separated)** in the `transcript-path` attribute. The Settings menu will automatically 
+display an additional option, allowing users to select or hide any language they prefer.
+
+CueSync determines the language name from the `Language:` metadata in each `VTT` or `SRT` file. If this metadata 
+is missing, the language selection may not be available in the Settings menu.
+
+To ensure a smooth multilingual experience, always include the `Language:` field at the top of each `VTT` or `SRT` 
+file (e.g., Language: English, Language: Hindi, etc.).
+
+{{< example codeId="code6" >}}
+<!-- Video -->
+<video id="natGeoVideo7" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript -->
+<cue-sync transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/natgeo_hindi.vtt" 
+          media="#natGeoVideo7"
+          style="height: 400px;"></cue-sync>
+{{< /example >}}
+
+<br><br>
+
+## Customization
+
+You can customize the appearance of CueSync by modifying the <a href="/{{< docs_version >}}/specs/#css-custom-properties">CSS custom properties listed here</a>.
+
+{{< example codeId="code7" >}}
+<style>
+.custom-cuesync {
+ --cs-border-color: #aa076b;
+ --cs-border-radius: 20px;
+ 
+ --cs-toolbar-bg: #aa076b;
+ --cs-toolbar-color: #fff;
+ 
+ --cs-container-bg: #aa076b;
+ --cs-container-color: #fff;
+
+ --cs-transcript-hover-bg: #e47aaf;
+ --cs-transcript-hover-color: #000;
+ --cs-transcript-active-bg: #ffd75e;
+ --cs-transcript-active-color: #aa076b;
+ --cs-transcript-highlight-color: #ffd75e;
+ 
+ --cs-timestamp-bg: #ffd75e;
+ --cs-timestamp-color: #aa076b;
+ --cs-timestamp-border-radius: 20px;
+}
+</style>
+
+<!-- Video -->
+<video id="natGeoVideo8" controls style="width: 100%; max-width: 500px;">
+    <source src="/assets/videos/natgeo.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+</video>
+
+<!-- Transcript -->
+<cue-sync class="custom-cuesync" transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/natgeo_hindi.vtt" 
+          media="#natGeoVideo8"
+          style="height: 400px;"></cue-sync>
+{{< /example >}}
+
+<br><br>
 
 ## Javascript
+The `<cue-sync>` web component is designed to work declaratively via HTML attributes, but it also exposes a 
+few useful ways to interact with it via JavaScript.
 
-### getInstance()
-`getInstance()` is a static method that enables you to obtain the CueSync instance associated with a DOM element.
+<br>
 
- ```javascript
-  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
+### Accessing the Component
+You can select the element using `document.querySelector()` (or any standard DOM method).
+
+```javascript
+const cueSync = document.querySelector('cue-sync');
 ```
 
 <br>
 
-### getOrCreateInstance()
-`getOrCreateInstance()` is a static method that enables you to obtain the CueSync instance associated with a DOM element or create a new one if it hasn't been initialized.
+### Attributes You Can Modify Dynamically
+<a href="/{{< docs_version >}}/specs/#html-attributes">HTML attributes listed here</a> can be updated via 
+JavaScript using 'setAttribute()'.
 
- ```javascript
-  const cueSyncInstance = cuesync.CueSync.getOrCreateInstance('#video-transcript')
+```javascript
+const cueSync = document.querySelector('cue-sync');
+
+cueSync.setAttribute('layout', 'paragraph');
+cueSync.setAttribute('theme', 'dark');
 ```
 
 <br>
 
-### Non-visible transcripts
-CueSync automatically adjusts the width of timestamp elements to match that of the longest timestamp, 
-ensuring uniformity across all elements. 
-However, since dimensions cannot be accurately determined on elements that aren't visible, 
-if you instantiate CueSync on transcripts that are hidden, you may need to call the `redrawTime()` method once they become visible. 
-This ensures consistency in the width of all timestamp elements.
+### Custom Events
+CueSync dispatches <a href="/{{< docs_version >}}/specs/#custom-events">custom events listed here</a> 
+whenever key attributes change.
 
- ```javascript
-  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
-  cueSyncInstance.redrawTime()
+```javascript
+const cueSync = document.querySelector('cue-sync');
+
+cueSync.addEventListener('layout-changed', e => {
+  console.log('Layout changed to:', e.detail.newValue);
+});
 ```
 
 <br>
 
-### refresh()
-`refresh()` — Reconfigures a CueSync instance, useful in case it was not properly initialized during the first attempt.
+### Public Functions
+#### redrawTime()
+Recalculates the width of the timestamp column. Useful if fonts or styles change.
 
- ```javascript
-  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
-  cueSyncInstance.refresh()
+```javascript
+const cueSync = document.querySelector('cue-sync');
+
+cueSync.redrawTime();
 ```
 
 <br>
 
-### dispose()
-`dispose()` - Destroys an element's instance and removes stored data associated with the DOM element.
-
- ```javascript
-  const cueSyncInstance = cuesync.CueSync.getInstance('#video-transcript')
-  cueSyncInstance.dispose()
-```
+### Please Note
+* Internal state and rendering are handled automatically based on attributes.
+* You don't need to call an initialization function — the component sets itself up when added to the DOM.
+* Shadow DOM is used (`mode: 'open'`), so you can access `cueSync.shadowRoot` if absolutely necessary, though 
+this is not recommended.

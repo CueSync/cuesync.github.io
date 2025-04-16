@@ -152,7 +152,9 @@ export default class CueSync extends HTMLElement {
 
   _changeTimestamp() {
     const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
-    timestampCheckbox.checked = this._config.showTimestamp
+    if (timestampCheckbox) {
+      timestampCheckbox.checked = this._config.showTimestamp
+    }
 
     const timestamps = this.shadowRoot.querySelectorAll('.time')
     for (const timeElement of timestamps) {
@@ -162,7 +164,9 @@ export default class CueSync extends HTMLElement {
 
   _changeAutoScroll() {
     const autoScrollCheckbox = this.shadowRoot.getElementById('auto-scroll-toggle')
-    autoScrollCheckbox.checked = this._config.autoScroll
+    if (autoScrollCheckbox) {
+      autoScrollCheckbox.checked = this._config.autoScroll
+    }
   }
 
   _renderComponent() {

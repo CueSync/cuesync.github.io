@@ -9,7 +9,9 @@ aliases:
 
 <div class="row mb-5">
     <h2 class="text-center">See CueSync in action!</h3>
-    <label class="h5 text-center">Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken. Click any phrase to instantly jump to that moment in the video.</label>
+    <label class="h5 text-center">
+        Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken. 
+        Click on any phrase to instantly jump to that exact moment in the media.</label>
     <label class="h4 my-4">Video</label>
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">

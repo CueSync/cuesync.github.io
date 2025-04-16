@@ -14,7 +14,7 @@ description: CueSync is a JavaScript library designed to simplify the integratio
 
 ### CDN
 
-Use CueSync instantly by including its CSS and JavaScript files directly from a Content Delivery Network (CDN). 
+Use CueSync instantly by including its JavaScript file directly from a Content Delivery Network (CDN). 
 This option allows you to link to the files hosted on a remote server, ensuring quick and easy integration into your project. 
 You can choose from popular CDN providers like `jsDelivr` or `unpkg` to access CueSync’s resources seamlessly. 
 This method is convenient and ideal for those who want a straightforward integration process.
@@ -37,19 +37,7 @@ This method is convenient and ideal for those who want a straightforward integra
 </div>
 
 <div class="tab-content" id="cdn-tab-content">
-<div class="tab-pane fade show active" id="jsdelivr" role="tabpanel" aria-labelledby="jsdelivr-tab" tabindex="0">
-
-Styles
-
-```html
-<!-- CueSync CSS -->
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css" 
-      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e" 
-      crossorigin="anonymous">
-```
-
-Scripts
+<div class="tab-pane fade mt-3 show active" id="jsdelivr" role="tabpanel" aria-labelledby="jsdelivr-tab" tabindex="0">
 
 ```html  
 <!-- CueSync JS -->
@@ -59,19 +47,7 @@ Scripts
 ```
 
 </div>
-<div class="tab-pane fade" id="unpkg" role="tabpanel" aria-labelledby="unpkg-tab" tabindex="0">
-
-Styles
-
-```html
-<!-- CueSync CSS -->
-<link rel="stylesheet"
-      href="https://unpkg.com/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css" 
-      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e" 
-      crossorigin="anonymous">
-```
-
-Scripts
+<div class="tab-pane fade mt-3" id="unpkg" role="tabpanel" aria-labelledby="unpkg-tab" tabindex="0">
 
 ```html  
 <!-- CueSync JS -->
@@ -100,21 +76,16 @@ Import CueSync JS
 import * as cuesync from '@cuesync/cuesync'
 ```
 
-Import CueSync SCSS in your SCSS file
-```scss
-@import "~@cuesync/cuesync/scss/cuesync";
-```
-
 {{< squiggle >}}
 
 ### Download
 
-Download the pre-compiled CSS and JavaScript files of CueSync directly to your system. This option is suitable for 
+Download the pre-compiled JavaScript file of CueSync directly to your system. This option is suitable for 
 developers who prefer to have local copies of the required files and manually link them in their project’s code.
 
 <a class="btn btn-primary btn-lg rounded-pill" 
-   href="https://github.com/cuesync/cuesync.github.io/releases/download/v1.0.0-alpha1/cuesync-1.0.0-alpha1-dist.zip" download>
-Download v1.0.0-alpha1
+   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha1/cuesync-2.0.0-alpha1-dist.zip" download>
+Download v2.0.0-alpha1
     <span class="ripple-surface"></span>
 </a>
 

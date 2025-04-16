@@ -168,33 +168,58 @@ Customize CueSync by modifying the CSS custom properties listed below.
 
 {{< squiggle >}}
 
-### Javascript options
+### Javascript 
+#### Custom Events
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
     <tr>
-      <th>Option</th>
-      <th>Description</th>
+      <th>Event Name</th>
+      <th>Triggered When...</th>
+      <th><code>event.detail.newValue</code> contains</th>
     </tr>
   </thead>
   <tbody>
-   <tr>
-      <td>transcriptPath</td>
-      <td>Sets the transcript file path</td>
+    <tr>
+      <td>layout-changed</td>
+      <td>Layout is changed</td>
+      <td>'stacked' or 'paragraph'</td>
     </tr>
     <tr>
-      <td>media</td>
-      <td>Sepcifies the media element for transcript highlighting and interactive control</td>
+      <td>show-timestamp-changed</td>
+      <td>Timestamp visibility is changed</td>
+      <td>true or false</td>
     </tr>
     <tr>
-      <td>displayTime</td>
-      <td>Indicates whether the timestamp should be displayed or not</td>
+      <td>auto-scroll-changed</td>
+      <td>Auto scroll is updated</td>
+      <td>true or false</td>
+    </tr>
+    <tr>
+      <td>theme-changed</td>
+      <td>Theme is changed</td>
+      <td>'auto', 'light', 'dark'</td>
+    </tr>
+    <tr>
+      <td>transcript-path-changed</td>
+      <td>Transcript paths are updated</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>media-changed</td>
+      <td>Media target is updated</td>
+      <td>string (selector)</td>
+    </tr>
+    <tr>
+      <td>allow-settings-changed</td>
+      <td>Allow Settings is updated</td>
+      <td>true or false</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-### Javascript functions
+#### Functions
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -205,24 +230,8 @@ Customize CueSync by modifying the CSS custom properties listed below.
   </thead>
   <tbody>
   <tr>
-    <td>getInstance</td>
-    <td>Static method that enables you to obtain the CueSync instance associated with a DOM element.</td>
-  </tr>
-  <tr>
-    <td>getOrCreateInstance</td>
-    <td>Static method that enables you to obtain the CueSync instance associated with a DOM element or create a new one if it hasn’t been initialized.</td>
-  </tr>
-  <tr>
-    <td>redrawTime</td>
-    <td>Ensures consistent timestamp element width in CueSync by recalculating dimensions when transcripts become visible.</td>
-  </tr>
-  <tr>
-    <td>refresh</td>
-    <td>Reconfigures a CueSync instance, useful in case it was not properly initialized during the first attempt.</td>
-  </tr>
-  <tr>
-    <td>dispose</td>
-    <td>Destroys an element’s instance and removes stored data associated with the DOM element.</td>
+    <td>redrawTime()</td>
+    <td>Recalculates the width of the timestamp column. Useful if fonts or styles change.</td>
   </tr>
   </tbody>
 </table>
@@ -235,21 +244,46 @@ Customize CueSync by modifying the CSS custom properties listed below.
   <table class="table table-bordered rounded-5">
     <thead>
       <tr>
-        <th>HTML attribute</th>
-        <th>Javascript equivalent option</th>
+        <th>Attribute</th>
+        <th>Type</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>data-cs-transcript-path</td>
-        <td>transcriptPath</td>
-        <td>Sets the transcript file path</td>
+        <td>transcript-path</td>
+        <td>string</td>
+        <td>Comma-separated paths to transcript files (VTT/SRT)</td>
       </tr>
       <tr>
-        <td>data-cs-display-time</td>
-        <td>displayTime</td>
-        <td>Indicates whether the timestamp should be displayed or not</td>
+        <td>media</td>
+        <td>string</td>
+        <td>CSS selector for the associated &ltvideo&gt or &ltaudio&gt element</td>
+      </tr>
+      <tr>
+        <td>layout</td>
+        <td>string</td>
+        <td>'stacked' or 'paragraph' (default is 'stacked')</td>
+      </tr>
+      <tr>
+        <td>show-timestamp</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>auto-scroll</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>allow-settings</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>theme</td>
+        <td>string</td>
+        <td>'auto', 'light', or 'dark' (default is 'auto')</td>
       </tr>
     </tbody>
   </table>
