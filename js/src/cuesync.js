@@ -53,6 +53,7 @@ export default class CueSync extends HTMLElement {
     if (['theme', 'layout', 'show-timestamp', 'auto-scroll'].includes(name)) {
       this._applyAttributeChange(name)
     } else {
+      this._renderComponent()
       this._requestRefresh()
     }
   }
@@ -660,46 +661,47 @@ export default class CueSync extends HTMLElement {
       }
     }
 
-    if (!this._handleTimeUpdate) {
-      this._handleTimeUpdate = () => {
-        const { currentTime } = media
+    if (this._handleTimeUpdate) {
+      media.removeEventListener('timeupdate', this._handleTimeUpdate)
+    }
 
-        // Identify the new active cue index
-        let newActiveIndex = activeCueIndex
+    this._handleTimeUpdate = () => {
+      const { currentTime } = media
 
-        for (let i = 0; i < cues.length; i++) {
-          const { startTime, endTime } = cues[i]
-          if (currentTime >= startTime && (i === cues.length - 1 || currentTime < endTime)) {
-            newActiveIndex = i
-            break
-          }
+      // Identify the new active cue index
+      let newActiveIndex = activeCueIndex
+
+      for (let i = 0; i < cues.length; i++) {
+        const { startTime, endTime } = cues[i]
+        if (currentTime >= startTime && (i === cues.length - 1 || currentTime < endTime)) {
+          newActiveIndex = i
+          break
+        }
+      }
+
+      // Update only if there's a change in the active cue
+      if (newActiveIndex !== activeCueIndex) {
+        if (activeCueIndex >= 0) {
+          updateActiveLine(activeCueIndex, false)
         }
 
-        // Update only if there's a change in the active cue
-        if (newActiveIndex !== activeCueIndex) {
-          if (activeCueIndex >= 0) {
-            updateActiveLine(activeCueIndex, false)
+        activeCueIndex = newActiveIndex
+
+        if (activeCueIndex >= 0) {
+          updateActiveLine(activeCueIndex, true)
+
+          // Add the 'active-added' class once the media starts
+          if (!transcriptContainer.classList.contains('active-added')) {
+            transcriptContainer.classList.add('active-added')
           }
 
-          activeCueIndex = newActiveIndex
-
-          if (activeCueIndex >= 0) {
-            updateActiveLine(activeCueIndex, true)
-
-            // Add the 'active-added' class once the media starts
-            if (!transcriptContainer.classList.contains('active-added')) {
-              transcriptContainer.classList.add('active-added')
-            }
-
-            if (this._config.autoScroll) {
-              this._scroll(transcriptLines[activeCueIndex])
-            }
+          if (this._config.autoScroll) {
+            this._scroll(transcriptLines[activeCueIndex])
           }
         }
       }
     }
 
-    media.removeEventListener('timeupdate', this._handleTimeUpdate)
     media.addEventListener('timeupdate', this._handleTimeUpdate)
   }
 
