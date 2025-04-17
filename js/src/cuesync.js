@@ -144,7 +144,7 @@ export default class CueSync extends HTMLElement {
       option.checked = option.value === this._config.layout
     }
 
-    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.transcript-line-container')
+    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.cue')
 
     for (const container of transcriptLineContainers) {
       container.classList.toggle('paragraph', this._config.layout === 'paragraph')
@@ -157,7 +157,7 @@ export default class CueSync extends HTMLElement {
       timestampCheckbox.checked = this._config.showTimestamp
     }
 
-    const timestamps = this.shadowRoot.querySelectorAll('.time')
+    const timestamps = this.shadowRoot.querySelectorAll('.timestamp')
     for (const timeElement of timestamps) {
       timeElement.style.display = this._config.showTimestamp ? 'inline-block' : 'none'
     }
@@ -173,13 +173,13 @@ export default class CueSync extends HTMLElement {
   _renderComponent() {
     const { allowSettings } = this._config
     const settingsHTML = allowSettings ?
-      `<button id="settings-toggle" aria-label="Settings">
+      `<button id="settings-btn" aria-label="Settings Button">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
             <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
             <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
           </svg>
         </button>
-        <div id="settings-menu" hidden>
+        <div id="settings-panel" hidden>
             <div id="layout-options">
                 Layout:
                 <label><input type="radio" name="layout" value="stacked">Stacked</label>
@@ -200,12 +200,12 @@ export default class CueSync extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>${CueSync.styles}</style>
-      <div class="wrapper">
+      <div class="cue-sync">
         <div id="toolbar">
           <h2>Transcript</h2>
           ${settingsHTML}
         </div>
-        <div id="transcript-container"></div>
+        <div id="transcript"></div>
       </div>
     `
   }
@@ -231,8 +231,8 @@ export default class CueSync extends HTMLElement {
       this._applyConfiguration(cuesCollection)
 
       const handleDocumentClicks = e => {
-        const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
-        const settingsToggle = this.shadowRoot.querySelector('#settings-toggle')
+        const settingsMenu = this.shadowRoot.querySelector('#settings-panel')
+        const settingsToggle = this.shadowRoot.querySelector('#settings-btn')
 
         if (settingsMenu && !settingsMenu.hidden) {
           // Check if the click is outside the settings menu and toggle
@@ -301,14 +301,14 @@ export default class CueSync extends HTMLElement {
     }
 
     const toggleSettingsMenu = e => {
-      const settingsMenu = this.shadowRoot.querySelector('#settings-menu')
+      const settingsMenu = this.shadowRoot.querySelector('#settings-panel')
 
       settingsMenu.hidden = !settingsMenu.hidden
 
       e.stopPropagation()
     }
 
-    const settingsToggle = this.shadowRoot.querySelector('#settings-toggle')
+    const settingsToggle = this.shadowRoot.querySelector('#settings-btn')
 
     settingsToggle.removeEventListener('click', toggleSettingsMenu)
     settingsToggle.addEventListener('click', toggleSettingsMenu)
@@ -316,7 +316,7 @@ export default class CueSync extends HTMLElement {
 
   _setTimeMaxWidth() {
     if (this._timeMaxWidth) {
-      this.shadowRoot.querySelector('#transcript-container').style.setProperty('--cs-timestamp-width', `${this._timeMaxWidth}px`)
+      this.shadowRoot.querySelector('#transcript').style.setProperty('--cs-timestamp-width', `${this._timeMaxWidth}px`)
     }
   }
 
@@ -408,19 +408,19 @@ export default class CueSync extends HTMLElement {
     }
 
     const cues = cuesCollection[0]
-    const container = this.shadowRoot.querySelector('#transcript-container')
+    const container = this.shadowRoot.querySelector('#transcript')
     container.innerHTML = ''
 
     for (const [index, cue] of cues.entries()) {
       const line = document.createElement('div')
-      line.className = 'transcript-line'
+      line.className = 'cue-text'
 
       const fragment = document.createDocumentFragment()
 
       for (const cueArray of cuesCollection) {
         if (cueArray[index]) {
           const span = document.createElement('span')
-          span.className = `transcript-${cueArray.language || 'default'}`
+          span.className = `cue-${cueArray.language || 'default'}`
           span.textContent = cueArray[index].text.trim()
           fragment.append(span)
         }
@@ -433,13 +433,13 @@ export default class CueSync extends HTMLElement {
       line.append(fragment)
 
       const transcriptLineContainer = document.createElement('div')
-      transcriptLineContainer.className = `transcript-line-container${layout === 'paragraph' ? ' paragraph' : ''}`
+      transcriptLineContainer.className = `cue${layout === 'paragraph' ? ' paragraph' : ''}`
       transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
       transcriptLineContainer.setAttribute('role', 'button')
       transcriptLineContainer.tabIndex = 0
 
       const timeContainer = document.createElement('span')
-      timeContainer.className = 'time'
+      timeContainer.className = 'timestamp'
       timeContainer.textContent = cue.startTimeRaw
       timeContainer.style.display = showTimestamp ? 'inline-block' : 'none'
 
@@ -472,7 +472,7 @@ export default class CueSync extends HTMLElement {
 
   _toggleLayout = () => {
     const layout = this.shadowRoot.querySelector('input[name="layout"]:checked').value
-    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.transcript-line-container')
+    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.cue')
 
     for (const container of transcriptLineContainers) {
       container.classList.toggle('paragraph', layout === 'paragraph')
@@ -512,7 +512,7 @@ export default class CueSync extends HTMLElement {
 
   _toggleTimestamps = () => {
     const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
-    const timestamps = this.shadowRoot.querySelectorAll('.time')
+    const timestamps = this.shadowRoot.querySelectorAll('.timestamp')
 
     for (const timeElement of timestamps) {
       timeElement.style.display = timestampCheckbox.checked ? 'inline-block' : 'none'
@@ -585,8 +585,8 @@ export default class CueSync extends HTMLElement {
   }
 
   _updateLayout(selectedLanguages) {
-    for (const span of this.shadowRoot.querySelectorAll('.transcript-line span')) {
-      const languageClass = span.classList[0] // e.g., 'transcript-en'
+    for (const span of this.shadowRoot.querySelectorAll('.cue-text span')) {
+      const languageClass = span.classList[0] // e.g., 'cue-en'
       const language = languageClass.slice(11) // extract language code e.g., 'en'
 
       span.style.display = selectedLanguages.includes(language) ? '' : 'none'
@@ -594,7 +594,7 @@ export default class CueSync extends HTMLElement {
   }
 
   _scroll(line) {
-    const container = this.shadowRoot.querySelector('#transcript-container')
+    const container = this.shadowRoot.querySelector('#transcript')
     const { top: containerTop } = container.getBoundingClientRect()
     const { top: elementTop, height: elementHeight } = line.getBoundingClientRect()
 
@@ -649,13 +649,13 @@ export default class CueSync extends HTMLElement {
     }
 
     const cues = cuesCollection[0]
-    const transcriptLines = Array.from(this.shadowRoot.querySelectorAll('.transcript-line'))
-    const transcriptContainer = this.shadowRoot.querySelector('#transcript-container')
+    const transcriptLines = Array.from(this.shadowRoot.querySelectorAll('.cue-text'))
+    const transcriptContainer = this.shadowRoot.querySelector('#transcript')
     let activeCueIndex = -1 // Pointer to track the active cue
 
     const updateActiveLine = (index, isActive) => {
       const line = transcriptLines[index]
-      const container = line.closest('.transcript-line-container')
+      const container = line.closest('.cue')
       if (container) {
         container.classList.toggle('active', isActive)
       }
@@ -706,7 +706,7 @@ export default class CueSync extends HTMLElement {
   }
 
   redrawTime() {
-    const timeElements = this.shadowRoot.querySelectorAll('.time')
+    const timeElements = this.shadowRoot.querySelectorAll('.timestamp')
 
     if (timeElements.length === 0) {
       return
@@ -721,7 +721,7 @@ export default class CueSync extends HTMLElement {
       }
     }
 
-    this.shadowRoot.querySelector('#transcript-container').style.setProperty('--cs-timestamp-width', `${maxWidth}px`)
+    this.shadowRoot.querySelector('#transcript').style.setProperty('--cs-timestamp-width', `${maxWidth}px`)
   }
 }
 
