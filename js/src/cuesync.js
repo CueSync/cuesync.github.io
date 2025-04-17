@@ -587,7 +587,7 @@ export default class CueSync extends HTMLElement {
   _updateLayout(selectedLanguages) {
     for (const span of this.shadowRoot.querySelectorAll('.cue-text span')) {
       const languageClass = span.classList[0] // e.g., 'cue-en'
-      const language = languageClass.slice(11) // extract language code e.g., 'en'
+      const language = languageClass.slice(4) // extract language code e.g., 'en' from 'cue-en'
 
       span.style.display = selectedLanguages.includes(language) ? '' : 'none'
     }

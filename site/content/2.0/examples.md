@@ -31,8 +31,8 @@ and the `media` attribute **set to a CSS selector that matches your media elemen
 
 That’s it — your interactive transcript is ready to go!
 
-Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken.
-Click on any phrase to instantly jump to that exact moment in the media.
+Hit play and watch the transcript come to life, elegantly highlighting each phrase — known as a Cue — as it's spoken.
+Click on any Cue to instantly jump to that exact moment in the media.
 
 Video
 
@@ -117,7 +117,7 @@ oh she's fluffy
 CueSync offers two layout options for displaying the transcript: `stacked` and `paragraph`, with `stacked` being 
 the default. 
 
-Users can switch between these layouts at any time from the Settings menu.
+Users can switch between these layouts at any time from the Settings panel.
 
 As a developer, you can also set a default layout for your users using the `layout` attribute on the 
 `<cue-sync>` element. This attribute accepts the values `'stacked'` or `'paragraph'`, respectively, to choose 
@@ -141,7 +141,7 @@ the desired layout.
 
 ## Timestamps
 By default, CueSync displays timestamps for each segment of the transcript. Users can show or hide the timestamps 
-at any time from the Settings menu.
+at any time from the Settings panel.
 
 As a developer, you can control the visibility of timestamps for your users by using the `show-timestamp` attribute 
 on the `<cue-sync>` element. This attribute accepts `'true'` to show timestamps and `'false'` to hide them.
@@ -163,8 +163,8 @@ on the `<cue-sync>` element. This attribute accepts `'true'` to show timestamps 
 <br><br>
 
 ## Auto Scroll
-By default, CueSync enables auto-scroll, which automatically brings the currently spoken phrase into view as the 
-media plays. Users can turn this feature on or off at any time from the Settings menu.
+By default, CueSync enables auto-scroll, which automatically brings the currently spoken phrase — known as a Cue — 
+into view as the media plays. Users can turn this feature on or off at any time from the Settings panel.
 
 As a developer, you can control the default behavior using the `auto-scroll` attribute on the `<cue-sync>` 
 element. This attribute accepts `'true'` to enable auto-scroll and `'false'` to disable it.
@@ -189,7 +189,7 @@ element. This attribute accepts `'true'` to enable auto-scroll and `'false'` to 
 CueSync offers three theme options: `auto`, `light`, and `dark`, with `auto` being the default. 
 The `auto` theme adapts to the user's device settings, switching between light or dark mode accordingly.
 
-Users can switch between these themes at any time from the Settings menu.
+Users can switch between these themes at any time from the Settings panel.
 
 As a developer, you can set a default theme for your users using the `theme` attribute on the `<cue-sync>` element. 
 This attribute accepts the values `'auto'`, `'light'`, or `'dark'`.
@@ -210,14 +210,15 @@ This attribute accepts the values `'auto'`, `'light'`, or `'dark'`.
 
 <br><br>
 
-## Settings Menu
-The Settings menu is enabled by default in CueSync, allowing users to switch themes, toggle auto-scroll, 
+## Settings
+The Settings feature is enabled by default in CueSync, allowing users to switch themes, toggle auto-scroll, 
 change layouts, show or hide timestamps, and select transcript languages.
 
-If you prefer not to offer these customization options, you can disable the Settings menu by using the 
-`allow-settings` attribute on the `<cue-sync>` element. This will hide the settings icon from the toolbar.
+If you prefer not to offer these customization options, you can disable the Settings feature by using the 
+`allow-settings` attribute on the `<cue-sync>` element.  This will prevent the settings button from appearing 
+in the toolbar.
 
-This attribute accepts `'true'` to enable the menu and `'false'` to disable it.
+This attribute accepts `'true'` to enable settings and `'false'` to disable it.
 
 {{< example codeId="code5" >}}
 <!-- Video -->
@@ -239,11 +240,11 @@ This attribute accepts `'true'` to enable the menu and `'false'` to disable it.
 
 ## Multilingual Transcripts
 If you have transcripts in multiple languages for a media element, you can provide the paths to each 
-transcript file **(comma-separated)** in the `transcript-path` attribute. The Settings menu will automatically 
+transcript file **(comma-separated)** in the `transcript-path` attribute. The Settings panel will automatically 
 display an additional option, allowing users to select or hide any language they prefer.
 
 CueSync determines the language name from the `Language:` metadata in each `VTT` or `SRT` file. If this metadata 
-is missing, the language selection may not be available in the Settings menu.
+is missing, the language selection may not appear in the Settings panel.
 
 To ensure a smooth multilingual experience, always include the `Language:` field at the top of each `VTT` or `SRT` 
 file (e.g., Language: English, Language: Hindi, etc.).
@@ -276,14 +277,14 @@ You can customize the appearance of CueSync by modifying the <a href="/{{< docs_
  --cs-toolbar-bg: #aa076b;
  --cs-toolbar-color: #fff;
  
- --cs-container-bg: #aa076b;
- --cs-container-color: #fff;
+ --cs-transcript-bg: #aa076b;
+ --cs-transcript-color: #fff;
 
- --cs-transcript-hover-bg: #e47aaf;
- --cs-transcript-hover-color: #000;
- --cs-transcript-active-bg: #ffd75e;
- --cs-transcript-active-color: #aa076b;
- --cs-transcript-highlight-color: #ffd75e;
+ --cs-cue-hover-bg: #e47aaf;
+ --cs-cue-hover-color: #000;
+ --cs-cue-active-bg: #ffd75e;
+ --cs-cue-active-color: #aa076b;
+ --cs-cue-highlight-color: #ffd75e;
  
  --cs-timestamp-bg: #ffd75e;
  --cs-timestamp-color: #aa076b;
