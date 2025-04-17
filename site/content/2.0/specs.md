@@ -12,126 +12,224 @@ description: CueSync is a JavaScript library designed to simplify the integratio
 ---
 
 ## Specs
-  
-### CSS custom properties
-Customize CueSync by modifying the CSS custom properties listed below.
+ This page lists and explains all configurable aspects of the CueSync component — including:
+* CSS custom properties for customizing styles and layout
+* HTML attributes for declarative configuration
+* JavaScript functions for runtime control
+* Custom events emitted by the component for interactivity and integration
 
-#### Transcript container
+Use this guide to fully customize and integrate CueSync into your project, whether you're tweaking the visuals or 
+wiring it up with JavaScript.
+
+<br>
+
+## CSS custom properties
+Customize CueSync’s appearance by modifying the CSS custom properties listed below.
+
+<br>
+
+### CueSync (Main Container)
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Default Value</th>
-      <th>Description</th>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>--cs-container-bg</td>
-      <td>#fff</td>
-      <td>Transcript container background color</td>
+      <td>--cs-border-width</td>
+      <td colspan="2">1px</td>
+      <td>CueSync border width</td>
     </tr>
     <tr>
-      <td>--cs-container-color</td>
-      <td>#000</td>
-      <td>Transcript container text color</td>
+      <td>--cs-border-style</td>
+      <td colspan="2">solid</td>
+      <td>CueSync border style</td>
     </tr>
     <tr>
-      <td>--cs-container-padding-x</td>
-      <td>5px</td>
-      <td>Transcript container padding left and right</td>
-    </tr>
-    <tr>
-      <td>--cs-container-padding-y</td>
-      <td>5px</td>
-      <td>Transcript container padding top and bottom</td>
-    </tr>
-    <tr>
-      <td>--cs-container-border-width</td>
-      <td>1px</td>
-      <td>Transcript container border width</td>
-    </tr>
-    <tr>
-      <td>--cs-container-border-style</td>
-      <td>solid</td>
-      <td>Transcript container border style</td>
-    </tr>
-    <tr>
-      <td>--cs-container-border-color</td>
+      <td>--cs-border-color</td>
       <td>#e9e9e9</td>
-      <td>Transcript container border color</td>
-    </tr>
-    <tr>
-      <td>--cs-container-border-radius</td>
-      <td>4px</td>
-      <td>Transcript container border radius</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-    
-#### Transcript
-<div class="table-responsive">
-<table class="table table-bordered rounded-5">
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Default Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>--cs-padding-x</td>
-      <td>5px</td>
-      <td>Transcript padding left and right</td>
-    </tr>
-    <tr>
-      <td>--cs-padding-y</td>
-      <td>5px</td>
-      <td>Transcript padding top and bottom</td>
+      <td>#495057</td>
+      <td>CueSync border color</td>
     </tr>
     <tr>
       <td>--cs-border-radius</td>
-      <td>4px</td>
-      <td>Transcript border radius</td>
-    </tr>
-    <tr>
-      <td>--cs-hover-bg</td>
-      <td>#e3e4e5</td>
-      <td>Transcript hover background color</td>
-    </tr>
-    <tr>
-      <td>--cs-hover-color</td>
-      <td>#000</td>
-      <td>Transcript hover color</td>
-    </tr>
-    <tr>
-      <td>--cs-active-bg</td>
-      <td>#9ec5fe</td>
-      <td>Transcript active background color</td>
-    </tr>    
-    <tr>
-      <td>--cs-active-color</td>
-      <td>#000</td>
-      <td>Transcript active color</td>
-    </tr>
-    <tr>
-      <td>--cs-highlight-bg</td>
-      <td>transparent</td>
-      <td>Transcript highlight background color</td>
-    </tr>
-    <tr>
-      <td>--cs-highlight-color</td>
-      <td>#084298</td>
-      <td>Transcript highlight color</td>
+      <td colspan="2">10px</td>
+      <td>CueSync border radius</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-#### Timestamp
+<br>
+
+### Toolbar and Settings
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-toolbar-bg</td>
+      <td>#fff</td>
+      <td>#16191d</td>
+      <td>Toolbar background color</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Toolbar color</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-px</td>
+      <td colspan="2">15px</td>
+      <td>Toolbar padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-py</td>
+      <td colspan="2">8px</td>
+      <td>Toolbar padding top and bottom</td>
+    </tr>
+    <tr>
+      <td>--cs-settings-shadow-opacity</td>
+      <td>.1</td>
+      <td>1</td>
+      <td>Settings menu shadow opacity</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+### Transcript
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-transcript-bg</td>
+      <td>#fff</td>
+      <td>#16191d</td>
+      <td>Transcript background color</td>
+    </tr>
+    <tr>
+      <td>--cs-transcript-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Transcript text color</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+### Cue
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-cue-px</td>
+      <td colspan="2">15px</td>
+      <td>Cue padding left and right in Stacked layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-py</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding top and bottom in Stacked layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-paragraph-px</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding left and right in Paragraph layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-paragraph-py</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding top and bottom in Paragraph layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-hover-bg</td>
+      <td>#f2f2f2</td>
+      <td>#252525</td>
+      <td>Cue hover background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-hover-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Cue hover text color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-active-bg</td>
+      <td>#def1ff</td>
+      <td>#032b48</td>
+      <td>Cue active background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-active-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
+      <td>Cue active text color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-highlight-bg</td>
+      <td>transparent</td>
+      <td>transparent</td>
+      <td>Cue highlight background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-highlight-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
+      <td>Cue highlight text color</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+### Cue Text
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -143,24 +241,67 @@ Customize CueSync by modifying the CSS custom properties listed below.
   </thead>
   <tbody>
     <tr>
-      <td>--cs-time-bg</td>
-      <td>#084298</td>
+      <td>--cs-cue-text-px</td>
+      <td>5px</td>
+      <td>Cue text padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-text-py</td>
+      <td>5px</td>
+      <td>Cue text padding top and bottom</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+### Timestamp
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-timestamp-bg</td>
+      <td>#def1ff</td>
+      <td>#032b48</td>
       <td>Timestamp background color</td>
     </tr>
     <tr>
-      <td>--cs-time-color</td>
-      <td>#fff</td>
+      <td>--cs-timestamp-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
       <td>Timestamp color</td>
     </tr>
     <tr>
-      <td>--cs-time-border-radius</td>
-      <td>4px</td>
+      <td>--cs-timestamp-border-radius</td>
+      <td colspan="2">5px</td>
       <td>Timestamp border radius</td>
     </tr>
     <tr>
-      <td>--cs-time-width</td>
-      <td>auto</td>
+      <td>--cs-timestamp-width</td>
+      <td colspan="2">auto</td>
       <td>Timestamp width<br><i>(Automatically adjusted to match the width of the longest timestamp.)</i></td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-px</td>
+      <td colspan="2">5px</td>
+      <td>Timestamp padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-py</td>
+      <td colspan="2">5px</td>
+      <td>Timestamp padding top and bottom</td>
     </tr>
   </tbody>
 </table>
@@ -168,8 +309,12 @@ Customize CueSync by modifying the CSS custom properties listed below.
 
 {{< squiggle >}}
 
-### Javascript 
-#### Custom Events
+## Javascript 
+Control CueSync using the JavaScript functions and custom events listed below.
+
+<br>
+
+### Custom Events
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -192,7 +337,7 @@ Customize CueSync by modifying the CSS custom properties listed below.
     </tr>
     <tr>
       <td>auto-scroll-changed</td>
-      <td>Auto scroll is updated</td>
+      <td>Auto scroll setting is changed</td>
       <td>true or false</td>
     </tr>
     <tr>
@@ -212,14 +357,16 @@ Customize CueSync by modifying the CSS custom properties listed below.
     </tr>
     <tr>
       <td>allow-settings-changed</td>
-      <td>Allow Settings is updated</td>
+      <td>Allow Settings is changed</td>
       <td>true or false</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-#### Functions
+<br>
+
+### Functions
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -239,7 +386,9 @@ Customize CueSync by modifying the CSS custom properties listed below.
 
 {{< squiggle >}}
 
-### HTML attributes
+## HTML attributes
+Configure CueSync directly in your markup using the HTML attributes listed below.
+
 <div class="table-responsive">
   <table class="table table-bordered rounded-5">
     <thead>

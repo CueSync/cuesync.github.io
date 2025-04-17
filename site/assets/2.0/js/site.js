@@ -3,7 +3,7 @@
 (() => {
   'use strict'
 
-  anchors.add('h3, h4')
+  anchors.add('h2, h3, h4')
 
   // Hide AdSpace
   const ad = document.querySelector('.adspace')
