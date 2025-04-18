@@ -31,8 +31,8 @@ and the `media` attribute **set to a CSS selector that matches your media elemen
 
 That’s it — your interactive transcript is ready to go!
 
-Hit play and watch the transcript come to life, elegantly highlighting each phrase — known as a Cue — as it's spoken.
-Click on any Cue to instantly jump to that exact moment in the media.
+Hit play and watch the transcript come to life, elegantly highlighting each phrase (Cue) as it's spoken.
+Click on any Cue to jump to that moment in the media.
 
 Video
 
@@ -163,7 +163,7 @@ on the `<cue-sync>` element. This attribute accepts `'true'` to show timestamps 
 <br><br>
 
 ## Auto Scroll
-By default, CueSync enables auto-scroll, which automatically brings the currently spoken phrase — known as a Cue — 
+By default, CueSync enables auto-scroll, which automatically brings the currently spoken phrase (Cue) 
 into view as the media plays. Users can turn this feature on or off at any time from the Settings panel.
 
 As a developer, you can control the default behavior using the `auto-scroll` attribute on the `<cue-sync>` 

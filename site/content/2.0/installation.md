@@ -93,4 +93,5 @@ Download v2.0.0-alpha1
 
 ## Next steps
 
-Explore CueSync's capabilities in action! Head over to the [Examples](/{{< docs_version >}}/examples) page for usage scenarios, code snippets, and examples.
+Explore CueSync’s capabilities in action!<br>
+Head over to the [Examples](/{{< docs_version >}}/examples) page to get started — you'll find usage scenarios, helpful code snippets, and live examples to guide you.
