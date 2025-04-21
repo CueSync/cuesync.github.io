@@ -26,7 +26,7 @@ wiring it up with JavaScript.
 ## CSS custom properties
 Customize CueSync’s appearance by modifying the CSS custom properties listed below.
 
-<image src="/assets/images/CueSyncParts.png" alt="Image showing various parts of CueSync" class="rounded-4 mt-2 mb-4 border" style="max-width: 800px;">
+<image src="/assets/images/CueSyncParts.png" alt="Image showing various parts of CueSync" class="rounded-4 mt-2 mb-4 border w-100" style="max-width: 800px;">
 
 ### CueSync (Main Container)
 <div class="table-responsive">
