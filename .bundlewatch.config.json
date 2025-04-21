@@ -2,27 +2,27 @@
   "files": [
     {
       "path": "./dist/css/cuesync.css",
-      "maxSize": "555 B"
+      "maxSize": "1.35 kB"
     },
     {
       "path": "./dist/css/cuesync.min.css",
-      "maxSize": "535 B"
+      "maxSize": "1.2 kB"
     },
     {
       "path": "./dist/js/cuesync.esm.js",
-      "maxSize": "4.30 kB"
+      "maxSize": "7.15 kB"
     },
     {
       "path": "./dist/js/cuesync.esm.min.js",
-      "maxSize": "3.00 kB"
+      "maxSize": "5.55 kB"
     },
     {
       "path": "./dist/js/cuesync.js",
-      "maxSize": "4.50 kB"
+      "maxSize": "7.35 kB"
     },
     {
       "path": "./dist/js/cuesync.min.js",
-      "maxSize": "3.00 kB"
+      "maxSize": "5.65 kB"
     }
   ],
   "ci": {

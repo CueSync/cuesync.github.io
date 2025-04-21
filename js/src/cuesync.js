@@ -11,7 +11,7 @@ export default class CueSync extends HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
 
-    this._timeMaxWidth = 0
+    this._timestampMaxWidth = 0
     this._pendingRefresh = false
     this._config = {}
     this._languages = []
@@ -144,11 +144,13 @@ export default class CueSync extends HTMLElement {
       option.checked = option.value === this._config.layout
     }
 
-    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.cue')
+    const cueElements = this.shadowRoot.querySelectorAll('.cue')
 
-    for (const container of transcriptLineContainers) {
-      container.classList.toggle('paragraph', this._config.layout === 'paragraph')
+    for (const cueElement of cueElements) {
+      cueElement.classList.toggle('paragraph', this._config.layout === 'paragraph')
     }
+
+    this.redrawTime()
   }
 
   _changeTimestamp() {
@@ -158,9 +160,11 @@ export default class CueSync extends HTMLElement {
     }
 
     const timestamps = this.shadowRoot.querySelectorAll('.timestamp')
-    for (const timeElement of timestamps) {
-      timeElement.style.display = this._config.showTimestamp ? 'inline-block' : 'none'
+    for (const timestamp of timestamps) {
+      timestamp.style.display = this._config.showTimestamp ? 'inline-block' : 'none'
     }
+
+    this.redrawTime()
   }
 
   _changeAutoScroll() {
@@ -222,7 +226,7 @@ export default class CueSync extends HTMLElement {
 
   async _refresh() {
     try {
-      this._timeMaxWidth = 0
+      this._timestampMaxWidth = 0
       this._languages = []
 
       const transcripts = await this._loadTranscripts()
@@ -284,7 +288,7 @@ export default class CueSync extends HTMLElement {
       this._setupSettings()
     }
 
-    this._createTranscriptLines(cuesCollection)
+    this._createCueElements(cuesCollection)
     this._addMediaEventListener(media, cuesCollection)
 
     this._setTimeMaxWidth()
@@ -315,8 +319,8 @@ export default class CueSync extends HTMLElement {
   }
 
   _setTimeMaxWidth() {
-    if (this._timeMaxWidth) {
-      this.shadowRoot.querySelector('#transcript').style.setProperty('--cs-timestamp-width', `${this._timeMaxWidth}px`)
+    if (this._timestampMaxWidth) {
+      this.shadowRoot.querySelector('#transcript').style.setProperty('--cs-timestamp-width', `${this._timestampMaxWidth}px`)
     }
   }
 
@@ -400,7 +404,7 @@ export default class CueSync extends HTMLElement {
     return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`
   }
 
-  _createTranscriptLines(cuesCollection) {
+  _createCueElements(cuesCollection) {
     const { media, layout, showTimestamp } = this._config
 
     if (!Array.isArray(cuesCollection) || cuesCollection.length === 0) {
@@ -408,12 +412,12 @@ export default class CueSync extends HTMLElement {
     }
 
     const cues = cuesCollection[0]
-    const container = this.shadowRoot.querySelector('#transcript')
-    container.innerHTML = ''
+    const transcriptElement = this.shadowRoot.querySelector('#transcript')
+    transcriptElement.innerHTML = ''
 
     for (const [index, cue] of cues.entries()) {
-      const line = document.createElement('div')
-      line.className = 'cue-text'
+      const cueText = document.createElement('div')
+      cueText.className = 'cue-text'
 
       const fragment = document.createDocumentFragment()
 
@@ -430,31 +434,31 @@ export default class CueSync extends HTMLElement {
         fragment.lastChild.remove()
       }
 
-      line.append(fragment)
+      cueText.append(fragment)
 
-      const transcriptLineContainer = document.createElement('div')
-      transcriptLineContainer.className = `cue${layout === 'paragraph' ? ' paragraph' : ''}`
-      transcriptLineContainer.setAttribute('aria-label', cue.text.trim())
-      transcriptLineContainer.setAttribute('role', 'button')
-      transcriptLineContainer.tabIndex = 0
+      const cueElement = document.createElement('div')
+      cueElement.className = `cue${layout === 'paragraph' ? ' paragraph' : ''}`
+      cueElement.setAttribute('aria-label', cue.text.trim())
+      cueElement.setAttribute('role', 'button')
+      cueElement.tabIndex = 0
 
-      const timeContainer = document.createElement('span')
-      timeContainer.className = 'timestamp'
-      timeContainer.textContent = cue.startTimeRaw
-      timeContainer.style.display = showTimestamp ? 'inline-block' : 'none'
+      const timestamp = document.createElement('span')
+      timestamp.className = 'timestamp'
+      timestamp.textContent = cue.startTimeRaw
+      timestamp.style.display = showTimestamp ? 'inline-block' : 'none'
 
-      transcriptLineContainer.append(timeContainer, line)
-      container.append(transcriptLineContainer)
+      cueElement.append(timestamp, cueText)
+      transcriptElement.append(cueElement)
 
-      this._addTranscriptEventListeners(transcriptLineContainer, media, cue.startTime)
+      this._addTranscriptEventListeners(cueElement, media, cue.startTime)
 
-      const styles = window.getComputedStyle(timeContainer)
+      const styles = window.getComputedStyle(timestamp)
       const padding = Number.parseFloat(styles.paddingLeft) + Number.parseFloat(styles.paddingRight)
       const border = Number.parseFloat(styles.borderLeftWidth) + Number.parseFloat(styles.borderRightWidth)
 
-      const timeWidth = timeContainer.getBoundingClientRect().width - padding - border
-      if (timeWidth > this._timeMaxWidth) {
-        this._timeMaxWidth = timeWidth
+      const timeWidth = timestamp.getBoundingClientRect().width - padding - border
+      if (timeWidth > this._timestampMaxWidth) {
+        this._timestampMaxWidth = timeWidth
       }
     }
   }
@@ -472,10 +476,10 @@ export default class CueSync extends HTMLElement {
 
   _toggleLayout = () => {
     const layout = this.shadowRoot.querySelector('input[name="layout"]:checked').value
-    const transcriptLineContainers = this.shadowRoot.querySelectorAll('.cue')
+    const cueElements = this.shadowRoot.querySelectorAll('.cue')
 
-    for (const container of transcriptLineContainers) {
-      container.classList.toggle('paragraph', layout === 'paragraph')
+    for (const cueElement of cueElements) {
+      cueElement.classList.toggle('paragraph', layout === 'paragraph')
     }
 
     this._config.layout = layout
@@ -514,8 +518,8 @@ export default class CueSync extends HTMLElement {
     const timestampCheckbox = this.shadowRoot.getElementById('timestamp-toggle')
     const timestamps = this.shadowRoot.querySelectorAll('.timestamp')
 
-    for (const timeElement of timestamps) {
-      timeElement.style.display = timestampCheckbox.checked ? 'inline-block' : 'none'
+    for (const timestamp of timestamps) {
+      timestamp.style.display = timestampCheckbox.checked ? 'inline-block' : 'none'
     }
 
     this._config.showTimestamp = timestampCheckbox.checked
@@ -593,19 +597,19 @@ export default class CueSync extends HTMLElement {
     }
   }
 
-  _scroll(line) {
-    const container = this.shadowRoot.querySelector('#transcript')
-    const { top: containerTop } = container.getBoundingClientRect()
-    const { top: elementTop, height: elementHeight } = line.getBoundingClientRect()
+  _scroll(cueElement) {
+    const transcriptElement = this.shadowRoot.querySelector('#transcript')
+    const { top: transcriptElementTop } = transcriptElement.getBoundingClientRect()
+    const { top: cueTop, height: cueHeight } = cueElement.getBoundingClientRect()
 
-    // Calculate the offset for the second visible line
-    const secondLineOffset = elementHeight
+    // Calculate the offset for the second visible Cue
+    const secondLineOffset = cueHeight
 
-    // Calculate the ideal top position for the active line to "lock" it in the second line
-    const lockPosition = containerTop + secondLineOffset
+    // Calculate the ideal top position for the active Cue to "lock" it in the second line
+    const lockPosition = transcriptElementTop + secondLineOffset
 
-    if (elementTop !== lockPosition) {
-      this._scrollToLock(line, lockPosition, container)
+    if (cueTop !== lockPosition) {
+      this._scrollToLock(cueElement, lockPosition, transcriptElement)
     }
   }
 
@@ -649,15 +653,15 @@ export default class CueSync extends HTMLElement {
     }
 
     const cues = cuesCollection[0]
-    const transcriptLines = Array.from(this.shadowRoot.querySelectorAll('.cue-text'))
-    const transcriptContainer = this.shadowRoot.querySelector('#transcript')
+    const cueTextArray = Array.from(this.shadowRoot.querySelectorAll('.cue-text'))
+    const transcriptElement = this.shadowRoot.querySelector('#transcript')
     let activeCueIndex = -1 // Pointer to track the active cue
 
     const updateActiveLine = (index, isActive) => {
-      const line = transcriptLines[index]
-      const container = line.closest('.cue')
-      if (container) {
-        container.classList.toggle('active', isActive)
+      const cueText = cueTextArray[index]
+      const cueElement = cueText.closest('.cue')
+      if (cueElement) {
+        cueElement.classList.toggle('active', isActive)
       }
     }
 
@@ -691,12 +695,12 @@ export default class CueSync extends HTMLElement {
           updateActiveLine(activeCueIndex, true)
 
           // Add the 'active-added' class once the media starts
-          if (!transcriptContainer.classList.contains('active-added')) {
-            transcriptContainer.classList.add('active-added')
+          if (!transcriptElement.classList.contains('active-added')) {
+            transcriptElement.classList.add('active-added')
           }
 
           if (this._config.autoScroll) {
-            this._scroll(transcriptLines[activeCueIndex])
+            this._scroll(cueTextArray[activeCueIndex])
           }
         }
       }
