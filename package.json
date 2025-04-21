@@ -1,9 +1,9 @@
 {
   "name": "@cuesync/cuesync",
   "description": "CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.",
-  "version": "1.0.0-alpha1",
+  "version": "2.0.0-alpha1",
   "config": {
-    "version_short": "1.0"
+    "version_short": "2.0"
   },
   "keywords": [
     "cuesync",
@@ -75,13 +75,13 @@
     "watch-js-docs": "nodemon --watch site/assets/js/ --ext js --exec \"npm run js-lint\""
   },
   "devDependencies": {
-    "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.8",
-    "autoprefixer": "^10.4.20",
-    "bundlewatch": "^0.4.0",
+    "autoprefixer": "^10.4.21",
+    "bundlewatch": "^0.4.1",
     "clean-css-cli": "^5.6.3",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.1",
@@ -98,16 +98,16 @@
     "lockfile-lint": "^4.14.0",
     "nodemon": "^3.1.9",
     "npm-run-all2": "^6.2.6",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.3",
     "postcss-cli": "^10.1.0",
     "rollup": "^3.29.5",
     "rollup-plugin-import-css": "^3.5.8",
-    "sass": "^1.83.0",
+    "sass": "^1.86.3",
     "sass-true": "^7.0.1",
     "shelljs": "^0.8.5",
     "stylelint": "^15.11.0",
     "stylelint-config-twbs-bootstrap": "^11.0.1",
-    "terser": "^5.37.0",
+    "terser": "^5.39.0",
     "vnu-jar": "23.4.11"
   },
   "files": [
