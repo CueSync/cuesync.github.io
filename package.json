@@ -2,9 +2,6 @@
   "name": "@cuesync/cuesync",
   "description": "CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.",
   "version": "2.0.0-alpha1",
-  "config": {
-    "version_short": "2.0"
-  },
   "keywords": [
     "cuesync",
     "cue",
@@ -96,13 +93,13 @@
     "hugo-bin": "^0.114.2",
     "ip": "^2.0.1",
     "lockfile-lint": "^4.14.0",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.10",
     "npm-run-all2": "^6.2.6",
     "postcss": "^8.5.3",
     "postcss-cli": "^10.1.0",
     "rollup": "^3.29.5",
     "rollup-plugin-import-css": "^3.5.8",
-    "sass": "^1.86.3",
+    "sass": "^1.87.0",
     "sass-true": "^7.0.1",
     "shelljs": "^0.8.5",
     "stylelint": "^15.11.0",

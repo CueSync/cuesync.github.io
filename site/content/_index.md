@@ -43,9 +43,9 @@ aliases:
 
 {{< squiggle >}}
 
-<div class="text-center mb-5">
-    <h2 class="my-5">Get started any way you want</h2>
-    <p class="h5 mb-4">Use the CDN, install it via package manager, or download.</p>
+<div class="text-center">
+    <h2 class="mb-4">Get started any way you want</h2>
+    <p class="h5 mb-5">Use the CDN, install it via package manager, or download.</p>
     <a class="btn btn-primary btn-lg rounded-pill" 
        href="/{{< docs_version >}}/installation">
     Read installation docs
@@ -55,23 +55,48 @@ aliases:
 {{< squiggle >}}
 
 <div class="text-center mb-5">
-    <h2 class="my-5">Explore CueSync Examples with Build Tools</h2>
-    <p class="h5 mb-4">Check out our examples using Webpack, Parcel, and Vite to get started quickly and make the most of interactive transcripts in your multimedia content.</p>
+    <h2 class="mb-4">Explore CueSync Examples with Frameworks and Build Tools</h2>
+    <p class="h5 mb-5">
+        See how CueSync integrates with your tech stack. 
+        Explore examples for popular frameworks and standalone build tools.
+    </p>
+    <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+        <a class="d-flex flex-column align-items-center text-decoration-none" 
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/react-vite" target="_blank">
+            <img class="d-block mb-2" src="/assets/images/react.svg" alt="react logo" width="72" height="72">
+            React + Vite
+        </a>
+        <a class="d-flex flex-column align-items-center text-decoration-none" 
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/react-next" target="_blank">
+            <img class="d-block mb-2" src="/assets/images/next.svg" alt="next.js logo" width="72" height="72">
+            Next.js
+        </a>
+        <a class="d-flex flex-column align-items-center text-decoration-none" 
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/vue-vite" target="_blank">
+            <img class="d-block mb-2" src="/assets/images/vue.svg" alt="vue logo" width="72" height="72">
+            Vue + Vite
+        </a>
+        <a class="d-flex flex-column align-items-center text-decoration-none" 
+           href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/cuesync-angular" target="_blank">
+            <img class="d-block mb-2" src="/assets/images/angular.png" alt="angular logo" width="72" height="72">
+            Angular
+        </a>
+    </div>
     <div class="d-flex justify-content-center align-items-center gap-4">
         <a class="d-flex flex-column align-items-center text-decoration-none" 
            href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/webpack" target="_blank">
-           <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
-        Webpack
+            <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
+            Webpack
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
            href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/parcel" target="_blank">
-           <img class="d-block mb-2" src="/assets/images/parcel.png" alt="webpack logo" width="72" height="72">
-        Parcel
+            <img class="d-block mb-2" src="/assets/images/parcel.png" alt="parcel logo" width="72" height="72">
+            Parcel
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
            href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/vite" target="_blank">
-           <img class="d-block mb-2" src="/assets/images/vite.svg" alt="webpack logo" width="72" height="72">
-        Vite
+            <img class="d-block mb-2" src="/assets/images/vite.svg" alt="vite logo" width="72" height="72">
+            Vite
         </a>
     </div>
 </div>
