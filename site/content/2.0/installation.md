@@ -5,7 +5,7 @@ aliases:
   - "/2.0/installation/"
   - "/installation/"
 toc: true
-description: CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.
+description: CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.
 ---
 
 ## Installation
@@ -41,8 +41,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/js/cuesync.min.js" 
-        integrity="sha384-0jVqDf583RzrFczNb63VXRe5dXvYKzlsaWfIWwJe8HI3a/Uo9uARXkVt1yx2To8O" 
+<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.min.js" 
+        integrity="sha384-8CscDj5LJ+l14moc9Ay2Rg3N+vtwhP4Dja2r3cPeq1yrNFpVwiJ+7GGprymBJxZJ" 
         crossorigin="anonymous"></script>
 ```
 
@@ -51,8 +51,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://unpkg.com/@cuesync/cuesync@1.0.0-alpha1/dist/js/cuesync.min.js" 
-        integrity="sha384-0jVqDf583RzrFczNb63VXRe5dXvYKzlsaWfIWwJe8HI3a/Uo9uARXkVt1yx2To8O" 
+<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.min.js" 
+        integrity="sha384-8CscDj5LJ+l14moc9Ay2Rg3N+vtwhP4Dja2r3cPeq1yrNFpVwiJ+7GGprymBJxZJ" 
         crossorigin="anonymous"></script>
 ```
 

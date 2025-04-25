@@ -1,6 +1,6 @@
 {
   "name": "@cuesync/cuesync",
-  "description": "CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.",
+  "description": "CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.",
   "version": "2.0.0-alpha1",
   "keywords": [
     "cuesync",

@@ -60,7 +60,7 @@ aliases:
         See how CueSync integrates with your tech stack. 
         Explore examples for popular frameworks and standalone build tools.
     </p>
-    <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+    <div class="d-flex justify-content-center align-items-center gap-4 mb-4 flex-wrap">
         <a class="d-flex flex-column align-items-center text-decoration-none" 
            href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/react-vite" target="_blank">
             <img class="d-block mb-2" src="/assets/images/react.svg" alt="react logo" width="72" height="72">
@@ -82,7 +82,7 @@ aliases:
             Angular
         </a>
     </div>
-    <div class="d-flex justify-content-center align-items-center gap-4">
+    <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
         <a class="d-flex flex-column align-items-center text-decoration-none" 
            href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}/webpack" target="_blank">
             <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
