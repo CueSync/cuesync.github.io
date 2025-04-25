@@ -2,8 +2,8 @@
 layout: home
 title: CueSync
 aliases:
-  - "/1.0/"
-  - "/1.0/overview/"
+  - "/2.0/"
+  - "/2.0/overview/"
 ---
 
 <div class="row mb-5">
