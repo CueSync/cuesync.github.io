@@ -452,9 +452,9 @@
       }
     }
     _scrollToView(element) {
-      const parent = element.closest('.transcript');
+      const parent = element.closest('.transcript-container');
       if (!parent) {
-        console.error('Parent .transcript not found.'); // eslint-disable-line no-console
+        console.error('Parent .transcript-container not found.'); // eslint-disable-line no-console
         return;
       }
       const parentRect = parent.getBoundingClientRect();

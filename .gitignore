@@ -1,0 +1,7 @@
+.cache
+.hugo_build.lock
+.idea
+_site
+node_modules
+resources
+dist

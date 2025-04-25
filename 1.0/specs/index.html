@@ -29,7 +29,7 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="CueSync">
+<meta name="description" content="CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. Customize and configure CueSync to fit your needs. This page lists all available CSS custom properties, JavaScript initialization options, and HTML attributes you can use to control the behavior and appearance of CueSync.">
 <meta name="author" content="Neeraj Kumar Das">
 <meta name="generator" content="Hugo 0.118.2">
 
@@ -41,7 +41,7 @@
 <meta property="og:url" content="https://cuesync.github.io">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Specs · CueSync v1.0">
-<meta property="og:description" content="CueSync">
+<meta property="og:description" content="CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content. Customize and configure CueSync to fit your needs. This page lists all available CSS custom properties, JavaScript initialization options, and HTML attributes you can use to control the behavior and appearance of CueSync.">
 <meta property="og:image" content="https://cuesync.github.io/assets/images/CueSyncLogo.png">
 
 <title>Specs · CueSync v1.0</title>
@@ -88,23 +88,23 @@
 </head>
 <body>
   <div class="mw-1760">
-  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-5 mt-3 my-0 mx-container">
+  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 mt-3 my-0 mx-container">
     <div class="container">
       <h1 class="site-name text-center mb-4 text-warning">CueSync</h1>
 
       <p class="h4 text-center text-light fw-bold mb-4">
-        Elevate Multimedia Interactivity. Simplify the integration of interactive transcripts into your media projects with CueSync.
+        Elevate multimedia interactivity with CueSync — a JavaScript library that simplifies the integration of interactive transcripts into your media projects.
       </p>
 
       <div class="d-flex justify-content-center">
         <ul id="version-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 mx-container">
           <li class="nav-item">
-            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center ">
+            <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center">
             2.0<span class="ripple-surface"></span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/1.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center  active ">
+            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center active">
             1.0<span class="ripple-surface"></span>
             </a>
           </li>
@@ -148,7 +148,7 @@
     <h2 id="specs">Specs</h2>
 <h3 id="css-custom-properties">CSS custom properties</h3>
 <p>Customize CueSync by modifying the CSS custom properties listed below.</p>
-<h4 id="transcript">Transcript container</h4>
+<h4 id="transcript-container">Transcript container</h4>
 <div class="table-responsive">
 <table class="table table-bordered rounded-5">
   <thead>
@@ -170,12 +170,12 @@
       <td>Transcript container text color</td>
     </tr>
     <tr>
-      <td>--cs-container-px</td>
+      <td>--cs-container-padding-x</td>
       <td>5px</td>
       <td>Transcript container padding left and right</td>
     </tr>
     <tr>
-      <td>--cs-container-py</td>
+      <td>--cs-container-padding-y</td>
       <td>5px</td>
       <td>Transcript container padding top and bottom</td>
     </tr>
@@ -214,12 +214,12 @@
   </thead>
   <tbody>
     <tr>
-      <td>--cs-px</td>
+      <td>--cs-padding-x</td>
       <td>5px</td>
       <td>Transcript padding left and right</td>
     </tr>
     <tr>
-      <td>--cs-py</td>
+      <td>--cs-padding-y</td>
       <td>5px</td>
       <td>Transcript padding top and bottom</td>
     </tr>
@@ -418,7 +418,7 @@
       <ul class="nav flex-column">
         <li class="nav-item"><a class="nav-link" href="#css-custom-properties">CSS custom properties</a>
           <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#transcript">Transcript container</a></li>
+            <li class="nav-item"><a class="nav-link" href="#transcript-container">Transcript container</a></li>
             <li class="nav-item"><a class="nav-link" href="#transcript">Transcript</a></li>
             <li class="nav-item"><a class="nav-link" href="#timestamp">Timestamp</a></li>
           </ul>
@@ -441,7 +441,7 @@
 
   </div>
   <div class="mw-1760">
-  <footer class="bg-theme-primary bg-opacity-10 rounded-5 p-5 my-3 mx-container">
+  <footer class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 my-3 mx-container">
     <div class="container">
       <div class="d-flex justify-content-center">
         <div class="bg-theme-primary bg-opacity-10 rounded-5">
@@ -458,13 +458,13 @@
 
       <ul class="nav justify-content-center my-4">
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io/blob/main/LICENSE">License</a>
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io/blob/main/LICENSE" target="_blank">License</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io">GitHub</a>
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io" target="_blank">GitHub</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://www.npmjs.com/package/@cuesync/cuesync">npm</a>
+          <a class="nav-link fw-bold text-light" href="https://www.npmjs.com/package/@cuesync/cuesync" target="_blank">npm</a>
         </li>
       </ul>
       <h1 class="site-name text-center text-warning">CueSync</h1>

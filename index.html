@@ -29,7 +29,7 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="CueSync">
+<meta name="description" content="CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.">
 <meta name="author" content="Neeraj Kumar Das">
 <meta name="generator" content="Hugo 0.118.2">
 
@@ -40,11 +40,11 @@
 <meta name="google-site-verification" content="9VYtW9Yjy7Xav4JyFOCed5i-Q4XvWHoDFXY_yMrVrfs" />
 <meta property="og:url" content="https://cuesync.github.io">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CueSync · CueSync">
-<meta property="og:description" content="CueSync">
+<meta property="og:title" content="CueSync · CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.">
+<meta property="og:description" content="CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.">
 <meta property="og:image" content="https://cuesync.github.io/assets/images/CueSyncLogo.png">
 
-<title>CueSync · CueSync</title>
+<title>CueSync · CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</title>
 
 <link rel="canonical" href="http://cuesync.github.io/">
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/apple-icon-57x57.png">
@@ -88,23 +88,23 @@
 </head>
 <body>
   <div class="mw-1760">
-  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-5 mt-3 my-0 mx-container">
+  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 mt-3 my-0 mx-container">
     <div class="container">
       <h1 class="site-name text-center mb-4 text-warning">CueSync</h1>
 
       <p class="h4 text-center text-light fw-bold mb-4">
-        Elevate Multimedia Interactivity. Simplify the integration of interactive transcripts into your media projects with CueSync.
+        Elevate multimedia interactivity with CueSync — a JavaScript library that simplifies the integration of interactive transcripts into your media projects.
       </p>
 
       <div class="d-flex justify-content-center">
         <ul id="version-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 mx-container">
           <li class="nav-item">
-            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center ">
+            <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center">
             2.0<span class="ripple-surface"></span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/1.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center  active ">
+            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center active">
             1.0<span class="ripple-surface"></span>
             </a>
           </li>
@@ -142,9 +142,10 @@
 
   <div class="container pt-4" data-bs-spy="scroll" data-bs-target="#TableOfContents" data-bs-root-margin="0px 0px -75%">
     
-  <h2 class="my-5 text-center">CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.</h2>
-<div class="row my-5">
-    <label class="h3 mb-4">Video Transcript</label>
+  <div class="row mb-5">
+    <h2 class="text-center">See CueSync in action!</h3>
+    <label class="h5 text-center">Hit play and watch the transcript come to life, elegantly highlighting each phrase as it's spoken. Click any phrase to instantly jump to that moment in the video.</label>
+    <label class="h4 my-4">Video</label>
     <div class="col-md-6">
         <div class="ratio ratio-16x9" style="max-width:600px;">
             <video id="natGeoVideo" controls>
@@ -154,16 +155,16 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div id="video-transcript" class="transcript" style="max-height: 400px; overflow: auto;"></div>
+        <div id="video-transcript" class="transcript-container" style="max-height: 400px; overflow: auto;"></div>
     </div>
 </div>
 <div class="row my-5">
-    <label class="h3 mb-4">Audio Transcript</label>
+    <label class="h4 mb-4">Audio</label>
     <div class="col-md-12">
         <audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
             <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
         </audio>
-        <div id="audio-transcript" class="transcript" style="height: 400px; overflow: auto;"></div>
+        <div id="audio-transcript" class="transcript-container" style="height: 400px; overflow: auto;"></div>
     </div>
 </div>
 <svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +180,8 @@
     <h2 class="my-5">Get started any way you want</h2>
     <p class="h5 mb-4">Use the CDN, install it via package manager, or download.</p>
     <a class="btn btn-primary btn-lg rounded-pill" 
-       href="/installation">
+       href="/1.0
+/installation">
     Read installation docs
     </a>
 </div>
@@ -197,17 +199,20 @@
     <p class="h5 mb-4">Check out our examples using Webpack, Parcel, and Vite to get started quickly and make the most of interactive transcripts in your multimedia content.</p>
     <div class="d-flex justify-content-center align-items-center gap-4">
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/webpack">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/1.0
+/webpack" target="_blank">
            <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
         Webpack
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/parcel">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/1.0
+/parcel" target="_blank">
            <img class="d-block mb-2" src="/assets/images/parcel.png" alt="webpack logo" width="72" height="72">
         Parcel
         </a>
         <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/vite">
+           href="https://github.com/CueSync/cuesync-examples/tree/main/1.0
+/vite" target="_blank">
            <img class="d-block mb-2" src="/assets/images/vite.svg" alt="webpack logo" width="72" height="72">
         Vite
         </a>
@@ -217,7 +222,7 @@
 
   </div>
   <div class="mw-1760">
-  <footer class="bg-theme-primary bg-opacity-10 rounded-5 p-5 my-3 mx-container">
+  <footer class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 my-3 mx-container">
     <div class="container">
       <div class="d-flex justify-content-center">
         <div class="bg-theme-primary bg-opacity-10 rounded-5">
@@ -234,13 +239,13 @@
 
       <ul class="nav justify-content-center my-4">
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io/blob/main/LICENSE">License</a>
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io/blob/main/LICENSE" target="_blank">License</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io">GitHub</a>
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io" target="_blank">GitHub</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-light" href="https://www.npmjs.com/package/@cuesync/cuesync">npm</a>
+          <a class="nav-link fw-bold text-light" href="https://www.npmjs.com/package/@cuesync/cuesync" target="_blank">npm</a>
         </li>
       </ul>
       <h1 class="site-name text-center text-warning">CueSync</h1>
