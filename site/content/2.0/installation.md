@@ -76,7 +76,7 @@ as a package within your project’s ecosystem, providing more control and flexi
 
 Install
 ```console
-npm i @cuesync/cuesync
+npm i @cuesync/cuesync@alpha
 ```
 
 Import CueSync JS
