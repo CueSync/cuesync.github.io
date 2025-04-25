@@ -29,7 +29,7 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.">
+<meta name="description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.">
 <meta name="author" content="Neeraj Kumar Das">
 <meta name="generator" content="Hugo 0.118.2">
 
@@ -40,13 +40,13 @@
 <meta name="google-site-verification" content="9VYtW9Yjy7Xav4JyFOCed5i-Q4XvWHoDFXY_yMrVrfs" />
 <meta property="og:url" content="https://cuesync.github.io">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CueSync · CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.">
-<meta property="og:description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.">
+<meta property="og:title" content="Installation · CueSync v2.0">
+<meta property="og:description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.">
 <meta property="og:image" content="https://cuesync.github.io/assets/images/CueSyncLogo.png">
 
-<title>CueSync · CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.</title>
+<title>Installation · CueSync v2.0</title>
 
-<link rel="canonical" href="http://cuesync.github.io/">
+<link rel="canonical" href="http://cuesync.github.io/2.0/installation/">
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/assets/images/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-icon-72x72.png">
@@ -111,12 +111,12 @@
 <nav class="sticky-top bg-body mt-0 mb-3 justify-content-center">
   <ul id="site-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 nav-justified mx-container">
     <li class="nav-item">
-      <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2  active ">
+      <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 ">
         <i class="bi bi-info-circle-fill fs-3"></i> Overview<span class="ripple-surface"></span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="/2.0/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 ">
+      <a href="/2.0/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2  active ">
         <i class="bi bi-cloud-arrow-down-fill fs-3"></i> Installation<span class="ripple-surface"></span>
       </a>
     </li>
@@ -135,121 +135,140 @@
 
 
   <div class="container pt-4"
-       >
+         data-bs-spy="scroll" data-bs-target="#TableOfContents" data-bs-root-margin="0px 0px -75%"  >
     
-  <div class="row mb-5">
-    <h2 class="text-center">See CueSync in action!</h3>
-    <label class="h5 text-center">
-        Hit play and watch the transcript come to life, elegantly highlighting each phrase (Cue) as it's spoken. 
-        Click on any Cue to jump to that moment in the media.</label>
-    <label class="h4 my-4">Video</label>
-    <div class="col-md-6">
-        <div class="ratio ratio-16x9" style="max-width:600px;">
-            <video id="natGeoVideo" controls>
-              <source src="/assets/videos/natgeo.mp4" type="video/mp4">
-              Your browser does not support HTML video.
-            </video>
+<div class="component-page">
+
+  <div class="component-showcase">
+    <h2 id="installation">Installation</h2>
+<p class="fs-4 ms-0 mb-4">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.</p>
+<h3 id="cdn">CDN</h3>
+<p>Use CueSync instantly by including its JavaScript file directly from a Content Delivery Network (CDN).
+This option allows you to link to the files hosted on a remote server, ensuring quick and easy integration into your project.
+You can choose from popular CDN providers like <code>jsDelivr</code> or <code>unpkg</code> to access CueSync’s resources seamlessly.
+This method is convenient and ideal for those who want a straightforward integration process.</p>
+<div class="d-inline-block">
+<ul id="cdn-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-pill" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button id="jsdelivr-tab" class="nav-link rounded-pill position-relative active" data-bs-toggle="pill" data-bs-target="#jsdelivr" type="button" role="tab" aria-controls="jsdelivr" aria-selected="true">
+    jsDelivr
+    <span class="ripple-surface"></span>
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button id="unpkg-tab" class="nav-link rounded-pill position-relative" data-bs-toggle="pill" data-bs-target="#unpkg" type="button" role="tab" aria-controls="unpkg" aria-selected="false">
+    unpkg
+    <span class="ripple-surface"></span>
+    </button>
+  </li>
+</ul>
+</div>
+<div class="tab-content" id="cdn-tab-content">
+<div class="tab-pane fade mt-3 show active" id="jsdelivr" role="tabpanel" aria-labelledby="jsdelivr-tab" tabindex="0">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- CueSync JS --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.min.js&#34;</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha384-8CscDj5LJ+l14moc9Ay2Rg3N+vtwhP4Dja2r3cPeq1yrNFpVwiJ+7GGprymBJxZJ&#34;</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div></div>
+<div class="tab-pane fade mt-3" id="unpkg" role="tabpanel" aria-labelledby="unpkg-tab" tabindex="0">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- CueSync JS --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://unpkg.com/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.min.js&#34;</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha384-8CscDj5LJ+l14moc9Ay2Rg3N+vtwhP4Dja2r3cPeq1yrNFpVwiJ+7GGprymBJxZJ&#34;</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div></div>
+</div>
+<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
+    <g>
+      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
+    </g>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#s1)"></rect>
+</svg>
+
+<h3 id="npm">npm</h3>
+<p>Integrate CueSync into your project using the Node Package Manager (NPM). This method involves installing CueSync
+as a package within your project’s ecosystem, providing more control and flexibility over its usage and updates.</p>
+<div class="bg-theme-primary rounded-3 p-3 bg-opacity-10 mb-4 text-light">
+    <b>
+        Need help with setup?</span><br>
+        Explore examples of CueSync integration with popular frameworks and build tools like React, Next.js, Vue, Angular, 
+        Webpack, and more on our <a class="text-light" href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
+">CueSync Examples repository</a>.
+    </b>
+</div>
+<p>Install</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">npm i @cuesync/cuesync@alpha
+</span></span></span></code></pre></div><p>Import CueSync JS</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">cuesync</span> <span class="nx">from</span> <span class="s1">&#39;@cuesync/cuesync&#39;</span>
+</span></span></code></pre></div><svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
+    <g>
+      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
+    </g>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#s1)"></rect>
+</svg>
+
+<h3 id="download">Download</h3>
+<p>Download the pre-compiled JavaScript file of CueSync directly to your system. This option is suitable for
+developers who prefer to have local copies of the required files and manually link them in their project’s code.</p>
+<p><a class="btn btn-primary btn-lg rounded-pill" 
+href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha1/cuesync-2.0.0-alpha1-dist.zip" download>
+Download v2.0.0-alpha1
+<span class="ripple-surface"></span>
+</a></p>
+<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
+    <g>
+      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
+    </g>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#s1)"></rect>
+</svg>
+
+<h2 id="next-steps">Next steps</h2>
+<p>Explore CueSync’s capabilities in action!<br>
+Head over to the <a href="/2.0
+/examples">Examples</a> page to get started — you&rsquo;ll find usage scenarios, helpful code snippets, and live examples to guide you.</p>
+
+  </div>
+
+  <div class="component-map">
+    <div class="row">
+      <div class="col">
+        <div class="adspace bg-gray-100">
+
         </div>
+      </div>
     </div>
-    <div class="col-md-6">
-        <cue-sync transcript-path="/assets/transcripts/natgeo.vtt, /assets/transcripts/natgeo_hindi.vtt" 
-                  media="#natGeoVideo" 
-                  layout="paragraph"
-                  style="height: 400px;"></cue-sync>
-    </div>
-</div>
-<div class="row my-5">
-    <label class="h4 mb-4">Audio</label>
-    <div class="col-md-12">
-        <audio controls id="bobDylanAudio" crossorigin="anonymous" preload="true">
-            <source src="/assets/audio/bob_dylan.mp3" type="audio/mpeg">
-        </audio>
-        <cue-sync transcript-path="/assets/transcripts/bob_dylan.vtt" 
-                  media="#bobDylanAudio"
-                  style="height: 400px;"></cue-sync>
-    </div>
-</div>
-<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
-    <g>
-      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
-    </g>
-  </pattern>
-  <rect width="100%" height="100%" fill="url(#s1)"></rect>
-</svg>
 
-<div class="text-center">
-    <h2 class="mb-4">Get started any way you want</h2>
-    <p class="h5 mb-5">Use the CDN, install it via package manager, or download.</p>
-    <a class="btn btn-primary btn-lg rounded-pill" 
-       href="/2.0
-/installation">
-    Read installation docs
-    </a>
-</div>
-<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
-    <g>
-      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
-    </g>
-  </pattern>
-  <rect width="100%" height="100%" fill="url(#s1)"></rect>
-</svg>
+    <div class="sticky-md-top" style="top: 5rem;">
 
-<div class="text-center mb-5">
-    <h2 class="mb-4">Explore CueSync Examples with Frameworks and Build Tools</h2>
-    <p class="h5 mb-5">
-        See how CueSync integrates with your tech stack. 
-        Explore examples for popular frameworks and standalone build tools.
-    </p>
-    <div class="d-flex justify-content-center align-items-center gap-4 mb-4 flex-wrap">
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/react-vite" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/react.svg" alt="react logo" width="72" height="72">
-            React + Vite
-        </a>
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/react-next" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/next.svg" alt="next.js logo" width="72" height="72">
-            Next.js
-        </a>
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/vue-vite" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/vue.svg" alt="vue logo" width="72" height="72">
-            Vue + Vite
-        </a>
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/cuesync-angular" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/angular.png" alt="angular logo" width="72" height="72">
-            Angular
-        </a>
-    </div>
-    <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/webpack" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/webpack.svg" alt="webpack logo" width="72" height="72">
-            Webpack
-        </a>
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/parcel" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/parcel.png" alt="parcel logo" width="72" height="72">
-            Parcel
-        </a>
-        <a class="d-flex flex-column align-items-center text-decoration-none" 
-           href="https://github.com/CueSync/cuesync-examples/tree/main/2.0
-/vite" target="_blank">
-            <img class="d-block mb-2" src="/assets/images/vite.svg" alt="vite logo" width="72" height="72">
-            Vite
-        </a>
-    </div>
-</div>
+      <div class="row">
+        <div class="col">
+          <div class="ms-toc mt-2 mb-2">
+            <label class="mb-2">CONTENTS</label>
+            <nav id="TableOfContents">
+  <ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#cdn">CDN</a></li>
+        <li class="nav-item"><a class="nav-link" href="#npm">npm</a></li>
+        <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a class="nav-link" href="#next-steps">Next steps</a></li>
+  </ul>
+</nav>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
+
+</div>
 
   </div>
   <div class="mw-1760">

@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <script>
+  var root = document.documentElement
+  var activeTheme = localStorage.getItem('theme')
+
+  var checkSystemTheme = function () {
+    activeTheme = localStorage.getItem('theme')
+    
+    if (!activeTheme) {
+      
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-bs-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-bs-theme')
+      }
+    }
+  }
+
+  if (activeTheme) {
+    root.setAttribute('data-bs-theme', activeTheme)
+  } else {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+      checkSystemTheme()
+    })
+    checkSystemTheme()
+  }
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. Customize and configure CueSync to fit your needs. This page lists all available CSS custom properties, JavaScript initialization options, and HTML attributes you can use to control the behavior and appearance of CueSync.">
+<meta name="author" content="Neeraj Kumar Das">
+<meta name="generator" content="Hugo 0.118.2">
+
+<meta name="docsearch:language" content="en">
+<meta name="docsearch:version" content="2.0">
+
+<meta name="theme-color" content="#aa076b">
+<meta name="google-site-verification" content="9VYtW9Yjy7Xav4JyFOCed5i-Q4XvWHoDFXY_yMrVrfs" />
+<meta property="og:url" content="https://cuesync.github.io">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Specs · CueSync v2.0">
+<meta property="og:description" content="CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. Customize and configure CueSync to fit your needs. This page lists all available CSS custom properties, JavaScript initialization options, and HTML attributes you can use to control the behavior and appearance of CueSync.">
+<meta property="og:image" content="https://cuesync.github.io/assets/images/CueSyncLogo.png">
+
+<title>Specs · CueSync v2.0</title>
+
+<link rel="canonical" href="http://cuesync.github.io/2.0/specs/">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/images/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/images/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/images/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/images/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/images/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/images/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/images/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/images/ms-icon-144x144.png">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@materialstyle/materialstyle@3.1.1/dist/css/materialstyle.min.css"
+      integrity="sha384-TveZ4SBMG9Zwu44Pq5aK2bgL+4CaFRTtx6pSSsxmQKWhIRKoONDSRW+k+NA9A0Gk"
+      crossorigin="anonymous">
+
+<link href="/2.0/assets/css/styles-v20250425.css" rel="stylesheet">
+
+
+</head>
+<body>
+  <div class="mw-1760">
+  <div class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 mt-3 my-0 mx-container">
+    <div class="container">
+      <h1 class="site-name text-center mb-4 text-warning">CueSync</h1>
+
+      <p class="h4 text-center text-light fw-bold mb-4">
+        Elevate multimedia interactivity with CueSync — a JavaScript library that simplifies the integration of interactive transcripts into your media projects.
+      </p>
+
+      <div class="d-flex justify-content-center">
+        <ul id="version-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 mx-container">
+          <li class="nav-item">
+            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center active">
+            2.0<span class="ripple-surface"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/1.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center">
+            1.0<span class="ripple-surface"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="sticky-top bg-body mt-0 mb-3 justify-content-center">
+  <ul id="site-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 nav-justified mx-container">
+    <li class="nav-item">
+      <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 ">
+        <i class="bi bi-info-circle-fill fs-3"></i> Overview<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/2.0/installation" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 ">
+        <i class="bi bi-cloud-arrow-down-fill fs-3"></i> Installation<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/2.0/examples" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 ">
+        <i class="bi bi-palette2 fs-3"></i> Examples<span class="ripple-surface"></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/2.0/specs" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2  active ">
+        <i class="bi bi-grid-fill fs-3"></i> Specs<span class="ripple-surface"></span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+  <div class="container pt-4"
+         data-bs-spy="scroll" data-bs-target="#TableOfContents" data-bs-root-margin="0px 0px -75%"  >
+    
+<div class="component-page">
+
+  <div class="component-showcase">
+    <h2 id="specs">Specs</h2>
+<p>This page lists and explains all configurable aspects of the CueSync component — including:</p>
+<ul>
+<li>CSS custom properties for customizing styles and layout</li>
+<li>HTML attributes for declarative configuration</li>
+<li>JavaScript functions for runtime control</li>
+<li>Custom events emitted by the component for interactivity and integration</li>
+</ul>
+<p>Use this guide to fully customize and integrate CueSync into your project, whether you&rsquo;re tweaking the visuals or
+wiring it up with JavaScript.</p>
+<br>
+<h2 id="css-custom-properties">CSS custom properties</h2>
+<p>Customize CueSync’s appearance by modifying the CSS custom properties listed below.</p>
+<image src="/assets/images/CueSyncParts.png" alt="Image showing various parts of CueSync" class="rounded-4 mt-2 mb-4 border w-100" style="max-width: 800px;">
+<h3 id="cuesync-main-container">CueSync (Main Container)</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-border-width</td>
+      <td colspan="2">1px</td>
+      <td>CueSync border width</td>
+    </tr>
+    <tr>
+      <td>--cs-border-style</td>
+      <td colspan="2">solid</td>
+      <td>CueSync border style</td>
+    </tr>
+    <tr>
+      <td>--cs-border-color</td>
+      <td>#e9e9e9</td>
+      <td>#495057</td>
+      <td>CueSync border color</td>
+    </tr>
+    <tr>
+      <td>--cs-border-radius</td>
+      <td colspan="2">10px</td>
+      <td>CueSync border radius</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="toolbar-and-settings">Toolbar and Settings</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-toolbar-bg</td>
+      <td>#fff</td>
+      <td>#16191d</td>
+      <td>Toolbar background color</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Toolbar color</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-px</td>
+      <td colspan="2">15px</td>
+      <td>Toolbar padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-toolbar-py</td>
+      <td colspan="2">8px</td>
+      <td>Toolbar padding top and bottom</td>
+    </tr>
+    <tr>
+      <td>--cs-settings-shadow-opacity</td>
+      <td>.1</td>
+      <td>1</td>
+      <td>Settings menu shadow opacity</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="transcript">Transcript</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-transcript-bg</td>
+      <td>#fff</td>
+      <td>#16191d</td>
+      <td>Transcript background color</td>
+    </tr>
+    <tr>
+      <td>--cs-transcript-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Transcript text color</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="cue">Cue</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-cue-px</td>
+      <td colspan="2">15px</td>
+      <td>Cue padding left and right in Stacked layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-py</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding top and bottom in Stacked layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-paragraph-px</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding left and right in Paragraph layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-paragraph-py</td>
+      <td colspan="2">5px</td>
+      <td>Cue padding top and bottom in Paragraph layout</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-hover-bg</td>
+      <td>#f2f2f2</td>
+      <td>#252525</td>
+      <td>Cue hover background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-hover-color</td>
+      <td>#000</td>
+      <td>#ced4da</td>
+      <td>Cue hover text color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-active-bg</td>
+      <td>#def1ff</td>
+      <td>#032b48</td>
+      <td>Cue active background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-active-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
+      <td>Cue active text color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-highlight-bg</td>
+      <td>transparent</td>
+      <td>transparent</td>
+      <td>Cue highlight background color</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-highlight-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
+      <td>Cue highlight text color</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="cue-text">Cue Text</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Default Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-cue-text-px</td>
+      <td>5px</td>
+      <td>Cue text padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-cue-text-py</td>
+      <td>5px</td>
+      <td>Cue text padding top and bottom</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="timestamp">Timestamp</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th rowspan="2">Property</th>
+      <th colspan="2">Default Value</th>
+      <th rowspan="2">Description</th>
+    </tr>
+    <tr>
+      <th>Light or Auto Theme</th>
+      <th>Dark Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--cs-timestamp-bg</td>
+      <td>#def1ff</td>
+      <td>#032b48</td>
+      <td>Timestamp background color</td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-color</td>
+      <td>#044ba7</td>
+      <td>#def1ff</td>
+      <td>Timestamp color</td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-border-radius</td>
+      <td colspan="2">5px</td>
+      <td>Timestamp border radius</td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-width</td>
+      <td colspan="2">auto</td>
+      <td>Timestamp width<br><i>(Automatically adjusted to match the width of the longest timestamp.)</i></td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-px</td>
+      <td colspan="2">5px</td>
+      <td>Timestamp padding left and right</td>
+    </tr>
+    <tr>
+      <td>--cs-timestamp-py</td>
+      <td colspan="2">5px</td>
+      <td>Timestamp padding top and bottom</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
+    <g>
+      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
+    </g>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#s1)"></rect>
+</svg>
+
+<h2 id="javascript">Javascript</h2>
+<p>Control CueSync using the JavaScript functions and custom events listed below.</p>
+<br>
+<h3 id="custom-events">Custom Events</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Event Name</th>
+      <th>Triggered When...</th>
+      <th><code>event.detail.newValue</code> contains</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>layout-changed</td>
+      <td>Layout is changed</td>
+      <td>'stacked' or 'paragraph'</td>
+    </tr>
+    <tr>
+      <td>show-timestamp-changed</td>
+      <td>Timestamp visibility is changed</td>
+      <td>true or false</td>
+    </tr>
+    <tr>
+      <td>auto-scroll-changed</td>
+      <td>Auto scroll setting is changed</td>
+      <td>true or false</td>
+    </tr>
+    <tr>
+      <td>theme-changed</td>
+      <td>Theme is changed</td>
+      <td>'auto', 'light', 'dark'</td>
+    </tr>
+    <tr>
+      <td>transcript-path-changed</td>
+      <td>Transcript paths are updated</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>media-changed</td>
+      <td>Media target is updated</td>
+      <td>string (selector)</td>
+    </tr>
+    <tr>
+      <td>allow-settings-changed</td>
+      <td>Allow Settings is changed</td>
+      <td>true or false</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<h3 id="functions">Functions</h3>
+<div class="table-responsive">
+<table class="table table-bordered rounded-5">
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>redrawTime()</td>
+    <td>Recalculates the width of the timestamp column. Useful if fonts or styles change.</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<svg class="squiggle my-5" aria-hidden="true" width="100%" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <pattern id="s1" width="91" height="8" patternUnits="userSpaceOnUse">
+    <g>
+      <path d="M114 4c-5.067 4.667-10.133 4.667-15.2 0S88.667-.667 83.6 4 73.467 8.667 68.4 4 58.267-.667 53.2 4 43.067 8.667 38 4 27.867-.667 22.8 4 12.667 8.667 7.6 4-2.533-.667-7.6 4s-10.133 4.667-15.2 0S-32.933-.667-38 4s-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0-10.133-4.667-15.2 0-10.133 4.667-15.2 0" stroke="var(--bs-border-color)" stroke-linecap="square"></path>
+    </g>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#s1)"></rect>
+</svg>
+
+<h2 id="html-attributes">HTML attributes</h2>
+<p>Configure CueSync directly in your markup using the HTML attributes listed below.</p>
+<div class="table-responsive">
+  <table class="table table-bordered rounded-5">
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>transcript-path</td>
+        <td>string</td>
+        <td>Comma-separated paths to transcript files (VTT/SRT)</td>
+      </tr>
+      <tr>
+        <td>media</td>
+        <td>string</td>
+        <td>CSS selector for the associated &ltvideo&gt or &ltaudio&gt element</td>
+      </tr>
+      <tr>
+        <td>layout</td>
+        <td>string</td>
+        <td>'stacked' or 'paragraph' (default is 'stacked')</td>
+      </tr>
+      <tr>
+        <td>show-timestamp</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>auto-scroll</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>allow-settings</td>
+        <td>string</td>
+        <td>'true' or 'false' (default is 'true')</td>
+      </tr>
+      <tr>
+        <td>theme</td>
+        <td>string</td>
+        <td>'auto', 'light', or 'dark' (default is 'auto')</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+
+  <div class="component-map">
+    <div class="row">
+      <div class="col">
+        <div class="adspace bg-gray-100">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-md-top" style="top: 5rem;">
+
+      <div class="row">
+        <div class="col">
+          <div class="ms-toc mt-2 mb-2">
+            <label class="mb-2">CONTENTS</label>
+            <nav id="TableOfContents">
+  <ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link" href="#specs">Specs</a></li>
+    <li class="nav-item"><a class="nav-link" href="#css-custom-properties">CSS custom properties</a>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#cuesync-main-container">CueSync (Main Container)</a></li>
+        <li class="nav-item"><a class="nav-link" href="#toolbar-and-settings">Toolbar and Settings</a></li>
+        <li class="nav-item"><a class="nav-link" href="#transcript">Transcript</a></li>
+        <li class="nav-item"><a class="nav-link" href="#cue">Cue</a></li>
+        <li class="nav-item"><a class="nav-link" href="#cue-text">Cue Text</a></li>
+        <li class="nav-item"><a class="nav-link" href="#timestamp">Timestamp</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a class="nav-link" href="#javascript">Javascript</a>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#custom-events">Custom Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="#functions">Functions</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a class="nav-link" href="#html-attributes">HTML attributes</a></li>
+  </ul>
+</nav>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+  </div>
+  <div class="mw-1760">
+  <footer class="bg-theme-primary bg-opacity-10 rounded-5 p-4 p-md-5 my-3 mx-container">
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="bg-theme-primary bg-opacity-10 rounded-5">
+          <input type="radio" class="btn-check" name="themes" id="theme-auto" data-theme="auto" autocomplete="off" aria-label="Auto Theme">
+          <label class="btn btn-theme btn-fab mini-fab fs-5 shadow-none" for="theme-auto"><i class="bi bi-circle-half"></i><span class="ripple-surface"></span></label>
+
+          <input type="radio" class="btn-check" name="themes" id="theme-light" data-theme="light" autocomplete="off" aria-label="Light Theme">
+          <label class="btn btn-theme btn-fab mini-fab fs-5 shadow-none" for="theme-light"><i class="bi bi-sun-fill"></i><span class="ripple-surface"></span></label>
+
+          <input type="radio" class="btn-check" name="themes" id="theme-dark" data-theme="dark" autocomplete="off" aria-label="Dark Theme">
+          <label class="btn btn-theme btn-fab mini-fab fs-5 shadow-none" for="theme-dark"><i class="bi bi-moon-stars-fill"></i><span class="ripple-surface"></span></label>
+        </div>
+      </div>
+
+      <ul class="nav justify-content-center my-4">
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io/blob/main/LICENSE" target="_blank">License</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href="https://github.com/cuesync/cuesync.github.io" target="_blank">GitHub</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold text-light" href="https://www.npmjs.com/package/@cuesync/cuesync" target="_blank">npm</a>
+        </li>
+      </ul>
+      <h1 class="site-name text-center text-warning">CueSync</h1>
+      <label class="text-center d-block fw-bold mt-4 text-light">2.0.0-alpha1</label>
+    </div>
+  </footer>
+</div>
+
+  <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@material/ripple@14.0.0/dist/mdc.ripple.min.js"
+        integrity="sha384-9QANVmWxL3S8VRs8x1Q+bF1Zzogpy7P/Qw1+y5qHLdC1ig0EuoHg9VbB1SXyecdZ"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@materialstyle/materialstyle@3.1.1/dist/js/materialstyle.min.js"
+        integrity="sha384-rqhP61M9WSmzd7+ssgyoWP2I+R68vVHx7o+UmmIs6/Nxe8Lt1DoF6+0CKptZIXC0"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
+<script src="/2.0/dist/js/cuesync.min.js"></script>
+
+
+<script src="/2.0/assets/js/site.min.c193e61cbd4d9b88c60c13d5c99288b08d2fc65fda0cc039b805d4b07ecb2158.js"></script>
+
+</body>
+</html>
