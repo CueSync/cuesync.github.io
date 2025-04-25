@@ -13,7 +13,7 @@ import Config from './config.js'
  * Constants
  */
 
-const VERSION = '2.0.0-alpha2'
+const VERSION = '2.0.0-alpha3'
 
 /**
  * Class definition

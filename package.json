@@ -1,7 +1,7 @@
 {
   "name": "@cuesync/cuesync",
   "description": "CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.",
-  "version": "2.0.0-alpha2",
+  "version": "2.0.0-alpha3",
   "keywords": [
     "cuesync",
     "cue",
@@ -106,9 +106,12 @@
     "vnu-jar": "23.4.11"
   },
   "files": [
-    "dist/{js}/*.{js,map}",
-    "js/{src,dist}/**/*.{js,map}",
-    "js/index.{esm,umd}.js"
+    "dist/js/*.js",
+    "dist/js/*.map",
+    "js/src/**/*.{js,map}",
+    "js/dist/**/*.{js,map}",
+    "js/index.esm.js",
+    "js/index.umd.js"
   ],
   "hugo-bin": {
     "buildTags": "extended"

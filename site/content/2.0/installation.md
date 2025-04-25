@@ -41,8 +41,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha2/dist/js/cuesync.js"
-        integrity="sha384-TwSRNaypnjPMowDbh512x6bD8Lke7ZLgVq/aJA+D+TYcicCws3zoqffKU2c6Ewtn" 
+<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha3/dist/js/cuesync.min.js"
+        integrity="sha384-C06zXMFG8lOQvSuMwZos4wvMk+vk/VSiuckT/PMOpQ6lmm2Y5iDwoOmfoKukGXzX" 
         crossorigin="anonymous"></script>
 ```
 
@@ -51,8 +51,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha2/dist/js/cuesync.js"
-        integrity="sha384-TwSRNaypnjPMowDbh512x6bD8Lke7ZLgVq/aJA+D+TYcicCws3zoqffKU2c6Ewtn" 
+<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha3/dist/js/cuesync.min.js"
+        integrity="sha384-C06zXMFG8lOQvSuMwZos4wvMk+vk/VSiuckT/PMOpQ6lmm2Y5iDwoOmfoKukGXzX" 
         crossorigin="anonymous"></script>
 ```
 
@@ -92,8 +92,8 @@ Download the pre-compiled JavaScript file of CueSync directly to your system. Th
 developers who prefer to have local copies of the required files and manually link them in their project’s code.
 
 <a class="btn btn-primary btn-lg rounded-pill" 
-   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha2/cuesync-2.0.0-alpha2-dist.zip" download>
-Download v2.0.0-alpha2
+   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha3/cuesync-2.0.0-alpha3-dist.zip" download>
+Download v2.0.0-alpha3
     <span class="ripple-surface"></span>
 </a>
 
