@@ -28,7 +28,7 @@
 {{- $docsJs := $js | resources.Concat $targetDocsJSPath -}}
 
 {{- if eq hugo.Environment "production" -}}
-  {{- $docsJs = $docsJs | resources.Minify -}}
+  {{- $docsJs = $docsJs | resources.Minify | fingerprint -}}
 {{- end }}
 
 <script src="{{ $docsJs.Permalink | relURL }}"></script>
