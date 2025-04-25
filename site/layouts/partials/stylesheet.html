@@ -8,7 +8,9 @@
       integrity="sha384-TveZ4SBMG9Zwu44Pq5aK2bgL+4CaFRTtx6pSSsxmQKWhIRKoONDSRW+k+NA9A0Gk"
       crossorigin="anonymous">
 
-{{- $targetDocsCssPath := path.Join "/" .Site.Params.docs_version "assets/css/styles.css" -}}
+{{- $date := now.Format "20060102" -}}
+{{- $filename := printf "styles-v%s.css" $date -}}
+{{- $targetDocsCssPath := path.Join "/" .Site.Params.docs_version "assets/css" $filename -}}
 {{- $sassOptions := dict "targetPath" $targetDocsCssPath "outputStyle" "expanded" "precision" 6 -}}
 {{- $postcssOptions := dict "use" "autoprefixer" "noMap" true -}}
 
