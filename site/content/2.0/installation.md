@@ -41,7 +41,9 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha2/dist/js/cuesync.js"
+        integrity="sha384-TwSRNaypnjPMowDbh512x6bD8Lke7ZLgVq/aJA+D+TYcicCws3zoqffKU2c6Ewtn" 
+        crossorigin="anonymous"></script>
 ```
 
 </div>
@@ -49,7 +51,9 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.js"></script>
+<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha2/dist/js/cuesync.js"
+        integrity="sha384-TwSRNaypnjPMowDbh512x6bD8Lke7ZLgVq/aJA+D+TYcicCws3zoqffKU2c6Ewtn" 
+        crossorigin="anonymous"></script>
 ```
 
 </div>
@@ -88,8 +92,8 @@ Download the pre-compiled JavaScript file of CueSync directly to your system. Th
 developers who prefer to have local copies of the required files and manually link them in their project’s code.
 
 <a class="btn btn-primary btn-lg rounded-pill" 
-   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha1/cuesync-2.0.0-alpha1-dist.zip" download>
-Download v2.0.0-alpha1
+   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha2/cuesync-2.0.0-alpha2-dist.zip" download>
+Download v2.0.0-alpha2
     <span class="ripple-surface"></span>
 </a>
 

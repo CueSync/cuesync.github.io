@@ -20,7 +20,9 @@
 {{ if eq hugo.Environment "production" -}}
 <!--<script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.min.js"></script>-->
 <!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha1/dist/js/cuesync.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha2/dist/js/cuesync.js"
+        integrity="sha384-TwSRNaypnjPMowDbh512x6bD8Lke7ZLgVq/aJA+D+TYcicCws3zoqffKU2c6Ewtn"
+        crossorigin="anonymous"></script>
 {{ else -}}
 <script src="/{{ .Site.Params.docs_version }}/dist/js/cuesync.js"></script>
 {{- end }}
