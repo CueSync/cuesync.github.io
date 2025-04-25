@@ -2,8 +2,8 @@
 layout: docs
 title: Specs
 aliases:
-  - "/2.0/specs/"
   - "/specs/"
+  - "/2.0/specs/"
 toc: true
 description: CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. Customize and configure CueSync to fit your needs. This page lists all available CSS custom properties, JavaScript initialization options, and HTML attributes you can use to control the behavior and appearance of CueSync.
 ---

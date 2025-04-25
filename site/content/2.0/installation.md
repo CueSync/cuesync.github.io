@@ -2,8 +2,8 @@
 layout: docs
 title: Installation
 aliases:
-  - "/2.0/installation/"
   - "/installation/"
+  - "/2.0/installation/"
 toc: true
 description: CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.
 ---

@@ -2,8 +2,8 @@
 layout: docs
 title: Examples
 aliases:
-  - "/2.0/examples/"
   - "/examples/"
+  - "/2.0/examples/"
 toc: true
 description: CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects. Explore different ways to use CueSync with real examples. Each example shows a variation of the interactive transcript along with the code you need to implement it.
 ---

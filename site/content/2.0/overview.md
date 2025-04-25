@@ -1,10 +1,11 @@
 ---
-layout: home
+layout: overview
 title: CueSync
 aliases:
+  - "/"
+  - "/overview/"
   - "/2.0/"
   - "/2.0/overview/"
-  - "/overview/"
 ---
 
 <div class="row mb-5">
