@@ -1,6 +1,6 @@
 /*!
   * CueSync v1.0.0-alpha1 (https://cuesync.github.io/)
-  * Copyright 2024 Neeraj Kumar Das (https://github.com/nkdas91)
+  * Copyright 2025 Neeraj Kumar Das (https://github.com/nkdas91)
   * Licensed under MIT (https://github.com/cuesync/cuesync/blob/master/LICENSE)  
   */
 /**
@@ -271,82 +271,72 @@ class CueSync extends BaseComponent {
   static get NAME() {
     return NAME;
   }
-  refresh() {
-    const {
-      transcriptPath
-    } = this._config;
-    const {
-      media
-    } = this._config;
-    const {
-      displayTime
-    } = this._config;
+  async refresh() {
+    let transcripts = [];
+    let cuesCollection = [];
 
-    // Load and parse the transcript file
-    fetch(transcriptPath).then(response => response.text()).then(data => {
-      const cues = this.parseTranscript(data);
+    // Create an array of transcript file paths
+    const transcriptFilePaths = this._getTranscriptFilePaths();
 
-      // Create transcript lines and add them to the container
-      for (const [index, cue] of cues.entries()) {
-        const line = document.createElement('div');
-        line.className = 'transcript-line';
-        line.textContent = cue.text.trim();
-        if (displayTime) {
-          const transcriptLineContainer = document.createElement('div');
-          transcriptLineContainer.className = 'transcript-line-container';
-          transcriptLineContainer.setAttribute('aria-label', cue.text.trim());
-          transcriptLineContainer.setAttribute('role', 'button');
-          const timeContainer = document.createElement('span');
-          timeContainer.className = 'time';
-          timeContainer.textContent = `${cue.startTimeRaw}`;
-          transcriptLineContainer.append(timeContainer);
-          transcriptLineContainer.append(line);
-          this._element.append(transcriptLineContainer);
-          transcriptLineContainer.addEventListener('click', () => {
-            media.currentTime = cue.startTime;
-          });
-          transcriptLineContainer.addEventListener('keypress', e => {
-            if (e.key === 'Enter') {
-              media.currentTime = cue.startTime;
-            }
-          });
-          transcriptLineContainer.tabIndex = 0;
-          if (timeContainer.getBoundingClientRect().width > this._timeMaxWidth) {
-            this._timeMaxWidth = timeContainer.getBoundingClientRect().width;
-          }
-        } else {
-          this._element.append(line);
-          line.setAttribute('aria-label', cue.text.trim());
-          line.setAttribute('role', 'button');
-          line.addEventListener('click', () => {
-            media.currentTime = cue.startTime;
-          });
-          line.addEventListener('keypress', e => {
-            if (e.key === 'Enter') {
-              media.currentTime = cue.startTime;
-            }
-          });
-          line.tabIndex = 0;
-        }
-        this._element.addEventListener('scroll', () => {
-          if (this._autoScroll) {
-            this._autoScroll = false;
-          }
-        });
+    // Create an array of transcript file contents
+    if (transcriptFilePaths.length) {
+      transcripts = await Promise.all(transcriptFilePaths.map(t => this._fetchTranscript(t)));
+    } else {
+      throw new Error('No transcript file paths found');
+    }
 
-        // Update transcript highlighting based on media time
-        this.addMediaEventListener(line, cues, cue, index);
-      }
+    // Create an array of parsed transcripts
+    if (transcripts.length) {
+      cuesCollection = transcripts.map(t => this._parseTranscript(t));
+    } else {
+      throw new Error('No transcript content retrieved');
+    }
+
+    // Create transcript lines and add them to the container
+    if (cuesCollection.length) {
+      this._createTranscriptLines(cuesCollection);
       if (this._timeMaxWidth) {
         this._element.style.setProperty('--cs-time-width', `${this._timeMaxWidth}px`);
       }
-    }).catch(error => console.error('Error loading transcript file:', error)); // eslint-disable-line no-console
+      this._element.addEventListener('scroll', () => {
+        if (this._autoScroll) {
+          this._autoScroll = false;
+        }
+      });
+    } else {
+      throw new Error('No cues parsed from transcripts');
+    }
+  }
+  _getTranscriptFilePaths() {
+    const {
+      transcriptPath
+    } = this._config;
+    let transcriptFilePaths = [];
+    if (typeof transcriptPath === 'string') {
+      transcriptFilePaths = transcriptPath.split(',');
+    } else if (Array.isArray(transcriptPath)) {
+      transcriptFilePaths = transcriptPath;
+    } else {
+      throw new TypeError('The transcript path should be provided as a string, or as an array if you have multiple transcript files.');
+    }
+    return transcriptFilePaths;
+  }
+  async _fetchTranscript(transcriptPath) {
+    try {
+      const response = await fetch(transcriptPath);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return await response.text();
+    } catch (error) {
+      throw new Error(`Failed to fetch transcripts: ${error.message}`);
+    }
   }
 
   // Function to parse SRT or VTT text into cue objects
-  parseTranscript(text) {
+  _parseTranscript(transcriptText) {
     const cues = [];
-    const lines = text.split('\n');
+    const lines = transcriptText.split('\n');
     let cue = null;
     for (let line of lines) {
       line = line.trim();
@@ -354,8 +344,9 @@ class CueSync extends BaseComponent {
         // Empty line
         if (cue) {
           cues.push(cue);
+          cue = null;
         }
-        cue = null;
+        continue;
       }
       if (!cue && /^\d+$/.test(line)) {
         // This is a line number (SRT format)
@@ -363,8 +354,8 @@ class CueSync extends BaseComponent {
       } else if (line.includes('-->')) {
         // Parse cue timing (both SRT and VTT formats)
         const [startTime, endTime] = line.split(/ --> /);
-        cue = new VTTCue(this.convertToSeconds(startTime), this.convertToSeconds(endTime), '');
-        cue.startTimeRaw = this.minimalTime(startTime);
+        cue = new VTTCue(this._convertToSeconds(startTime), this._convertToSeconds(endTime), '');
+        cue.startTimeRaw = this._minimalTime(startTime);
       } else if (cue) {
         // Add cue text (both SRT and VTT formats)
         cue.text += `${line} `;
@@ -375,17 +366,77 @@ class CueSync extends BaseComponent {
     }
     return cues;
   }
-  convertToSeconds(time) {
+  _convertToSeconds(time) {
     const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat);
     return (hours * 3600 + minutes * 60 + seconds).toFixed(2);
   }
-  minimalTime(time) {
+  _minimalTime(time) {
     const [hours, minutes, seconds] = time.split(/:|,/).map(Number.parseFloat);
     return `${hours === 0 ? '' : `${hours} : `} ${minutes} : ${Math.trunc(seconds)}`;
   }
-  autoScroll(line) {
+  _createTranscriptLines(cuesCollection) {
+    const {
+      media,
+      displayTime
+    } = this._config;
+    if (!Array.isArray(cuesCollection) || cuesCollection.length === 0) {
+      throw new Error('Invalid cuesCollection provided');
+    }
+    const cues = cuesCollection[0];
+    for (const [index, cue] of cues.entries()) {
+      var _fragment$lastChild;
+      const line = document.createElement('div');
+      line.className = 'transcript-line';
+
+      // Create a document fragment to combine text safely
+      const fragment = document.createDocumentFragment();
+
+      // Combine text from all cue arrays
+      for (const cueArray of cuesCollection) {
+        if (cueArray[index]) {
+          const textNode = document.createTextNode(`${cueArray[index].text.trim()}`);
+          fragment.append(textNode);
+          fragment.append(document.createElement('br'));
+        }
+      }
+
+      // Remove the trailing <br>
+      if (((_fragment$lastChild = fragment.lastChild) == null ? void 0 : _fragment$lastChild.nodeName) === 'BR') {
+        fragment.lastChild.remove();
+      }
+      line.append(fragment);
+      if (displayTime) {
+        const transcriptLineContainer = document.createElement('div');
+        transcriptLineContainer.className = 'transcript-line-container';
+        transcriptLineContainer.setAttribute('aria-label', cue.text.trim());
+        transcriptLineContainer.setAttribute('role', 'button');
+        transcriptLineContainer.tabIndex = 0;
+        const timeContainer = document.createElement('span');
+        timeContainer.className = 'time';
+        timeContainer.textContent = cue.startTimeRaw;
+        transcriptLineContainer.append(timeContainer);
+        transcriptLineContainer.append(line);
+        this._element.append(transcriptLineContainer);
+        this._addTranscriptEventListeners(transcriptLineContainer, media, cue.startTime);
+        const timeWidth = timeContainer.getBoundingClientRect().width;
+        if (timeWidth > this._timeMaxWidth) {
+          this._timeMaxWidth = timeWidth;
+        }
+      } else {
+        line.setAttribute('aria-label', cue.text.trim());
+        line.setAttribute('role', 'button');
+        line.tabIndex = 0;
+        this._element.append(line);
+        this._addTranscriptEventListeners(line, media, cue.startTime);
+      }
+
+      // Update transcript highlighting based on media time
+      this._addMediaEventListener(line, cues, cue, index);
+    }
+  }
+  _scroll(line) {
     if (this._autoScroll) {
-      this.scrollToView(line);
+      this._scrollToView(line);
     } else {
       const parentRect = this._element.getBoundingClientRect();
       const elementRect = line.getBoundingClientRect();
@@ -394,88 +445,84 @@ class CueSync extends BaseComponent {
       }
     }
   }
-  scrollToView(element) {
-    const parent = element.closest('.transcript-container');
-    const elementOffset = element.offsetTop - parent.offsetTop;
-    const elementHeight = element.offsetHeight;
-    const parentHeight = parent.clientHeight;
+  _scrollToView(element) {
+    const parent = element.closest('.transcript');
+    if (!parent) {
+      console.error('Parent .transcript not found.'); // eslint-disable-line no-console
+      return;
+    }
+    const parentRect = parent.getBoundingClientRect();
+    const elementRect = element.getBoundingClientRect();
 
-    // Calculate the current scroll position of the parent
-    const parentScrollTop = parent.scrollTop;
-
-    // Check if the element is above the visible area
-    if (elementOffset < parentScrollTop) {
+    // Check if the element is above or below the visible area
+    const isAbove = elementRect.top < parentRect.top;
+    const isBelow = elementRect.bottom > parentRect.bottom;
+    if (isAbove) {
       // Scroll up to make the element visible at the top
       parent.scrollTo({
-        top: elementOffset,
+        top: parent.scrollTop + (elementRect.top - parentRect.top),
         left: 0,
         behavior: 'smooth'
       });
-    } else if (elementOffset + elementHeight > parentScrollTop + parentHeight) {
+    } else if (isBelow) {
       // Scroll down to make the element visible at the bottom
       parent.scrollTo({
-        top: elementOffset + elementHeight - parentHeight,
+        top: parent.scrollTop + (elementRect.bottom - parentRect.bottom),
         left: 0,
         behavior: 'smooth'
       });
     }
-    // If the element is already visible, no scrolling is needed
   }
-  addMediaEventListener(line, cues, cue, index) {
+  _addMediaEventListener(line, cues, cue, index) {
     const {
-      media
-    } = this._config;
-    const {
+      media,
       displayTime
     } = this._config;
+    const updateClasses = (isActive, isPlayed) => {
+      const container = displayTime ? line.closest('.transcript-line-container') : line;
+      if (container) {
+        container.classList.toggle('active', isActive);
+        container.classList.toggle('played', isPlayed);
+      }
+    };
     media.addEventListener('timeupdate', () => {
-      if (index === cues.length - 1 && media.currentTime >= cue.startTime) {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.add('active');
-        } else {
-          line.classList.add('active');
-        }
-        this.autoScroll(line);
-      } else if (media.currentTime >= cue.startTime && media.currentTime < cue.endTime) {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.add('active');
-        } else {
-          line.classList.add('active');
-        }
-        this.autoScroll(line);
-      } else {
-        if (displayTime) {
-          line.closest('.transcript-line-container').classList.remove('active');
-        } else {
-          line.classList.remove('active');
-        }
-        if (media.currentTime >= cue.startTime) {
-          if (displayTime) {
-            line.closest('.transcript-line-container').classList.add('played');
-          } else {
-            line.classList.add('played');
-          }
-        } else if (displayTime) {
-          line.closest('.transcript-line-container').classList.remove('played');
-        } else {
-          line.classList.remove('played');
-        }
+      const {
+        currentTime
+      } = media;
+      const isActive = currentTime >= cue.startTime && (index === cues.length - 1 || currentTime < cue.endTime);
+      const isPlayed = currentTime >= cue.startTime;
+      updateClasses(isActive, isPlayed);
+      if (isActive) {
+        this._scroll(line);
+      }
+    });
+  }
+  _addTranscriptEventListeners(element, media, time) {
+    const setMediaTime = () => {
+      media.currentTime = time;
+    };
+    element.addEventListener('click', setMediaTime);
+    element.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        setMediaTime();
       }
     });
   }
   redrawTime() {
-    const timeList = Array.prototype.slice.call(this._element.querySelectorAll('.time'));
-    if (timeList) {
-      let maxWidth = 0;
-      for (const t of timeList) {
-        if (t.getBoundingClientRect().width > maxWidth) {
-          maxWidth = t.getBoundingClientRect().width;
-        }
-      }
-      if (maxWidth) {
-        this._element.style.setProperty('--cs-time-width', `${maxWidth}px`);
+    const timeElements = this._element.querySelectorAll('.time');
+    if (timeElements.length === 0) {
+      return;
+    }
+    let maxWidth = 0;
+    for (const t of timeElements) {
+      const {
+        width
+      } = t.getBoundingClientRect();
+      if (width > maxWidth) {
+        maxWidth = width;
       }
     }
+    this._element.style.setProperty('--cs-time-width', `${maxWidth}px`);
   }
 }
 
