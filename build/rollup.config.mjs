@@ -2,6 +2,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { babel } from '@rollup/plugin-babel'
+import css from 'rollup-plugin-import-css'
 import banner from './banner.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -11,6 +12,9 @@ const ESM = process.env.ESM === 'true'
 const destinationFile = `cuesync${ESM ? '.esm' : ''}`
 const external = []
 const plugins = [
+  css({
+    minify: true
+  }),
   babel({
     // Only transpile our source code
     exclude: 'node_modules/**',

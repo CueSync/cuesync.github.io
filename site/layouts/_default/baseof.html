@@ -6,7 +6,8 @@
 <body>
   {{ partial "navbar" . }}
 
-  <div class="container pt-4" data-bs-spy="scroll" data-bs-target="#TableOfContents" data-bs-root-margin="0px 0px -75%">
+  <div class="container pt-4"
+       {{ with .Params.toc }} {{ if . }} data-bs-spy="scroll" data-bs-target="#TableOfContents" data-bs-root-margin="0px 0px -75%" {{ end }} {{ end }}>
     {{ block "main" . }}
     {{ end }}
   </div>

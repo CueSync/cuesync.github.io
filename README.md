@@ -7,7 +7,7 @@
 <h3 align="center">CueSync</h3>
 
 <p align="center">
-  CueSync is a JavaScript library designed to simplify the integration of interactive transcripts into multimedia content.
+  CueSync is a JavaScript library that simplifies the integration of interactive transcripts into your media projects.
 </p>
 
 ## Table of contents

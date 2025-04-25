@@ -1,9 +1,9 @@
-/* global cuesync, materialstyle, anchors, ClipboardJS, mdc */
+/* global materialstyle, anchors, ClipboardJS, mdc */
 
 (() => {
   'use strict'
 
-  anchors.add('h3, h4')
+  anchors.add('h2, h3, h4')
 
   // Hide AdSpace
   const ad = document.querySelector('.adspace')
@@ -102,22 +102,22 @@
     return new materialstyle.MaterialTab(tab)
   })
 
-  // Transcript
-  const audioTranscript = document.getElementById('audio-transcript')
-  if (audioTranscript) {
-    new cuesync.CueSync(
-      audioTranscript,
-      { transcriptPath: '/assets/transcripts/bob_dylan.vtt', media: document.querySelector('#bobDylanAudio'), displayTime: true }
-    )
-  }
-
-  const videoTranscript = document.getElementById('video-transcript')
-  if (videoTranscript) {
-    new cuesync.CueSync(
-      videoTranscript,
-      { transcriptPath: '/assets/transcripts/natgeo.vtt', media: document.querySelector('#natGeoVideo') }
-    )
-  }
+  // // Transcript
+  // const audioTranscript = document.getElementById('audio-transcript')
+  // if (audioTranscript) {
+  //   new cuesync.CueSync(
+  //     audioTranscript,
+  //     { transcriptPath: '/assets/transcripts/bob_dylan.vtt', media: document.querySelector('#bobDylanAudio'), displayTime: true }
+  //   )
+  // }
+  //
+  // const videoTranscript = document.getElementById('video-transcript')
+  // if (videoTranscript) {
+  //   new cuesync.CueSync(
+  //     videoTranscript,
+  //     { transcriptPath: '/assets/transcripts/natgeo.vtt', media: document.querySelector('#natGeoVideo') }
+  //   )
+  // }
 
   let i = 1
   const squiggles = Array.prototype.slice.call(document.querySelectorAll('.squiggle'))

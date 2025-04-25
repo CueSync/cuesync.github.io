@@ -10,12 +10,12 @@
       <div class="d-flex justify-content-center">
         <ul id="version-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 mx-container">
           <li class="nav-item">
-            <a href="/2.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center">
+            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center active">
             2.0<span class="ripple-surface"></span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center active">
+            <a href="/1.0" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center">
             1.0<span class="ripple-surface"></span>
             </a>
           </li>
@@ -29,7 +29,7 @@
   <ul id="site-tab" class="nav nav-pills bg-theme-primary bg-opacity-10 rounded-5 nav-justified mx-container">
     <li class="nav-item">
       <a href="/{{ .Site.Params.docs_version | markdownify }}" class="nav-link rounded-5 py-2 position-relative fw-bold d-flex justify-content-center align-items-center gap-2 {{ if eq "CueSync" .Page.Params.title }} active {{ end }}">
-        <i class="bi bi-house-door-fill fs-3"></i> Overview<span class="ripple-surface"></span>
+        <i class="bi bi-info-circle-fill fs-3"></i> Overview<span class="ripple-surface"></span>
       </a>
     </li>
     <li class="nav-item">

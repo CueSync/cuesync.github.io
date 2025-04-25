@@ -8,12 +8,6 @@
       integrity="sha384-TveZ4SBMG9Zwu44Pq5aK2bgL+4CaFRTtx6pSSsxmQKWhIRKoONDSRW+k+NA9A0Gk"
       crossorigin="anonymous">
 
-<!-- CueSync CSS -->
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@1.0.0-alpha1/dist/css/cuesync.min.css"
-      integrity="sha384-QbwlWUfHblOOzH6C1Z5GeDeeDJupv9wTI9lLB5J1s51haYkLVjWWtAVlYPqqjh0e"
-      crossorigin="anonymous">
-
 {{- $date := now.Format "20060102" -}}
 {{- $filename := printf "styles-v%s.css" $date -}}
 {{- $targetDocsCssPath := path.Join "/" .Site.Params.docs_version "assets/css" $filename -}}
