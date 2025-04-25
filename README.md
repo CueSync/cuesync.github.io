@@ -21,13 +21,13 @@
 - [Creator](#creator)
 
 ## Installation
-https://cuesync.github.io/1.0/installation
+https://cuesync.github.io/2.0/installation
 
 ## Examples
-https://cuesync.github.io/1.0/examples
+https://cuesync.github.io/2.0/examples
 
 ## Specs
-https://cuesync.github.io/1.0/specs
+https://cuesync.github.io/2.0/specs
 
 ## Bugs and feature requests
 Have a bug or a feature request? Please read the [issue guidelines](https://github.com/cuesync/cuesync.github.io/blob/main/.github/CONTRIBUTING.md#using-the-issue-tracker) 
