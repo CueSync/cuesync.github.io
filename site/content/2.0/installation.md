@@ -66,6 +66,14 @@ This method is convenient and ideal for those who want a straightforward integra
 Integrate CueSync into your project using the Node Package Manager (NPM). This method involves installing CueSync 
 as a package within your project’s ecosystem, providing more control and flexibility over its usage and updates.
 
+<div class="bg-theme-primary rounded-3 p-3 bg-opacity-10 mb-4 text-light">
+    <b>
+        Need help with setup?</span><br>
+        Explore examples of CueSync integration with popular frameworks and build tools like React, Next.js, Vue, Angular, 
+        Webpack, and more on our <a class="text-light" href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}">CueSync Examples repository</a>.
+    </b>
+</div>
+
 Install
 ```console
 npm i @cuesync/cuesync

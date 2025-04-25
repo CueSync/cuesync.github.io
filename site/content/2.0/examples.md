@@ -264,7 +264,7 @@ file (e.g., Language: English, Language: Hindi, etc.).
 
 <br><br>
 
-## Customization
+## Custom Theming
 
 You can customize the appearance of CueSync by modifying the <a href="/{{< docs_version >}}/specs/#css-custom-properties">CSS custom properties listed here</a>.
 
