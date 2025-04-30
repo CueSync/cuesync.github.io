@@ -2,43 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cuesync.github.io/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>1.00</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/1.0/overview/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/2.0/installation/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/2.0/examples/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/2.0/specs/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/1.0/installation/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/1.0/examples/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://cuesync.github.io/1.0/specs/</loc>
-    <lastmod>2025-04-25T13:04:24+00:00</lastmod>
-    <priority>0.64</priority>
+    <loc>http://cuesync.github.io/404.html</loc>
+  </url><url>
+    <loc>http://cuesync.github.io/</loc>
+  </url><url>
+    <loc>http://cuesync.github.io/2.0/examples/</loc>
+  </url><url>
+    <loc>http://cuesync.github.io/2.0/installation/</loc>
+  </url><url>
+    <loc>http://cuesync.github.io/2.0/specs/</loc>
   </url>
 </urlset>

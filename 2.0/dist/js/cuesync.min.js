@@ -1,5 +1,5 @@
 /*!
-  * CueSync v2.0.0-alpha3 (https://cuesync.github.io/)
+  * CueSync v2.0.0 (https://cuesync.github.io/)
   * Copyright 2025 Neeraj Kumar Das (https://github.com/nkdas91)
   * Licensed under MIT (https://github.com/cuesync/cuesync/blob/master/LICENSE)  
   */
