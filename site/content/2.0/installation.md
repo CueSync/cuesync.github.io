@@ -10,7 +10,14 @@ description: CueSync is a JavaScript library that simplifies the integration of 
 
 ## Installation
 
-<p class="fs-4 ms-0 mb-4">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.</p>
+<p class="fs-4 ms-0">We offer three convenient options to integrate CueSync into your multimedia content. Choose the one that best fits your workflow.</p>
+
+<div class="bg-theme-primary rounded-3 p-3 bg-opacity-10 mb-4 text-light">
+    <b>
+        Note: Regardless of how you install CueSync, you don’t need to include the <code class="text-white">cuesync.css</code> file.
+        All required styles are already embedded and automatically injected by the <code class="text-white">&lt;cue-sync&gt;</code> Web Component.
+    </b>
+</div>
 
 ### CDN
 
@@ -68,7 +75,7 @@ as a package within your project’s ecosystem, providing more control and flexi
 
 <div class="bg-theme-primary rounded-3 p-3 bg-opacity-10 mb-4 text-light">
     <b>
-        Need help with setup?</span><br>
+        Need help with setup?<br>
         Explore examples of CueSync integration with popular frameworks and build tools like React, Next.js, Vue, Angular, 
         Webpack, and more on our <a class="text-light" href="https://github.com/CueSync/cuesync-examples/tree/main/{{< docs_version >}}">CueSync Examples repository</a>.
     </b>
