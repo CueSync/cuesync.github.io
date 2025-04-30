@@ -48,8 +48,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0-alpha3/dist/js/cuesync.min.js"
-        integrity="sha384-C06zXMFG8lOQvSuMwZos4wvMk+vk/VSiuckT/PMOpQ6lmm2Y5iDwoOmfoKukGXzX" 
+<script src="https://cdn.jsdelivr.net/npm/@cuesync/cuesync@2.0.0/dist/js/cuesync.min.js"
+        integrity="sha384-RpHsvYVjmvzPcZvnEEhED/Ak7wWjOC/VvcwaDXj87I9fJXNy2SF0OreIznbkrWbK" 
         crossorigin="anonymous"></script>
 ```
 
@@ -58,8 +58,8 @@ This method is convenient and ideal for those who want a straightforward integra
 
 ```html  
 <!-- CueSync JS -->
-<script src="https://unpkg.com/@cuesync/cuesync@2.0.0-alpha3/dist/js/cuesync.min.js"
-        integrity="sha384-C06zXMFG8lOQvSuMwZos4wvMk+vk/VSiuckT/PMOpQ6lmm2Y5iDwoOmfoKukGXzX" 
+<script src="https://unpkg.com/@cuesync/cuesync@2.0.0/dist/js/cuesync.min.js"
+        integrity="sha384-RpHsvYVjmvzPcZvnEEhED/Ak7wWjOC/VvcwaDXj87I9fJXNy2SF0OreIznbkrWbK" 
         crossorigin="anonymous"></script>
 ```
 
@@ -83,7 +83,7 @@ as a package within your project’s ecosystem, providing more control and flexi
 
 Install
 ```console
-npm i @cuesync/cuesync@alpha
+npm i @cuesync/cuesync
 ```
 
 Import CueSync JS
@@ -99,8 +99,8 @@ Download the pre-compiled JavaScript file of CueSync directly to your system. Th
 developers who prefer to have local copies of the required files and manually link them in their project’s code.
 
 <a class="btn btn-primary btn-lg rounded-pill" 
-   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0-alpha3/cuesync-2.0.0-alpha3-dist.zip" download>
-Download v2.0.0-alpha3
+   href="https://github.com/cuesync/cuesync.github.io/releases/download/v2.0.0/cuesync-2.0.0-dist.zip" download>
+Download v2.0.0
     <span class="ripple-surface"></span>
 </a>
 
